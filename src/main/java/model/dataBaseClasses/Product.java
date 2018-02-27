@@ -10,50 +10,33 @@ package model.dataBaseClasses;
  * @author Ahmed
  */
 public class Product {
-    
-    private int id;
-    private float price;
-    private int Quantity;
-    private String name;
-    private String description;
-    private String category;
-    private String url;
+
+    Long id;
+    String name;
+    float price;
+    String category;
+    int amount;
+    String imgURL;
+    String description;
 
     public Product() {
     }
 
-    public Product(int id, float price, int Quantity, String name, String description, String category, String url) {
+    public Product(Long id, float price, int amount, String name, String description, String category, String imgURL) {
         this.id = id;
         this.price = price;
-        this.Quantity = Quantity;
+        this.amount = amount;
         this.name = name;
         this.description = description;
         this.category = category;
-        this.url = url;
+        this.imgURL = imgURL;
     }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return Quantity;
-    }
-
-    public void setQuantity(int Quantity) {
-        this.Quantity = Quantity;
     }
 
     public String getName() {
@@ -64,12 +47,12 @@ public class Product {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public float getPrice() {
+        return price;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public String getCategory() {
@@ -80,12 +63,27 @@ public class Product {
         this.category = category;
     }
 
-    public String getUrl() {
-        return url;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

@@ -10,5 +10,6 @@ package model.dataBaseClasses;
  * @author Ahmed
  */
 public class Cart {
-    
+    int id;
+    //
 }

@@ -25,19 +25,18 @@ public class Product {
     public Product(Long id, float price, int amount, String name, String description, String category, String imgURL) {
         this.id = id;
         this.price = price;
-        this.amount = amount;
         this.name = name;
         this.description = description;
         this.category = category;
+        this.amount = amount;
         this.imgURL = imgURL;
     }
 
+
+   
+
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public float getPrice() {
@@ -58,10 +57,6 @@ public class Product {
 
     public String getCategory() {
         return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public int getAmount() {
@@ -88,4 +83,14 @@ public class Product {
         this.description = description;
     }
 
-}
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    }
+    
+

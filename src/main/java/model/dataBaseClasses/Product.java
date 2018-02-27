@@ -31,6 +31,7 @@ public class Product {
         this.category = category;
         this.imgURL = imgURL;
     }
+
     public Long getId() {
         return id;
     }
@@ -39,20 +40,20 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public float getPrice() {
         return price;
     }
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCategory() {
@@ -86,4 +87,5 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

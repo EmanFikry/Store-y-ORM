@@ -10,41 +10,33 @@ package model.dataBaseClasses;
  * @author Ahmed
  */
 public class Cart {
-    private int id;
-    private Product product;
-    private int quantity;
+    private int cart_id;
+    private int total_sum;
 
     public Cart() {
     }
 
-    public Cart(int id, Product product, int quantity) {
-        this.id = id;
-        this.product = product;
-        this.quantity = quantity;
+    public Cart(int cart_id, int total_sum) {
+        this.cart_id = cart_id;
+        this.total_sum = total_sum;
     }
 
-    public int getId() {
-        return id;
+    public int getCart_id() {
+        return cart_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCart_id(int cart_id) {
+        this.cart_id = cart_id;
     }
 
-    public Product getProduct() {
-        return product;
+    public int getTotal_sum() {
+        return total_sum;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setTotal_sum(int total_sum) {
+        this.total_sum = total_sum;
     }
+    
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
     
 }

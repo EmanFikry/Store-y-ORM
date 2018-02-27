@@ -11,33 +11,33 @@ package model.dataBaseClasses;
  */
 public class Product {
     
-    private int id;
+    private int product_id;
     private float price;
-    private int Quantity;
+    private int quantity;
     private String name;
     private String description;
     private String category;
-    private String url;
+    private String pic_url;
 
     public Product() {
     }
 
-    public Product(int id, float price, int Quantity, String name, String description, String category, String url) {
-        this.id = id;
+    public Product(int product_id, float price, int quantity, String name, String description, String category, String pic_url) {
+        this.product_id = product_id;
         this.price = price;
-        this.Quantity = Quantity;
+        this.quantity = quantity;
         this.name = name;
         this.description = description;
         this.category = category;
-        this.url = url;
+        this.pic_url = pic_url;
     }
 
-    public int getId() {
-        return id;
+    public int getProduct_id() {
+        return product_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
     }
 
     public float getPrice() {
@@ -49,11 +49,11 @@ public class Product {
     }
 
     public int getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
-    public void setQuantity(int Quantity) {
-        this.Quantity = Quantity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getName() {
@@ -80,12 +80,12 @@ public class Product {
         this.category = category;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPic_url() {
+        return pic_url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPic_url(String pic_url) {
+        this.pic_url = pic_url;
     }
-
+    
 }

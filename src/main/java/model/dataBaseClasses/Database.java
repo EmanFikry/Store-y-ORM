@@ -20,14 +20,10 @@ public class Database {
      private static PreparedStatement psUpdatable = null;
 
     static {
-        try {
-            DriverManager.registerDriver(new OracleDriver());
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        }
+        DriverManager.registerDriver(new OracleDriver());
     }
     
-    private Database() {
+    public Database() {
     }
 
     public static Database getInstance() {

@@ -21,7 +21,11 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+<<<<<<< HEAD
 
+=======
+       
+>>>>>>> c54ae6b7d5ef6b4773c60d9e30013f41cb87857c
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>

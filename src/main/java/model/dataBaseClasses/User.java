@@ -28,10 +28,11 @@ public class User {
     private String address;
 
     private int user_id ;
-    private ArrayList<String> interest;
+    private ArrayList<String> interests;
 
     public User() {
     }
+
 
     public User(String email, String name, String password, Date birthdate, String job, float creditLimit, String address, int user_id, ArrayList<String> interest) {
 
@@ -44,7 +45,11 @@ public class User {
         this.address = address;
 
         this.user_id = user_id;
-        this.interest = interest;
+
+        
+
+
+        this.interests = interests;
 
     }
 
@@ -120,11 +125,11 @@ return "User{" + "email=" + email + ", name=" + name + ", password=" + password 
     }
 
     public ArrayList<String> getInterest() {
-        return interest;
+        return interests;
     }
 
-    public void setInterest(ArrayList<String> interest) {
-        this.interest = interest;
+    public void setInterest(ArrayList<String> interests) {
+        this.interests = interests;
     }
 
 

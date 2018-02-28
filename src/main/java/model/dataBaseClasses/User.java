@@ -24,12 +24,12 @@ public class User {
     private float creditLimit;
     private String address;
     private int user_id ;
-    private ArrayList<String> interest;
+    private ArrayList<String> interests;
 
     public User() {
     }
 
-    public User(String email, String name, String password, Date birthdate, String job, float creditLimit, String address, int user_id, ArrayList<String> interest) {
+    public User(String email, String name, String password, Date birthdate, String job, float creditLimit, String address, int user_id, ArrayList<String> interests) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -38,7 +38,7 @@ public class User {
         this.creditLimit = creditLimit;
         this.address = address;
         this.user_id = user_id;
-        this.interest = interest;
+        this.interests = interests;
     }
 
     public String getEmail() {
@@ -106,11 +106,11 @@ public class User {
     }
 
     public ArrayList<String> getInterest() {
-        return interest;
+        return interests;
     }
 
-    public void setInterest(ArrayList<String> interest) {
-        this.interest = interest;
+    public void setInterest(ArrayList<String> interests) {
+        this.interests = interests;
     }
 
     

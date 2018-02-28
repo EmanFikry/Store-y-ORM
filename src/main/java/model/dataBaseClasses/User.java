@@ -6,7 +6,11 @@
 package model.dataBaseClasses;
 
 
+
 import java.util.Date;
+
+import java.util.ArrayList;
+
 
 
 /**
@@ -15,7 +19,6 @@ import java.util.Date;
  */
 public class User {
 
-
     private String email;
     private String name;
     private String password;
@@ -23,12 +26,15 @@ public class User {
     private String job;
     private float creditLimit;
     private String address;
-   
+
+    private int user_id ;
+    private ArrayList<String> interest;
 
     public User() {
     }
 
-    public User(String email, String name, String password, Date birthdate, String job, float creditLimit, String address) {
+    public User(String email, String name, String password, Date birthdate, String job, float creditLimit, String address, int user_id, ArrayList<String> interest) {
+
         this.email = email;
         this.name = name;
         this.password = password;
@@ -36,7 +42,10 @@ public class User {
         this.job = job;
         this.creditLimit = creditLimit;
         this.address = address;
-    
+
+        this.user_id = user_id;
+        this.interest = interest;
+
     }
 
     public String getEmail() {
@@ -95,10 +104,28 @@ public class User {
         this.address = address;
     }
 
-    
+   
 public String tostString()
 {
 return "User{" + "email=" + email + ", name=" + name + ", password=" + password + ", birthdate=" + birthdate + ", job=" + job + ", creditLimit=" + creditLimit + ", address=" + address +  '}';
 } 
+
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public ArrayList<String> getInterest() {
+        return interest;
+    }
+
+    public void setInterest(ArrayList<String> interest) {
+        this.interest = interest;
+    }
+
 
 }

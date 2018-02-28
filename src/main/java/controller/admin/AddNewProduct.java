@@ -21,7 +21,7 @@ import model.dataBaseDAOs.ProductDao;
  *
  * @author shalaby
  */
-public class AddNewProductServlet extends HttpServlet {
+public class AddNewProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

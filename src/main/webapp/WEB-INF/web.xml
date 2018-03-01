@@ -1,24 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>AddNewProduct</servlet-name>
-        <servlet-class>controller.admin.AddNewProduct</servlet-class>
+        <servlet-name>SignUpServlet</servlet-name>
+        <servlet-class>view.controller.user.SignUpServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditProductServlet</servlet-name>
-        <servlet-class>controller.admin.EditProductServlet</servlet-class>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>view.controller.user.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddProduct</servlet-name>
+        <servlet-class>view.controller.admin.AddProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProduct</servlet-name>
+        <servlet-class>view.controller.admin.EditProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveProduct</servlet-name>
+        <servlet-class>view.controller.admin.RemoveProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DisplayUsers</servlet-name>
+        <servlet-class>view.controller.admin.DisplayUsers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUserServlet</servlet-name>
+        <servlet-class>view.controller.user.UpdateUserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AddNewProduct</servlet-name>
-        <url-pattern>/AddNewProduct</url-pattern>
+        <servlet-name>SignUpServlet</servlet-name>
+        <url-pattern>/SignUpServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditProductServlet</servlet-name>
-        <url-pattern>/EditProductServlet</url-pattern>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
-    <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
-    </session-config>
+    <servlet-mapping>
+        <servlet-name>AddProduct</servlet-name>
+        <url-pattern>/AddProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProduct</servlet-name>
+        <url-pattern>/EditProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveProduct</servlet-name>
+        <url-pattern>/RemoveProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisplayUsers</servlet-name>
+        <url-pattern>/DisplayUsers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUserServlet</servlet-name>
+        <url-pattern>/UpdateUserServlet</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>generalPages/registeration.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

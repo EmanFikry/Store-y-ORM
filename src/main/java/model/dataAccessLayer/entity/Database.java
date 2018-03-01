@@ -1,4 +1,9 @@
-package model.dataBaseClasses;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package model.dataAccessLayer.entity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,21 +14,24 @@ import oracle.jdbc.OracleDriver;
 
 /**
  *
- * @author Ghada
+ * @author Eman-PC
  */
-
 public class Database {
 
     private static Connection con;
     private static Database opr;
     private static PreparedStatement ps = null;
-     private static PreparedStatement psUpdatable = null;
+    private static PreparedStatement psUpdatable = null;
 
     static {
-        DriverManager.registerDriver(new OracleDriver());
+        try {
+            DriverManager.registerDriver(new OracleDriver());
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
     }
-    
-    public Database() {
+
+    private Database() {
     }
 
     public static Database getInstance() {
@@ -35,7 +43,7 @@ public class Database {
 
     private static Connection getConnection() throws SQLException {
         if (con == null) {
-            con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","STORE_Y","store_y");
+            con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "STORE_Y", "store_y");
         }
         return con;
     }
@@ -50,10 +58,11 @@ public class Database {
 
         return ps;
     }
- public PreparedStatement getPreparedStatementUpdatable(String query) {
+
+    public PreparedStatement getPreparedStatementUpdatable(String query) {
         try {
-        psUpdatable = getConnection().prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-                               
+            psUpdatable = getConnection().prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
         } catch (SQLException ex) {
             release();
             ex.printStackTrace(System.out);
@@ -61,6 +70,7 @@ public class Database {
 
         return psUpdatable;
     }
+
     public void release() {
         try {
             if (ps != null) {
@@ -74,5 +84,4 @@ public class Database {
             ex.printStackTrace(System.out);
         }
     }
-    
 }

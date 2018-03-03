@@ -58,7 +58,6 @@ public class UserDAOImpl implements UserDAOInt {
         boolean isStored = true;
         for (String i : user.getUserInterest()) {
             isStored = addUserInterest(user, i);
-            break;
         }
         return isStored;
     }
@@ -71,7 +70,7 @@ public class UserDAOImpl implements UserDAOInt {
         PreparedStatement ps = Database.getInstance().getPreparedStatement("INSERT INTO ITI_STORE_Y_INTEREST (USERID,NAME) VALUES (?,?)");
         try {
             ps.setLong(1, user.getRecID());
-            ps.setString(1, interest);
+            ps.setString(2, interest);
             int rowsEffected = ps.executeUpdate();
             if (rowsEffected == 1) {
                 isStored = true;

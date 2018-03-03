@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Eman-PC
  */
 public class AddProduct extends HttpServlet {
+    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

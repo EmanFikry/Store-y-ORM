@@ -5,9 +5,13 @@
  */
 package view.controller.user;
 
+import controller.DAODelegate.DAOService;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,44 +41,73 @@ public class SignUpServlet extends HttpServlet {
         String interest = request.getParameter("uCategory");
 
         String interestsArray[] = interest.split(";");
-        List<String> interests = new ArrayList<>();
+        ArrayList<String> interests = new ArrayList<>();
         for (String temp : interestsArray) {
             if (!temp.isEmpty()) {
                 interests.add(temp);
             }
         }
 
-        boolean validName = validate.validateName(name);
-        boolean validEmail = validate.validateEmail(email);
-        boolean validPassword = validate.validatePassword(password, confirmPassword);
-        boolean validDate = validate.validateDate(birthday);
-        boolean validAddress = validate.validateAddress(address);
-        boolean validCreditLimit = validate.validateCreditLimit(creditLimit);
-
-        if (!validName) {
+        boolean validData = true;
+        if (!validate.validateName(name)) {
             request.getServletContext().setAttribute("invalidName", "Wrong Format");
+            validData = false;
         }
-        if (!validAddress) {
+        if (!validate.validateAddress(address)) {
             request.getServletContext().setAttribute("invalidAddress", "Wrong Format");
+            validData = false;
         }
-        if (!validEmail) {
+        if (!validate.validateEmail(email)) {
             request.getServletContext().setAttribute("invalidEmail", "Wrong Format");
+            validData = false;
         }
-        if (!validDate) {
+        if (!validate.validateDate(birthday)) {
             request.getServletContext().setAttribute("invalidDate", "Enter date before '2000-02-28'");
+            validData = false;
         }
-        if (!validPassword) {
+        if (!validate.validatePassword(password, confirmPassword)) {
             request.getServletContext().setAttribute("invalidPassword", "Passwords do not match");
+            validData = false;
         }
-        if (!validCreditLimit) {
-            request.getServletContext().setAttribute("invalidCreditLimit", "Wrong Format");
+        if (!validate.validateCreditLimit(creditLimit)) {
+            request.getServletContext().setAttribute("invalidCreditLimit", "Enter number greater than 0");
+            validData = false;
         }
 
-        if (validAddress && validDate && validEmail && validName && validPassword && validCreditLimit) {
-            User user = new User();
-            //fill the data in user object
-            //call DAOsCaller
-            response.sendRedirect("generalPages/login.jsp");
+        if (validData) {
+
+            DAOService daoService = new DAOService();
+            boolean isExisted = daoService.isEmailExist(email);
+            if (isExisted) {
+                request.getServletContext().setAttribute("invalidEmail", "Email already exists");
+                response.sendRedirect("generalPages/registeration.jsp");
+            } else {
+                //fill the data in user object
+                User user = new User();
+                user.setAddress(address);
+                user.setCreditLimit(Float.parseFloat(creditLimit));
+                user.setEmail(email);
+                user.setInterest(interests);
+                user.setJob(job);
+                user.setName(name);
+                user.setPassword(password);
+
+                //convert birthday from String to sql date
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date date = null;
+                try {
+                    date = formatter.parse(birthday);
+                } catch (ParseException ex) {
+                    Logger.getLogger(SignUpServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                user.setBirthdate(sqlDate);
+
+                boolean isAdded = daoService.addUser(user);
+                if (isAdded) {
+                    response.sendRedirect("generalPages/login.jsp");
+                }
+            }
         } else {
             response.sendRedirect("generalPages/registeration.jsp");
         }

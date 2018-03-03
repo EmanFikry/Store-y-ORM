@@ -5,12 +5,14 @@
  */
 package view.controller.user;
 
+import controller.DAODelegate.DAOService;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.dataAccessLayer.entity.User;
 
 /**
  *
@@ -24,23 +26,20 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("loginemail");
         String password = request.getParameter("loginpas");
 
-        //check if user exists
-        boolean userExist = false;
-        boolean passRight = false;
-
         //check if user exists in db or not
-        //if exist check his password
-        //if password is true create session for him
-        //if password is false send error message
-        //if not exist send error message
-        //this method will call the UserDAOCaller and it will call the UserDAO to deal with DB
-        HttpSession session = request.getSession(true);
-        session.setAttribute("userEmail", email);
-
-        if (!passRight) {
-            request.getServletContext().setAttribute("loginMsg", "Wrong Password");
-            request.getServletContext().setAttribute("loginEmail", email);
+        DAOService daoService = new DAOService();
+        User user = daoService.checkLogin(email, password);
+        if (user == null) {
+            boolean isExisted = daoService.isEmailExist(email);
+            if (isExisted) {
+                request.getServletContext().setAttribute("invalidPassword", "wrong password");
+            } else {
+                request.getServletContext().setAttribute("invalidEmail", "Email does not exist");
+            }
             response.sendRedirect("generalPages/login.jsp");
+        } else {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("userEmail", email);
         }
 
     }

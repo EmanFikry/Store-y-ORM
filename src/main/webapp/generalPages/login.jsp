@@ -22,15 +22,15 @@
                         <label for="loginemail"><b>Email</b></label>
                         <br>
                         <input type="text" placeholder="Enter Email" id="loginemail" name="loginemail"
-                               value="${loginEmail}" required>
+                               required>
+                        <label>${invalidEmail}</label>
                         <br>
                         <br>
                         <label for="loginpas"><b>Password</b></label>
                         <br>
                         <input type="password" placeholder="Enter Password" id="loginpas" name="loginpas"
                                required>
-                        <br>
-                        <label id="error2">${loginMsg}</label>
+                        <label>${invalidPassword}</label>
                         <br>
                         <div>
                             <button type="submit">Sign In</button>
@@ -39,8 +39,8 @@
                 </form>
             </center>
         </div>
-        <c:remove var="loginMsg" scope="application" />
-        <c:remove var="loginEmail" scope="application" />
+        <c:remove var="invalidEmail" scope="application" />
+        <c:remove var="invalidPassword" scope="application" />
 
     </body>
 </html>

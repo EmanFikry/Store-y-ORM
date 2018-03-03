@@ -51,6 +51,38 @@ public class UserDAOImpl implements UserDAOInt {
     }
 
     /**
+     * ******************* add all User interest *****************
+     */
+    @Override
+    public boolean addAllUserInterest(User user) {
+        boolean isStored = true;
+        for (String i : user.getUserInterest()) {
+            isStored = addUserInterest(user, i);
+            break;
+        }
+        return isStored;
+    }
+
+    /**
+     * ******************* add single interest *****************
+     */
+    private boolean addUserInterest(User user, String interest) {
+        boolean isStored = false;
+        PreparedStatement ps = Database.getInstance().getPreparedStatement("INSERT INTO ITI_STORE_Y_INTEREST (USERID,NAME) VALUES (?,?)");
+        try {
+            ps.setLong(1, user.getRecID());
+            ps.setString(1, interest);
+            int rowsEffected = ps.executeUpdate();
+            if (rowsEffected == 1) {
+                isStored = true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        return isStored;
+    }
+
+    /**
      * ******************* update product *****************
      */
     @Override
@@ -127,6 +159,27 @@ public class UserDAOImpl implements UserDAOInt {
             Database.getInstance().release();
         }
         return user;
+    }
+
+    /**
+     * ***************** get user by email ***************
+     */
+    @Override
+    public Long getUserIdByEmail(String email) {
+        Long userID = -1L;
+        PreparedStatement ps = Database.getInstance().getPreparedStatement("SELECT recid FROM ITI_STORE_Y_USER WHERE email=?");
+        try {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                userID = rs.getLong("recid");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Database.getInstance().release();
+        }
+        return userID;
     }
 
     /**

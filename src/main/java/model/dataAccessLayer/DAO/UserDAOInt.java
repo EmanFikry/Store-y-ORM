@@ -16,10 +16,14 @@ import model.dataAccessLayer.entity.User;
 public interface UserDAOInt {
 
     public boolean addUser(User user);
+    
+    public boolean addAllUserInterest(User user);
 
     public boolean editProfile(User user);
 
     public boolean isEmailExist(String email);
+    
+    public Long getUserIdByEmail(String email);
 
     public User getUserById(Long id) throws SQLException;
 

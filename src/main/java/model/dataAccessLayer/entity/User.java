@@ -7,6 +7,7 @@ package model.dataAccessLayer.entity;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,12 +23,12 @@ public class User {
     private String job;
     private Date birthdate;
     private float creditLimit;
-    private ArrayList<String> interest;
+    private ArrayList<String> userInterest = new ArrayList<String>();
 
     public User() {
     }
 
-    public User(String email, String name, String password, Date birthdate, String job, float creditLimit, String address, Long recID, ArrayList<String> interest) {
+    public User(String email, String name, String password, Date birthdate, String job, float creditLimit, String address, Long recID) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -36,7 +37,6 @@ public class User {
         this.creditLimit = creditLimit;
         this.address = address;
         this.recID = recID;
-        this.interest = interest;
     }
 
     public String getEmail() {
@@ -103,11 +103,11 @@ public class User {
         this.recID = recID;
     }
 
-    public ArrayList<String> getInterest() {
-        return interest;
+    public ArrayList<String> getUserInterest() {
+        return userInterest;
     }
 
-    public void setInterest(ArrayList<String> interest) {
-        this.interest = interest;
+    public void setUserInterest(ArrayList<String> userInterest) {
+        this.userInterest = userInterest;
     }
 }

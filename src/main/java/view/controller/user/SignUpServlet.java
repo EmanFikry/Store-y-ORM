@@ -87,7 +87,7 @@ public class SignUpServlet extends HttpServlet {
                 user.setAddress(address);
                 user.setCreditLimit(Float.parseFloat(creditLimit));
                 user.setEmail(email);
-                user.setInterest(interests);
+                user.setUserInterest(interests);
                 user.setJob(job);
                 user.setName(name);
                 user.setPassword(password);

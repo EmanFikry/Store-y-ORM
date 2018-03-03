@@ -54,7 +54,12 @@ public class DAOService {
     }
 
     public boolean addUser(User user) {
-        boolean isAdded = userDAORef.addUser(user);
+        boolean isAdded = false;
+        if (userDAORef.addUser(user) && userDAORef.getUserIdByEmail(user.getEmail()) > 0){
+            user.setRecID(userDAORef.getUserIdByEmail(user.getEmail()));
+            if (userDAORef.addAllUserInterest(user))
+                isAdded = true;
+        }
         return isAdded;
     }
 

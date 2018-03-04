@@ -86,7 +86,7 @@
                 Product imgurl:<br>
                 <input type="text" id="imgurl" placeholder="Enter imgurl" onblur="checkUrl()" required>
                 <br>
-                <label id="imgurlError"></label>
+                <label id="imgurlError"></label>   
                 <br>
                 Product description:<br>
                 <input type="text" id="description" placeholder="Enter description" onblur="checkName()" required>

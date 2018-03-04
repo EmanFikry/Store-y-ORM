@@ -32,7 +32,7 @@ public class UpdateUserServlet extends HttpServlet {
         birthDay = (Date) session.getAttribute("ubd");
         String email = request.getParameter(("uemail"));
         String password = request.getParameter(("upassword"));
-        long creditLimit = Long.parseLong(request.getParameter(("ucreditLimit")));
+         long creditLimit = Long.parseLong(request.getParameter(("ucreditLimit")));
         String address = request.getParameter(("uaddress"));
         String job = request.getParameter(("ujob"));
 

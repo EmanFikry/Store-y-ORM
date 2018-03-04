@@ -28,6 +28,8 @@
                     <label for="ubd"><b>Birthday</b></label>
                     <br>
                     <input type="date" max="2000-02-28" name="ubd" id="ubd" required>
+                    
+                    
 
                     <label id="dateError">${invalidDate}</label>
                     <br>

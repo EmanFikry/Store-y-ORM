@@ -1,0 +1,586 @@
+<%-- 
+    Document   : home
+    Created on : Mar 4, 2018, 7:17:16 PM
+    Author     : Eman-PC
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Store-Y</title>
+        <!-- for-mobile-apps -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="Electronic Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+              SmartPhone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+            function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <!-- //for-mobile-apps -->
+        <!-- Custom Theme files -->
+        <link href="MainPages/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="MainPages/css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="MainPages/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="MainPages/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+        <!-- //Custom Theme files -->
+        <!-- font-awesome icons -->
+        <link href="MainPages/css/font-awesome.css" rel="stylesheet">
+        <!-- //font-awesome icons -->
+        <!-- js -->
+        <script src="MainPages/js/jquery.min.js"></script>
+        <link rel="stylesheet" href="MainPages/css/jquery.countdown.css" /> <!-- countdown -->
+        <!-- //js -->
+        <!-- web fonts -->
+        <link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+        <!-- //web fonts -->
+        <!-- start-smooth-scrolling -->
+        <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
+                    event.preventDefault();
+                    $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+                });
+            });
+        </script>
+        <!-- //end-smooth-scrolling -->
+    </head>
+    <body>
+        <!-- for bootstrap working -->
+        <script type="text/javascript" src="MainPages/js/bootstrap-3.1.1.min.js"></script>
+        <!-- //for bootstrap working -->
+        <!-- header modal -->
+        <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Don't Wait, Login now!</h4>
+                    </div>
+                    <div class="modal-body modal-body-sub">
+                        <div class="row">
+                            <div class="col-md-8 modal_body_left modal_body_left1" style="border-right: 1px dotted #C2C2C2;padding-right:3em; width:80%;">
+                                <div class="sap_tabs">
+                                    <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+                                        <ul>
+                                            <li class="resp-tab-item" aria-controls="tab_item-0"><span>Sign in</span></li>
+                                            <li class="resp-tab-item" aria-controls="tab_item-1"><span>Sign up</span></li>
+                                        </ul>
+                                        <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+                                            <div class="facts">
+                                                <div class="register">
+                                                    <form action="LoginServlet" method="post">
+                                                        <h1>Sign In</h1>
+                                                        <br>
+                                                        <label for="loginemail"><b>Email</b></label>
+                                                        <br>
+                                                        <input type="text" placeholder="Enter Email" id="loginemail" name="loginemail"
+                                                               required>
+                                                        <label></label>
+                                                        <br>
+                                                        <br>
+                                                        <label for="loginpas"><b>Password</b></label>
+                                                        <br>
+                                                        <input type="password" placeholder="Enter Password" id="loginpas" name="loginpas"
+                                                               required>
+                                                        <label></label>
+                                                        <br>
+                                                        <div class="sign-up">
+                                                            <input type="submit" value="Sign in"/>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
+                                            <div class="facts">
+                                                <div class="register">
+                                                    <form method="post" action="SignUpServlet" onsubmit="beforeSubmit();
+                return submitForm();">
+
+                                                        <div>
+                                                            <h1>Sign Up</h1>
+                                                            <label for="uname"><b>Name</b></label>
+                                                            <br>
+                                                            <input type="text" placeholder="Enter Name" maxlength="100" id="uname" name="uname" onblur="checkName()" required>
+
+                                                            <label id="nameError"></label>
+                                                            <br>
+                                                            <label for="ubd"><b>Birthday</b></label>
+                                                            <br>
+                                                            <input type="date" max="2000-02-28" name="ubd" id="ubd" required>
+
+                                                            <label id="dateError"></label>
+                                                            <br>
+                                                            <label for="uemail"><b>Email</b></label>
+                                                            <br>
+                                                            <input type="text" placeholder="Enter Email" maxlength="50" id="uemail" name="uemail" onblur="checkEmail()" required>
+
+
+                                                            <label id="emailError"></label>
+                                                            <br>
+                                                            <label for="upassword"><b>Password</b></label>
+                                                            <br>
+                                                            <input type="password" placeholder="Enter Password" maxlength="50" id="upassword" name="upassword" onblur="checkPassword()" required>
+                                                            <br>
+
+                                                            <label for="uconfirmPassword"><b>Confirm Password</b></label>
+                                                            <br>
+                                                            <input type="password" placeholder="Confirm Password" maxlength="50" id="uconfirmPassword" name="uconfirmPassword" onblur="checkPassword()" required>
+
+
+                                                            <label id="passwordError"></label>
+                                                            <br>
+                                                            <label for="ucreditLimit"><b>Credit Limit</b></label>
+                                                            <br>
+                                                            <input type="number" min="1" placeholder="Enter Credit Limit" id="ucreditLimit" name="ucreditLimit" required>
+
+                                                            <label id="creditLimitError"></label>
+                                                            <br>
+                                                            <label for="uInterests"><b>Interests</b></label>
+                                                            <br>
+                                                            <input type="checkbox" class="uInterests" value="Baby" />Baby<br/>
+                                                            <input type="checkbox" class="uInterests" value="Beauty" />Beauty<br/>
+                                                            <input type="checkbox" class="uInterests" value="Computers" />Computers<br/>
+                                                            <input type="checkbox" class="uInterests" value="Home Decor & Furniture" />Home Decor & Furniture<br/>
+                                                            <input type="checkbox" class="uInterests" value="Jewelry & Accessories" />Jewelry & Accessories<br/>
+                                                            <input type="checkbox" class="uInterests" value="Mobile Phones, Tablets & Accessories" />Mobile Phones, Tablets & Accessories<br/>
+                                                            <label for="uJob"><b>Job</b></label>
+                                                            <br>
+                                                            <select id="uJob">
+                                                                <option value="student">Student</option>
+                                                                <option value="teacher">Teacher</option>
+                                                                <option value="engineer">Engineer</option>
+                                                                <option value="doctor">Doctor</option>
+                                                                <option value="other">Other</option>
+                                                            </select>
+                                                            <br>
+                                                            <label for="uaddress"><b>Address</b></label>
+                                                            <br>
+                                                            <input type="text" placeholder="Enter Address" maxlength="70" id="uaddress" name="uaddress" required>
+
+                                                            <label id="AddressError"></label>
+                                                            <br>
+
+                                                        </div>
+                                                        <input type="hidden" id="uCategory" name="uCategory" value="done">
+                                                        <input type="hidden" id="userJob" name="userJob" value="done">
+
+                                                        <div class="sign-up">
+                                                            <input type="submit" value="Create Account"/>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <script src="MainPages/js/easyResponsiveTabs.js" type="text/javascript"></script>
+                                <script type="text/javascript">
+                                                                $(document).ready(function () {
+                                                                    $('#horizontalTab').easyResponsiveTabs({
+                                                                        type: 'default', //Types: default, vertical, accordion
+                                                                        width: 'auto', //auto or any width like 600px
+                                                                        fit: true   // 100% fit in a container
+                                                                    });
+                                                                });
+                                </script>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#myModal88').modal('show');
+        </script>
+        <!-- header modal -->
+        <!-- header -->
+        <div class="header" id="home1">
+            <div class="container">
+                <div class="w3l_login">
+                    <a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                </div>
+                <div class="w3l_logo" style="text-align:center;">
+                    <h1 ><a href="index.html">Store-Y<span>Your stores. Your place.</span></a></h1>
+                    <br>
+                    <button class="" type="button" name="checkout-btn" value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="check-btn">Check Out</button>
+                </div>
+                <div class="cart cart box_1">
+                    <form action="#" method="post" class="last">
+                        <input type="hidden" name="cmd" value="_cart" />
+                        <input type="hidden" name="display" value="1" />
+                        <button class="w3view-cart" type="submit" name="submit" value="" style="color:#fff;"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- //header -->
+        <!-- navigation -->
+        <div class="navigation" style="background:#ba3e9d;">
+            <div class="container" >
+                <nav class="navbar navbar-default">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+
+                </nav>
+            </div>
+        </div>
+
+        <!-- new-products -->
+        <div class="new-products">
+            <div class="container">
+                <h3>Products</h3>
+                <!--main div of products-->
+                <div class="agileinfo_new_products_grids">
+
+                    <!--product part-->
+                    <div class="col-md-3 agileinfo_new_products_grid">
+                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+                            <div class="hs-wrapper hs-wrapper1">
+                                <img src="MainPages/images/25.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/23.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/24.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/22.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/26.jpg" alt=" " class="img-responsive" />
+                                <div class="w3_hs_bottom w3_hs_bottom_sub">
+                                    <ul>
+                                        <li>
+                                            <a href="single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <h5><a href="single.html">Laptops</a></h5>
+                            <div class="simpleCart_shelfItem">
+                                <p><i class="item_price">$500</i></p>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="w3ls_item" value="Red Laptop">
+                                    <input type="hidden" name="amount" value="500.00">
+                                    <button type="submit" class="w3ls-cart">Add to cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--product part-->
+
+
+                    <div class="col-md-3 agileinfo_new_products_grid">
+                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+                            <div class="hs-wrapper hs-wrapper1">
+                                <img src="MainPages/images/27.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/28.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/29.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/30.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/31.jpg" alt=" " class="img-responsive" />
+                                <div class="w3_hs_bottom w3_hs_bottom_sub">
+                                    <ul>
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <h5><a href="single.html">Black Phone</a></h5>
+                            <div class="simpleCart_shelfItem">
+                                <p><i class="item_price">$370</i></p>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="w3ls_item" value="Black Phone">
+                                    <input type="hidden" name="amount" value="370.00">
+                                    <button type="submit" class="w3ls-cart">Add to cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 agileinfo_new_products_grid">
+                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+                            <div class="hs-wrapper hs-wrapper1">
+                                <img src="MainPages/images/34.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/33.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/32.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/35.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/36.jpg" alt=" " class="img-responsive" />
+                                <div class="w3_hs_bottom w3_hs_bottom_sub">
+                                    <ul>
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#myModal5"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <h5><a href="single.html">Kids Toy</a></h5>
+                            <div class="simpleCart_shelfItem">
+                                <p><i class="item_price">$100</i></p>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="w3ls_item" value="Kids Toy">
+                                    <input type="hidden" name="amount" value="100.00">
+                                    <button type="submit" class="w3ls-cart">Add to cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 agileinfo_new_products_grid">
+                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+                            <div class="hs-wrapper hs-wrapper1">
+                                <img src="MainPages/images/37.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/38.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/39.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/40.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/41.jpg" alt=" " class="img-responsive" />
+                                <div class="w3_hs_bottom w3_hs_bottom_sub">
+                                    <ul>
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#myModal6"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <h5><a href="single.html">Induction Stove</a></h5>
+                            <div class="simpleCart_shelfItem">
+                                <p><i class="item_price">$250</i></p>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="w3ls_item" value="Induction Stove">
+                                    <input type="hidden" name="amount" value="250.00">
+                                    <button type="submit" class="w3ls-cart">Add to cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 agileinfo_new_products_grid" style="margin-top:20px;">
+                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+                            <div class="hs-wrapper hs-wrapper1">
+                                <img src="MainPages/images/25.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/23.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/24.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/22.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/26.jpg" alt=" " class="img-responsive" />
+                                <div class="w3_hs_bottom w3_hs_bottom_sub">
+                                    <ul>
+                                        <li>
+                                            <a href="single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <h5><a href="single.html">Laptops</a></h5>
+                            <div class="simpleCart_shelfItem">
+                                <p><i class="item_price">$500</i></p>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="w3ls_item" value="Red Laptop">
+                                    <input type="hidden" name="amount" value="500.00">
+                                    <button type="submit" class="w3ls-cart">Add to cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 agileinfo_new_products_grid" style="margin-top:20px;">
+                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+                            <div class="hs-wrapper hs-wrapper1">
+                                <img src="MainPages/images/25.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/23.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/24.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/22.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/26.jpg" alt=" " class="img-responsive" />
+                                <div class="w3_hs_bottom w3_hs_bottom_sub">
+                                    <ul>
+                                        <li>
+                                            <a href="single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <h5><a href="single.html">Laptops</a></h5>
+                            <div class="simpleCart_shelfItem">
+                                <p><i class="item_price">$500</i></p>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="w3ls_item" value="Red Laptop">
+                                    <input type="hidden" name="amount" value="500.00">
+                                    <button type="submit" class="w3ls-cart">Add to cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 agileinfo_new_products_grid" style="margin-top:20px;">
+                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+                            <div class="hs-wrapper hs-wrapper1">
+                                <img src="MainPages/images/25.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/23.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/24.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/22.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/26.jpg" alt=" " class="img-responsive" />
+                                <div class="w3_hs_bottom w3_hs_bottom_sub">
+                                    <ul>
+                                        <li>
+                                            <a href="single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <h5><a href="single.html">Laptops</a></h5>
+                            <div class="simpleCart_shelfItem">
+                                <p><i class="item_price">$500</i></p>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="w3ls_item" value="Red Laptop">
+                                    <input type="hidden" name="amount" value="500.00">
+                                    <button type="submit" class="w3ls-cart">Add to cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 agileinfo_new_products_grid" style="margin-top:20px;">
+                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+                            <div class="hs-wrapper hs-wrapper1">
+                                <img src="MainPages/images/25.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/23.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/24.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/22.jpg" alt=" " class="img-responsive" />
+                                <img src="MainPages/images/26.jpg" alt=" " class="img-responsive" />
+                                <div class="w3_hs_bottom w3_hs_bottom_sub">
+                                    <ul>
+                                        <li>
+                                            <a href="single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <h5><a href="single.html">Laptops</a></h5>
+                            <div class="simpleCart_shelfItem">
+                                <p><i class="item_price">$500</i></p>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="w3ls_item" value="Red Laptop">
+                                    <input type="hidden" name="amount" value="500.00">
+                                    <button type="submit" class="w3ls-cart">Add to cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+        <!-- //new-products -->
+
+        <!-- footer -->
+        <div class="footer">
+            <div class="container">
+                <div class="w3_footer_grids">
+                    <div class="col-md-3 w3_footer_grid">
+                        <h3>Contact</h3>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+                        <ul class="address">
+                            <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
+                            <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
+                            <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 w3_footer_grid">
+                        <h3>Information</h3>
+                        <ul class="info">
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="mail.html">Contact Us</a></li>
+                            <li><a href="codes.html">Short Codes</a></li>
+                            <li><a href="faq.html">FAQ's</a></li>
+                            <li><a href="products.html">Special Products</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 w3_footer_grid">
+                        <h3>Category</h3>
+                        <ul class="info">
+                            <li><a href="products.html">Mobiles</a></li>
+                            <li><a href="products1.html">Laptops</a></li>
+                            <li><a href="products.html">Purifiers</a></li>
+                            <li><a href="products1.html">Wearables</a></li>
+                            <li><a href="products2.html">Kitchen</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 w3_footer_grid">
+                        <h3>Profile</h3>
+                        <ul class="info">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="products.html">Today's Deals</a></li>
+                        </ul>
+                        <h4>Follow Us</h4>
+                        <div class="agileits_social_button">
+                            <ul>
+                                <li><a href="#" class="facebook"> </a></li>
+                                <li><a href="#" class="twitter"> </a></li>
+                                <li><a href="#" class="google"> </a></li>
+                                <li><a href="#" class="pinterest"> </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <div class="footer-copy">
+                <div class="footer-copy1">
+                    <div class="footer-copy-pos">
+                        <a href="#home1" class="scroll"><img src="MainPages/images/arrow.png" alt=" " class="img-responsive" /></a>
+                    </div>
+                </div>
+                <div class="container">
+                    <p>&copy; 2017 Store-Y. All rights reserved</p>
+                </div>
+            </div>
+        </div>
+        <!-- //footer -->
+        <!-- cart-js -->
+        <script src="MainPages/js/minicart.js"></script>
+        <script src="MainPages/js/registerationJS.js"></script>
+        <script>
+            w3ls.render();
+            $("#check-btn").click(function () {
+                console.log(w3ls.cart._items);
+            });
+            w3ls.cart.on('w3sb_checkout', function (evt) {
+                var items, len, i;
+
+                if (this.subtotal() > 0) {
+                    items = this.items();
+
+                    for (i = 0, len = items.length; i < len; i++) {
+                        console.log(items[i]);
+                    }
+                }
+            });
+        </script>
+        <!-- //cart-js -->
+    </body>
+</html>

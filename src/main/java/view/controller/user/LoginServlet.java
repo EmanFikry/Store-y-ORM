@@ -40,6 +40,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             HttpSession session = request.getSession(true);
             session.setAttribute("userEmail", email);
+            response.sendRedirect("generalPages/login.jsp");
         }
 
     }

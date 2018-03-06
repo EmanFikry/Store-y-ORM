@@ -27,22 +27,26 @@ public class UpdateUserServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
-        String username = (String) session.getAttribute("username");
+        
+        User updatedUser = (User) session.getAttribute("userObject");
+        
+        
         Date birthDay;
-        birthDay = (Date) session.getAttribute("ubd");
-        String email = request.getParameter(("uemail"));
-        String password = request.getParameter(("upassword"));
-        long creditLimit = Long.parseLong(request.getParameter(("ucreditLimit")));
-        String address = request.getParameter(("uaddress"));
-        String job = request.getParameter(("ujob"));
+        birthDay = (Date) request.getAttribute("birthdate");
+        String email = request.getParameter(("email"));
+        String password = request.getParameter(("password"));
+        long creditLimit = Long.parseLong(request.getParameter(("credit")));
+        String address = request.getParameter(("address"));
+        String job = request.getParameter(("job"));
 
         UserDAOImpl user = new UserDAOImpl();
-        User updatedUser = new User();
+
         updatedUser.setAddress(address);
         updatedUser.setBirthdate((java.sql.Date) birthDay);
         updatedUser.setCreditLimit(creditLimit);
         updatedUser.setPassword(password);
         updatedUser.setJob(job);
+        updatedUser.setEmail(email);
 
         boolean updated = user.editProfile(updatedUser);
 

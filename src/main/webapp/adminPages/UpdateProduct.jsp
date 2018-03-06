@@ -22,7 +22,7 @@
                 <input type="text" id="5" name="imgURL"      value="imgURL"      onblur="validateField()" maxlength="100" required>
                 <input type="text" id="6" name="description" value="good mobile" onblur="validateField()" maxlength="200" required>
                 <label id="errorMsg"></label>
-                <input type="button" value="update" id="update">
+                <input type="submit" value="update" id="update">
             </div>
         </form>
         <script>

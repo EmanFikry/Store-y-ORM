@@ -32,6 +32,14 @@
         <servlet-name>BuyServlet</servlet-name>
         <servlet-class>view.controller.user.BuyServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewProduct</servlet-name>
+        <servlet-class>view.controller.admin.ViewProduct</servlet-class>
+    </servlet>
+     <servlet-mapping>
+        <servlet-name>BuyServlet</servlet-name>
+        <url-pattern>/BuyServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SignUpServlet</servlet-name>
         <url-pattern>/SignUpServlet</url-pattern>
@@ -61,8 +69,8 @@
         <url-pattern>/UpdateUserServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BuyServlet</servlet-name>
-        <url-pattern>/BuyServlet</url-pattern>
+        <servlet-name>ViewProduct</servlet-name>
+        <url-pattern>/ViewProduct</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>MainPages/home.jsp</welcome-file>

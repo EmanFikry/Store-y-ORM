@@ -5,10 +5,13 @@
  */
 package model.dataAccessLayer.DAO;
 
+import model.dataAccessLayer.entity.Cart;
+
 /**
  *
  * @author Eman-PC
  */
 public interface CartDAOInt {
-    
+    public boolean addCart(Cart cart);
+    public Long getLastCartID ();
 }

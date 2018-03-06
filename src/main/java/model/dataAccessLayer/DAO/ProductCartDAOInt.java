@@ -12,4 +12,5 @@ package model.dataAccessLayer.DAO;
 public interface ProductCartDAOInt {
 
     public boolean isProductExist(Long cartID, Long productID);
+    public boolean addOrder(Long cartID, Long productID, Long numOfItem);
 }

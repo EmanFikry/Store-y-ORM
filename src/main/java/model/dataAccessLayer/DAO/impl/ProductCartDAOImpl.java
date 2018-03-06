@@ -41,4 +41,24 @@ public class ProductCartDAOImpl implements ProductCartDAOInt {
         }
         return isExist;
     }
+    @Override
+    public boolean addOrder(Long cartID, Long productID, Long numOfItem) {
+        boolean isAdded = false;
+        PreparedStatement ps = Database.getInstance().getPreparedStatement("INSERT INTO ITI_STORE_Y_PRODUCTCART (CARTID, PRODUCTID, NUMOFITEMS) VALUES (?,?,?)");
+        try {
+            ps.setLong(1, cartID);
+            ps.setLong(2, productID);
+            ps.setLong(3, numOfItem);
+
+            int rowsEffected = ps.executeUpdate();
+            if (rowsEffected == 1) {
+                isAdded= true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Database.getInstance().release();
+        }
+        return isAdded;
+    }
 }

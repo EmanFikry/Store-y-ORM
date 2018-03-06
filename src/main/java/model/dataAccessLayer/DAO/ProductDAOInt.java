@@ -23,4 +23,6 @@ public interface ProductDAOInt {
     public Product getProductByID(Long id);
 
     public ArrayList<Product> getProductList();
+    
+    public int productAmount(Long id);
 }

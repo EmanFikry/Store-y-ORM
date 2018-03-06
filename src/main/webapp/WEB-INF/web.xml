@@ -28,6 +28,10 @@
         <servlet-name>UpdateUserServlet</servlet-name>
         <servlet-class>view.controller.user.UpdateUserServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewProduct</servlet-name>
+        <servlet-class>view.controller.admin.ViewProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUpServlet</servlet-name>
         <url-pattern>/SignUpServlet</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>UpdateUserServlet</servlet-name>
         <url-pattern>/UpdateUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProduct</servlet-name>
+        <url-pattern>/ViewProduct</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>generalPages/login.jsp</welcome-file>

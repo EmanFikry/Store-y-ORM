@@ -1,6 +1,6 @@
 <%-- 
     Document   : UpdateProduct
-    Created on : Mar 4, 2018, 4:18:53 AM
+    Created on : Mar 3, 2018, 4:18:53 AM
     Author     : Ghada
 --%>
 
@@ -15,12 +15,12 @@
         <form method=post action="EditProduct">
             <div>
 
-                <input type="text" id="1" name="productName" value="Samsung" onblur="validateField()" maxlength="50" required>
-                <input type="text" id="2" name="price" value="5000" onblur="validateField()" required>
-                <input type="text" id="3" name="category" value="mobile" onblur="validateField()" required>
-                <input type="text" id="4" name="amount" value="5" onblur="validateField()" required>
-                <input type="text" id="5" name="imgURL" value="imgURL" onblur="validateField()" required>
-                <input type="text" id="6" name="description" value="good mobile" onblur="validateField()" required>
+                <input type="text" id="1" name="productName" value="Samsung"     onblur="validateField()" maxlength="50" required>
+                <input type="text" id="2" name="price"       value="5000"        onblur="validateField()"  required>
+                <input type="text" id="3" name="category"    value="mobile"      onblur="validateField()" maxlength="50" required>
+                <input type="text" id="4" name="amount"      value="5"           onblur="validateField()"  required>
+                <input type="text" id="5" name="imgURL"      value="imgURL"      onblur="validateField()" maxlength="100" required>
+                <input type="text" id="6" name="description" value="good mobile" onblur="validateField()" maxlength="200" required>
                 <label id="errorMsg"></label>
                 <input type="button" value="update" id="update">
             </div>

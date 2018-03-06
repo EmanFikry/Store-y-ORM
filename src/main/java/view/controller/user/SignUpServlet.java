@@ -29,7 +29,6 @@ public class SignUpServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Validation validate = new Validation();
-
         String name = request.getParameter("uname");
         String birthday = request.getParameter("ubd");
         String email = request.getParameter("uemail");
@@ -80,7 +79,7 @@ public class SignUpServlet extends HttpServlet {
             boolean isExisted = daoService.isEmailExist(email);
             if (isExisted) {
                 request.getServletContext().setAttribute("invalidEmail", "Email already exists");
-                response.sendRedirect("generalPages/registeration.jsp");
+                response.sendRedirect("../generalPages/registeration.jsp");
             } else {
                 //fill the data in user object
                 User user = new User();
@@ -105,7 +104,7 @@ public class SignUpServlet extends HttpServlet {
 
                 boolean isAdded = daoService.addUser(user);
                 if (isAdded) {
-                    response.sendRedirect("generalPages/login.jsp");
+                    response.sendRedirect("generalPages/registeration.jsp");
                 }
             }
         } else {
@@ -124,7 +123,7 @@ public class SignUpServlet extends HttpServlet {
             request.getServletContext().setAttribute("invalidEmail", "Email already exists");
             response.sendRedirect("generalPages/registeration.jsp");
         } else {
-            
+
         }
     }
 }

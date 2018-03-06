@@ -5,6 +5,7 @@
  */
 package view.controller.admin;
 
+import controller.DAODelegate.DAOService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,8 +22,14 @@ public class RemoveProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("choosedProductID");
-        System.out.println("kjdskjsdh");
+        String productID = request.getParameter("choosedProductID");
+        DAOService daoService = new DAOService();
+        boolean productdao = daoService.deleteProduct(Long.parseLong(productID));
+        if (productdao) {
+            System.out.println("delete done successfly");
+        } else {
+            System.out.println("delete failed");
+        }
     }
 
 }

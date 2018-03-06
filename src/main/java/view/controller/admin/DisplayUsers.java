@@ -5,12 +5,15 @@
  */
 package view.controller.admin;
 
+import controller.DAODelegate.DAOService;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.dataAccessLayer.entity.User;
 
 /**
  *
@@ -21,7 +24,14 @@ public class DisplayUsers extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        ArrayList<User> users;
+        //call userdao from database
+        DAOService daoService = new DAOService();
+        users = daoService.getUserList();
+        //create session to add all user list
+        HttpSession session = request.getSession();
+        session.setAttribute("userList", users);
+
     }
 
 }

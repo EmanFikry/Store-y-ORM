@@ -36,11 +36,11 @@ public class LoginServlet extends HttpServlet {
             } else {
                 request.getServletContext().setAttribute("invalidEmail", "Email does not exist");
             }
-            response.sendRedirect("generalPages/login.jsp");
+            //   response.sendRedirect("generalPages/login.jsp");
         } else {
             HttpSession session = request.getSession(true);
             session.setAttribute("userObject", user);
-          //  response.sendRedirect("generalPages/login.jsp");
+            //  response.sendRedirect("generalPages/login.jsp");
         }
 
     }

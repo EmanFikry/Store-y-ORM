@@ -8,6 +8,7 @@ package controller.DAODelegate;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.dataAccessLayer.DAO.*;
+import model.dataAccessLayer.entity.Cart;
 import model.dataAccessLayer.entity.Product;
 import model.dataAccessLayer.entity.User;
 import model.databasedao.factory.DAOsFactory;
@@ -55,10 +56,11 @@ public class DAOService {
 
     public boolean addUser(User user) {
         boolean isAdded = false;
-        if (userDAORef.addUser(user) && userDAORef.getUserIdByEmail(user.getEmail()) > 0){
+        if (userDAORef.addUser(user) && userDAORef.getUserIdByEmail(user.getEmail()) > 0) {
             user.setRecID(userDAORef.getUserIdByEmail(user.getEmail()));
-            if (userDAORef.addAllUserInterest(user))
+            if (userDAORef.addAllUserInterest(user)) {
                 isAdded = true;
+            }
         }
         return isAdded;
     }
@@ -86,5 +88,20 @@ public class DAOService {
     public ArrayList<User> getUserList() {
         ArrayList<User> users = userDAORef.getUserList();
         return users;
+    }
+
+    public boolean addCart(Cart cart) {
+        boolean isAdded = cartDAORef.addCart(cart);
+        return isAdded;
+    }
+
+    public Long getLastCartID() {
+        Long cartID = cartDAORef.getLastCartID();
+        return cartID;
+    }
+
+    public boolean addOrder(Long cartID, Long productID, Long numOfItem) {
+        boolean isAdded = productCartDAORef.addOrder(cartID, productID, numOfItem);
+        return isAdded;
     }
 }

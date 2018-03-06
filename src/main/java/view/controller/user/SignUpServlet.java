@@ -113,4 +113,18 @@ public class SignUpServlet extends HttpServlet {
         }
 
     }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String email = request.getParameter("uemail");
+        DAOService daoService = new DAOService();
+        boolean isExisted = daoService.isEmailExist(email);
+        if (isExisted) {
+            request.getServletContext().setAttribute("invalidEmail", "Email already exists");
+            response.sendRedirect("generalPages/registeration.jsp");
+        } else {
+            
+        }
+    }
 }

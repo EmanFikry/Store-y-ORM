@@ -88,14 +88,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                         <br>
                                                         <input type="text" placeholder="Enter Email" id="loginemail" name="loginemail"
                                                                required>
-                                                        <label>${invalidEmail}</label>
+                                                        <label></label>
                                                         <br>
                                                         <br>
                                                         <label for="loginpas"><b>Password</b></label>
                                                         <br>
                                                         <input type="password" placeholder="Enter Password" id="loginpas" name="loginpas"
                                                                required>
-                                                        <label>${invalidPassword}</label>
+                                                        <label></label>
                                                         <br>
                                                         <div class="sign-up">
                                                             <input type="submit" value="Sign in"/>
@@ -116,20 +116,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                             <br>
                                                             <input type="text" placeholder="Enter Name" maxlength="100" id="uname" name="uname" onblur="checkName()" required>
 
-                                                            <label id="nameError">${invalidName}</label>
+                                                            <label id="nameError"></label>
                                                             <br>
                                                             <label for="ubd"><b>Birthday</b></label>
                                                             <br>
                                                             <input type="date" max="2000-02-28" name="ubd" id="ubd" required>
 
-                                                            <label id="dateError">${invalidDate}</label>
+                                                            <label id="dateError"></label>
                                                             <br>
                                                             <label for="uemail"><b>Email</b></label>
                                                             <br>
                                                             <input type="text" placeholder="Enter Email" maxlength="50" id="uemail" name="uemail" onblur="checkEmail()" required>
 
 
-                                                            <label id="emailError">${invalidEmail}</label>
+                                                            <label id="emailError"></label>
                                                             <br>
                                                             <label for="upassword"><b>Password</b></label>
                                                             <br>
@@ -141,13 +141,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                             <input type="password" placeholder="Confirm Password" maxlength="50" id="uconfirmPassword" name="uconfirmPassword" onblur="checkPassword()" required>
 
 
-                                                            <label id="passwordError">${invalidPassword}</label>
+                                                            <label id="passwordError"></label>
                                                             <br>
                                                             <label for="ucreditLimit"><b>Credit Limit</b></label>
                                                             <br>
                                                             <input type="number" min="1" placeholder="Enter Credit Limit" id="ucreditLimit" name="ucreditLimit" required>
 
-                                                            <label id="creditLimitError">${invalidCreditLimit}</label>
+                                                            <label id="creditLimitError"></label>
                                                             <br>
                                                             <label for="uInterests"><b>Interests</b></label>
                                                             <br>
@@ -171,8 +171,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                             <br>
                                                             <input type="text" placeholder="Enter Address" maxlength="70" id="uaddress" name="uaddress" required>
 
-                                                            <label id="AddressError">${invalidAddress}</label>
+                                                            <label id="AddressError"></label>
                                                             <br>
+
                                                         </div>
                                                         <input type="hidden" id="uCategory" name="uCategory" value="done">
                                                         <input type="hidden" id="userJob" name="userJob" value="done">
@@ -571,7 +572,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 var products = [];
                 console.log(w3ls.cart._items);
                 for (i = 0, len = w3ls.cart._items.length; i < len; i++) {
-                    products.push(w3ls.cart._items[i]._data.w3ls_item + ":" + w3ls.cart._items[i]._data.quantity + ":" + w3ls.cart._items[i]._data.amount);
+                    products.push(w3ls.cart._items[i]._data.w3ls_item+":"+w3ls.cart._items[i]._data.quantity+":"+w3ls.cart._items[i]._data.amount);
 
                 }
                 console.log(products);

@@ -62,10 +62,35 @@ function checkEmail()
     if (emailRegex.test(document.getElementById('uemail').value))
     {
         document.getElementById('emailError').innerHTML = "";
-        validEmail = true;
+
+        $.ajax({
+            url: "SignUpServlet",
+            type: 'GET',
+            contentType: 'application/json',
+            data: {'temail': document.getElementById('uemail').value},
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            },
+            success: function (data)
+            {
+                $("#emailError").text(data);
+                console.log(data);
+                if (data !== null && data !== '')
+                {
+                    validEmail = false;
+                } else
+                {
+                    validEmail = true;
+                }
+                console.log(validEmail);
+            }});
+
         console.log(validEmail);
     } else {
         document.getElementById('emailError').innerHTML = "Wrong Format";
+        console.log("here");
     }
 }
 

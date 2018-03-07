@@ -40,7 +40,7 @@ public class BuyServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("userObject");
         //update user credit limit after buying
-        user.setCreditLimit(user.getCreditLimit() - totalSum);
+      //  user.setCreditLimit(user.getCreditLimit() - totalSum);
 
         //add new cart
         Cart cart = new Cart();

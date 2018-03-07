@@ -12,18 +12,18 @@ and open the template in the editor.
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
-        
+
         <label>Name</label><br>
         <input type="text" name="name" id="name" onblur="checkName()"><br>
-        <input type="text" name="nameError" id="nameError" disabled="true"><br>
+        <input type="text" name="nameError" id="nameError" disabled><br>
         <label>email</label><br>
         <input type="email" name="email" id="email" onblur="checkEmail();"><br>
-        <input type="text" name="emailError" id="emailError" disabled="true"><br>
+        <input type="text" name="emailError" id="emailError" disabled><br>
         <label>Password</label><br>
         <input type="password" name="password" id="pass"><br>
         <label>Confirm Password</label><br>
         <input type="password" name="cpassword" id="cpassword" onblur="checkPassword();"><br>
-        <input type="text" name="passwordError" id="passwordError" disabled="true"><br>
+        <input type="text" name="passwordError" id="passwordError" disabled><br>
         <label>Date OF Birth</label><br>
         <input type="date" name="date" id="date"><br>
         <label>Job</label><br>
@@ -32,24 +32,24 @@ and open the template in the editor.
         <input type="text" name="credit" id="credit"><br>
         <label>Address</label><br>
         <input type="text" name="address" id="address"><br>
-        
+
         <input type="button" id="submit" value="button"/><br>
-        
-        
+
+
         <script>
             function checkName()
+            {
+                var nameRegex = /^[a-zA-Z]+([ ][a-zA-Z]*)*$/;
+                if (document.getElementById('name').value.match(nameRegex))
                 {
-                    var nameRegex = /^[a-zA-Z]+([ ][a-zA-Z]*)*$/;
-                    if (document.getElementById('name').value.match(nameRegex))
-                    {
-                        document.getElementById('nameError').value = "";
-                        validName = true;
-                        console.log(validName);
-                    } else {
-                        document.getElementById('nameError').value = "Wrong Format";
-                    }
+                    document.getElementById('nameError').value = "";
+                    validName = true;
+                    console.log(validName);
+                } else {
+                    document.getElementById('nameError').value = "Wrong Format";
                 }
-                
+            }
+
             function checkEmail()
             {
                 var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -63,13 +63,13 @@ and open the template in the editor.
                     document.getElementById('emailError').value = "Wrong Format";
                 }
             }
-        
+
             function checkPassword()
             {
-                
+
                 if (document.getElementById('pass').value === document.getElementById('cpassword').value)
                 {
-                    
+
                     document.getElementById('passwordError').value = "";
                     validPass = true;
                     console.log(validPass);
@@ -78,32 +78,32 @@ and open the template in the editor.
                     document.getElementById('passwordError').value = "Passwords do not match";
                 }
             }
-            
-            
-            
-            $(document).ready(function(){
-                $("#submit").click(function(){
+
+
+
+            $(document).ready(function () {
+                $("#submit").click(function () {
                     name_var = $("#name").val();
                     password_var = $("#pass").val();
                     email_var = $("#email").val();
-                     credit_var = $("#credit").val();
-                     job_var = $("#job").val();
-                     address_var = $("#address").val();
-                     birthdate_var = $("#date").val();
+                    credit_var = $("#credit").val();
+                    job_var = $("#job").val();
+                    address_var = $("#address").val();
+                    birthdate_var = $("#date").val();
                     $.post("UpdateUserServlet",
-                    {
-                      name: name_var,
-                      email: email_var,
-                      password: password_var,
-                      birthdate: birthdate_var,
-                      job: job_var,
-                      address: address_var,
-                      credit: credit_var,
-                          
-                    },
-                    function(){
-                        alert("success");
-                    });
+                            {
+                                name: name_var,
+                                email: email_var,
+                                password: password_var,
+                                birthdate: birthdate_var,
+                                job: job_var,
+                                address: address_var,
+                                credit: credit_var,
+
+                            },
+                            function () {
+                                alert("success");
+                            });
                 });
             });
         </script>

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!--
 Author: W3layouts
@@ -55,7 +56,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </script>
         <!-- //end-smooth-scrolling -->
     </head>
-    <body>
+    <body onload="setInterval('updateProducts()', 3000)">
         <!-- for bootstrap working -->
         <script type="text/javascript" src="MainPages/js/bootstrap-3.1.1.min.js"></script>
         <!-- //for bootstrap working -->
@@ -81,21 +82,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
                                             <div class="facts">
                                                 <div class="register">
-                                                    <form action="LoginServlet" method="post">
+                                                    <form action="LoginServlet" method="post" 
+                                                          onsubmit="return checkEmailExistance();">
                                                         <h1>Sign In</h1>
                                                         <br>
                                                         <label for="loginemail"><b>Email</b></label>
                                                         <br>
                                                         <input type="text" placeholder="Enter Email" id="loginemail" name="loginemail"
-                                                               required>
-                                                        <label>${invalidEmail}</label>
+                                                               onblur="checkEmailExistance()" required>
+                                                        <label id="loginEmailError">${loginInvalidEmail}</label>
                                                         <br>
                                                         <br>
                                                         <label for="loginpas"><b>Password</b></label>
                                                         <br>
                                                         <input type="password" placeholder="Enter Password" id="loginpas" name="loginpas"
                                                                required>
-                                                        <label>${invalidPassword}</label>
+                                                        <label>${loginInvalidPassword}</label>
                                                         <br>
                                                         <div class="sign-up">
                                                             <input type="submit" value="Sign in"/>
@@ -108,7 +110,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                             <div class="facts">
                                                 <div class="register">
                                                     <form method="post" action="SignUpServlet" onsubmit="beforeSubmit();
-                return submitForm();">
+                                                            return submitForm();">
 
                                                         <div>
                                                             <h1>Sign Up</h1>
@@ -133,7 +135,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                             <br>
                                                             <label for="upassword"><b>Password</b></label>
                                                             <br>
-                                                            <input type="password" placeholder="Enter Password" maxlength="50" id="upassword" name="upassword" onblur="checkPassword()" required>
+                                                            <input type="password" placeholder="Enter Password" maxlength="50" id="upassword" name="upassword" onblur="checkPasswordStrength()" required>
+                                                            <label id="passStrength"></label>
                                                             <br>
 
                                                             <label for="uconfirmPassword"><b>Confirm Password</b></label>
@@ -247,251 +250,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <!--main div of products-->
                 <div class="agileinfo_new_products_grids">
 
-                    <!--product part-->
-                    <div class="col-md-3 agileinfo_new_products_grid">
-                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
-                            <div class="hs-wrapper hs-wrapper1">
-                                <img src="MainPages/images/25.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/23.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/24.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/22.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/26.jpg" alt=" " class="img-responsive" />
-                                <div class="w3_hs_bottom w3_hs_bottom_sub">
-                                    <ul>
-                                        <li>
-                                            <a href="single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <h5><a href="single.html">Laptops</a></h5>
-                            <div class="simpleCart_shelfItem">
-                                <p><i class="item_price">$500</i></p>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="w3ls_item" value="Red Laptop">
-                                    <input type="hidden" name="amount" value="500.00">
-                                    <button type="submit" class="w3ls-cart">Add to cart</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!--product part-->
-
-
-                    <div class="col-md-3 agileinfo_new_products_grid">
-                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
-                            <div class="hs-wrapper hs-wrapper1">
-                                <img src="MainPages/images/27.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/28.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/29.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/30.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/31.jpg" alt=" " class="img-responsive" />
-                                <div class="w3_hs_bottom w3_hs_bottom_sub">
-                                    <ul>
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <h5><a href="single.html">Black Phone</a></h5>
-                            <div class="simpleCart_shelfItem">
-                                <p><i class="item_price">$370</i></p>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="w3ls_item" value="Black Phone">
-                                    <input type="hidden" name="amount" value="370.00">
-                                    <button type="submit" class="w3ls-cart">Add to cart</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 agileinfo_new_products_grid">
-                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
-                            <div class="hs-wrapper hs-wrapper1">
-                                <img src="MainPages/images/34.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/33.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/32.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/35.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/36.jpg" alt=" " class="img-responsive" />
-                                <div class="w3_hs_bottom w3_hs_bottom_sub">
-                                    <ul>
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target="#myModal5"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <h5><a href="single.html">Kids Toy</a></h5>
-                            <div class="simpleCart_shelfItem">
-                                <p><i class="item_price">$100</i></p>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="w3ls_item" value="Kids Toy">
-                                    <input type="hidden" name="amount" value="100.00">
-                                    <button type="submit" class="w3ls-cart">Add to cart</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 agileinfo_new_products_grid">
-                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
-                            <div class="hs-wrapper hs-wrapper1">
-                                <img src="MainPages/images/37.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/38.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/39.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/40.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/41.jpg" alt=" " class="img-responsive" />
-                                <div class="w3_hs_bottom w3_hs_bottom_sub">
-                                    <ul>
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target="#myModal6"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <h5><a href="single.html">Induction Stove</a></h5>
-                            <div class="simpleCart_shelfItem">
-                                <p><i class="item_price">$250</i></p>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="w3ls_item" value="Induction Stove">
-                                    <input type="hidden" name="amount" value="250.00">
-                                    <button type="submit" class="w3ls-cart">Add to cart</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 agileinfo_new_products_grid" style="margin-top:20px;">
-                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
-                            <div class="hs-wrapper hs-wrapper1">
-                                <img src="MainPages/images/25.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/23.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/24.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/22.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/26.jpg" alt=" " class="img-responsive" />
-                                <div class="w3_hs_bottom w3_hs_bottom_sub">
-                                    <ul>
-                                        <li>
-                                            <a href="single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <h5><a href="single.html">Laptops</a></h5>
-                            <div class="simpleCart_shelfItem">
-                                <p><i class="item_price">$500</i></p>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="w3ls_item" value="Red Laptop">
-                                    <input type="hidden" name="amount" value="500.00">
-                                    <button type="submit" class="w3ls-cart">Add to cart</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 agileinfo_new_products_grid" style="margin-top:20px;">
-                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
-                            <div class="hs-wrapper hs-wrapper1">
-                                <img src="MainPages/images/25.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/23.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/24.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/22.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/26.jpg" alt=" " class="img-responsive" />
-                                <div class="w3_hs_bottom w3_hs_bottom_sub">
-                                    <ul>
-                                        <li>
-                                            <a href="single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <h5><a href="single.html">Laptops</a></h5>
-                            <div class="simpleCart_shelfItem">
-                                <p><i class="item_price">$500</i></p>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="w3ls_item" value="Red Laptop">
-                                    <input type="hidden" name="amount" value="500.00">
-                                    <button type="submit" class="w3ls-cart">Add to cart</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 agileinfo_new_products_grid" style="margin-top:20px;">
-                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
-                            <div class="hs-wrapper hs-wrapper1">
-                                <img src="MainPages/images/25.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/23.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/24.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/22.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/26.jpg" alt=" " class="img-responsive" />
-                                <div class="w3_hs_bottom w3_hs_bottom_sub">
-                                    <ul>
-                                        <li>
-                                            <a href="single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <h5><a href="single.html">Laptops</a></h5>
-                            <div class="simpleCart_shelfItem">
-                                <p><i class="item_price">$500</i></p>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="w3ls_item" value="Red Laptop">
-                                    <input type="hidden" name="amount" value="500.00">
-                                    <button type="submit" class="w3ls-cart">Add to cart</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 agileinfo_new_products_grid" style="margin-top:20px;">
-                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
-                            <div class="hs-wrapper hs-wrapper1">
-                                <img src="MainPages/images/25.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/23.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/24.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/22.jpg" alt=" " class="img-responsive" />
-                                <img src="MainPages/images/26.jpg" alt=" " class="img-responsive" />
-                                <div class="w3_hs_bottom w3_hs_bottom_sub">
-                                    <ul>
-                                        <li>
-                                            <a href="single.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <h5><a href="single.html">Laptops</a></h5>
-                            <div class="simpleCart_shelfItem">
-                                <p><i class="item_price">$500</i></p>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="available_quantity">
-                                    <input type="hidden" name="w3ls_item" value="Red Laptop">
-                                    <input type="hidden" name="amount" value="500.00">
-                                    <button type="submit" class="w3ls-cart">Add to cart</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="clearfix"> </div>
                 </div>
             </div>
         </div>
@@ -564,6 +322,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!-- cart-js -->
         <script src="MainPages/js/minicart.js"></script>
         <script src="MainPages/js/registerationJS.js"></script>
+        <script src="MainPages/js/updateProductsJS.js"></script>
+        <script src="MainPages/js/loginJS.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+
+
         <script>
 
             w3ls.render();
@@ -603,5 +366,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         </script>
         <!-- //cart-js -->
+        <c:remove var="invalidName" scope="application" />
+        <c:remove var="invalidAddress" scope="application" />
+        <c:remove var="invalidEmail" scope="application" />
+        <c:remove var="invalidDate" scope="application" />
+        <c:remove var="invalidPassword" scope="application" />
+        <c:remove var="invalidCreditLimit" scope="application" />
+
+        <c:remove var="loginInvalidPassword" scope="application" />
+        <c:remove var="loginInvalidEmail" scope="application" />
     </body>
 </html>

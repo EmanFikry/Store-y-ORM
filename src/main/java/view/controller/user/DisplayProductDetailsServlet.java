@@ -5,11 +5,8 @@
  */
 package view.controller.user;
 
-import com.google.gson.Gson;
 import controller.DAODelegate.DAOService;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,18 +17,14 @@ import model.dataAccessLayer.entity.Product;
  *
  * @author Eman-PC
  */
-public class DisplayProductsServlet extends HttpServlet {
+public class DisplayProductDetailsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
-        PrintWriter out = response.getWriter();
-
+        String productID = request.getParameter("productID");
         DAOService daoService = new DAOService();
-        //ArrayList<Product> products = daoService.getProductList();
-        //out.print(buildJSONFromVector(products));
-        ArrayList<Product> products = new ArrayList<>();
+        //Product product = daoService.getProductByID(Long.parseLong(productID));
         Product product = new Product();
         product.setAmount(100);
         product.setCategory("hsdjhsdjsd");
@@ -39,16 +32,9 @@ public class DisplayProductsServlet extends HttpServlet {
         product.setName("teeest");
         product.setPrice(100);
         product.setImgURL("MainPages/images/34.jpg");
-        products.add(product);
-        products.add(product);
-        out.print(buildJSONFromVector(products));
+        request.getServletContext().setAttribute("productObject", product);
+        response.sendRedirect("productPages/productDetails.jsp");
 
-    }
-
-    private String buildJSONFromVector(ArrayList<Product> products) {
-
-        Gson json = new Gson();
-        return json.toJson(products);
     }
 
 }

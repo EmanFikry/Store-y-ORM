@@ -30,7 +30,10 @@ public class DisplayUsers extends HttpServlet {
         users = daoService.getUserList();
         //create session to add all user list
         HttpSession session = request.getSession();
-        session.setAttribute("userList", users);
+        //session.setAttribute("users", users);
+        System.out.println(users.size()+"tesst");
+        request.setAttribute("users", users);
+        request.getRequestDispatcher("adminPages/customerProfile.jsp").forward(request, response);
 
     }
 

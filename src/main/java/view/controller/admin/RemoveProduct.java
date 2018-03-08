@@ -30,6 +30,7 @@ public class RemoveProduct extends HttpServlet {
         } else {
             System.out.println("delete failed");
         }
+        //redirect to specific page
     }
 
 }

@@ -40,6 +40,14 @@
         <servlet-name>DisplayProductsServlet</servlet-name>
         <servlet-class>view.controller.user.DisplayProductsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SignOutServlet</servlet-name>
+        <servlet-class>view.controller.user.SignOutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DisplayProductDetailsServlet</servlet-name>
+        <servlet-class>view.controller.user.DisplayProductDetailsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BuyServlet</servlet-name>
         <url-pattern>/BuyServlet</url-pattern>
@@ -80,7 +88,15 @@
         <servlet-name>DisplayProductsServlet</servlet-name>
         <url-pattern>/DisplayProductsServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignOutServlet</servlet-name>
+        <url-pattern>/SignOutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisplayProductDetailsServlet</servlet-name>
+        <url-pattern>/DisplayProductDetailsServlet</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>MainPages/home.jsp</welcome-file>
+        <welcome-file>productPages/test.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

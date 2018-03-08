@@ -55,6 +55,25 @@ function checkPassword()
     }
 }
 
+function checkPasswordStrength()
+{
+    var strength = {
+        0: "Worst",
+        1: "Bad",
+        2: "Weak",
+        3: "Good",
+        4: "Strong"
+    }
+    var val = document.getElementById('upassword').value;
+    var result = zxcvbn(val);
+
+    // Update the text indicator
+    if (val !== "") {
+        document.getElementById('passStrength').innerHTML = "Strength: " + strength[result.score];
+    } else {
+        document.getElementById('passStrength').innerHTML.innerHTML = "";
+    }
+}
 function checkEmail()
 {
     var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

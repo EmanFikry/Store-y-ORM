@@ -7,6 +7,7 @@ package view.controller.user;
 
 import controller.DAODelegate.DAOService;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,8 +29,9 @@ public class SignUpServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Validation validate = new Validation();
+        //System.out.println(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/generalPages/registeration.jsp");
 
+        Validation validate = new Validation();
         String name = request.getParameter("uname");
         String birthday = request.getParameter("ubd");
         String email = request.getParameter("uemail");
@@ -79,8 +81,11 @@ public class SignUpServlet extends HttpServlet {
             DAOService daoService = new DAOService();
             boolean isExisted = daoService.isEmailExist(email);
             if (isExisted) {
+                //response.sendRedirect(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/generalPages/registeration.jsp");
                 request.getServletContext().setAttribute("invalidEmail", "Email already exists");
-                response.sendRedirect("generalPages/registeration.jsp");
+                response.sendRedirect(request.getScheme() + "://"
+                        + request.getServerName() + ":" + request.getServerPort()
+                        + request.getContextPath() + "/MainPages/home.jsp");
             } else {
                 //fill the data in user object
                 User user = new User();
@@ -105,26 +110,31 @@ public class SignUpServlet extends HttpServlet {
 
                 boolean isAdded = daoService.addUser(user);
                 if (isAdded) {
-                    response.sendRedirect("generalPages/login.jsp");
+                    //response.sendRedirect("generalPages/registeration.jsp");
+                    response.sendRedirect(request.getScheme() + "://"
+                            + request.getServerName() + ":" + request.getServerPort()
+                            + request.getContextPath() + "/MainPages/home.jsp");
                 }
             }
         } else {
-            response.sendRedirect("generalPages/registeration.jsp");
+            // response.sendRedirect("generalPages/registeration.jsp");
+            response.sendRedirect(request.getScheme() + "://"
+                    + request.getServerName() + ":" + request.getServerPort()
+                    + request.getContextPath() + "/MainPages/home.jsp");
         }
-
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("uemail");
+        String email = request.getParameter("temail");
         DAOService daoService = new DAOService();
         boolean isExisted = daoService.isEmailExist(email);
         if (isExisted) {
-            request.getServletContext().setAttribute("invalidEmail", "Email already exists");
-            response.sendRedirect("generalPages/registeration.jsp");
-        } else {
-            
+            System.out.println("exist");
+            response.setContentType("text/plain");
+            PrintWriter out = response.getWriter();
+            out.write("Email already exists");
         }
     }
 }

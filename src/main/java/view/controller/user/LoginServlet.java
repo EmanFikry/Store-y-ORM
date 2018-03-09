@@ -7,6 +7,7 @@ package view.controller.user;
 
 import controller.DAODelegate.DAOService;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,16 +33,33 @@ public class LoginServlet extends HttpServlet {
         if (user == null) {
             boolean isExisted = daoService.isEmailExist(email);
             if (isExisted) {
-                request.getServletContext().setAttribute("invalidPassword", "wrong password");
+                request.getServletContext().setAttribute("loginInvalidPassword", "wrong password");
             } else {
-                request.getServletContext().setAttribute("invalidEmail", "Email does not exist");
+                request.getServletContext().setAttribute("loginInvalidEmail", "Email does not exist");
             }
             response.sendRedirect("generalPages/login.jsp");
         } else {
             HttpSession session = request.getSession(true);
             session.setAttribute("userObject", user);
-          //  response.sendRedirect("generalPages/login.jsp");
+            response.sendRedirect("adminPages/updateprofile.html");
         }
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String email = request.getParameter("lemail");
+        DAOService daoService = new DAOService();
+        boolean isExisted = daoService.isEmailExist(email);
+        if (isExisted) {
+            System.out.println("exist");
+            response.setContentType("text/plain");
+            PrintWriter out = response.getWriter();
+            out.write("Email already exists");
+        } else {
+            response.setContentType("text/plain");
+            PrintWriter out = response.getWriter();
+            out.write("");
+        }
     }
 }

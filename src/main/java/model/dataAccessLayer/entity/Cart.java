@@ -13,12 +13,12 @@ public class Cart {
 
     private Long recID;
     private Long userID;
-    private Double totalSum;
+    private float totalSum;
 
     public Cart() {
     }
 
-    public Cart(Long recID, Long userID, Double totalSum) {
+    public Cart(Long recID, Long userID, float totalSum) {
         this.recID = recID;
         this.userID = userID;
         this.totalSum = totalSum;
@@ -40,11 +40,11 @@ public class Cart {
         this.userID = userID;
     }
 
-    public Double getTotalSum() {
+    public float getTotalSum() {
         return totalSum;
     }
 
-    public void setTotalSum(Double totalSum) {
+    public void setTotalSum(float totalSum) {
         this.totalSum = totalSum;
     }
 }

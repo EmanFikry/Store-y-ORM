@@ -25,16 +25,20 @@ public class DisplayUsers extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response)
             throws ServletException, IOException {
-          ArrayList<User> users=new ArrayList<User>();
-          //call userdao from database
-           DAOService daoService = new DAOService();
-           users = daoService.getUserList();
-          //users=userdao.getAllUsers();
-          //create session to add all user list
-           HttpSession session=req.getSession();  
-            session.setAttribute("users",users);  
-          
-        
+  
+
+        ArrayList<User> users;
+        //call userdao from database
+        DAOService daoService = new DAOService();
+        users = daoService.getUserList();
+        //create session to add all user list
+        HttpSession session = req.getSession();
+        //session.setAttribute("users", users);
+        System.out.println(users.size()+"tesst");
+        req.setAttribute("users", users);
+        req.getRequestDispatcher("adminPages/customerProfile.jsp").forward(req, response);
+
+
     }
 
 }

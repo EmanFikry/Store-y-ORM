@@ -22,6 +22,7 @@ public class RemoveProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         
          Long pId = Long.parseLong(request.getParameter("pId"));
           DAOService daoService = new DAOService();
@@ -36,8 +37,11 @@ public class RemoveProduct extends HttpServlet {
               System.out.println("delete failed");
           }
         
-    }
+        
     
+        //redirect to specific page
+
     }
 
 
+}

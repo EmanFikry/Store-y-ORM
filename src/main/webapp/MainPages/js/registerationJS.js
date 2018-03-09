@@ -55,6 +55,25 @@ function checkPassword()
     }
 }
 
+function checkPasswordStrength()
+{
+    var strength = {
+        0: "Worst",
+        1: "Bad",
+        2: "Weak",
+        3: "Good",
+        4: "Strong"
+    }
+    var val = document.getElementById('upassword').value;
+    var result = zxcvbn(val);
+
+    // Update the text indicator
+    if (val !== "") {
+        document.getElementById('passStrength').innerHTML = "Strength: " + strength[result.score];
+    } else {
+        document.getElementById('passStrength').innerHTML.innerHTML = "";
+    }
+}
 function checkEmail()
 {
     var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -62,10 +81,35 @@ function checkEmail()
     if (emailRegex.test(document.getElementById('uemail').value))
     {
         document.getElementById('emailError').innerHTML = "";
-        validEmail = true;
+
+        $.ajax({
+            url: "SignUpServlet",
+            type: 'GET',
+            contentType: 'application/json',
+            data: {'temail': document.getElementById('uemail').value},
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            },
+            success: function (data)
+            {
+                $("#emailError").text(data);
+                console.log(data);
+                if (data !== null && data !== '')
+                {
+                    validEmail = false;
+                } else
+                {
+                    validEmail = true;
+                }
+                console.log(validEmail);
+            }});
+
         console.log(validEmail);
     } else {
         document.getElementById('emailError').innerHTML = "Wrong Format";
+        console.log("here");
     }
 }
 

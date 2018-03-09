@@ -22,7 +22,7 @@ public class Validation {
             validName = true;
         }
         return validName;
-    }
+    } 
 
     public boolean validateCreditLimit(String creditLimit) {
         

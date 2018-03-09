@@ -64,6 +64,9 @@ public class BuyServlet extends HttpServlet {
             //add product to cart
             daoService.addOrder(cartID, Long.parseLong(productID), Long.parseLong(productQuantity));
         }
+        response.sendRedirect(request.getScheme() + "://"
+                + request.getServerName() + ":" + request.getServerPort()
+                + request.getContextPath() + "/home.jsp");
     }
 
 }

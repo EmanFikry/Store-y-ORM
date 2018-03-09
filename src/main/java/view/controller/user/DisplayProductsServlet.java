@@ -38,7 +38,7 @@ public class DisplayProductsServlet extends HttpServlet {
         product.setDescription("dshsjhhshsdhsj");
         product.setName("teeest");
         product.setPrice(100);
-        product.setImgURL("MainPages/images/34.jpg");
+        product.setImgURL("images/34.jpg");
         products.add(product);
         products.add(product);
         out.print(buildJSONFromVector(products));

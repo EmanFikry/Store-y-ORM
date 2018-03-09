@@ -26,20 +26,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- //for-mobile-apps -->
         <!-- Custom Theme files -->
-        <link href="MainPages/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-        <link href="MainPages/css/style.css" rel="stylesheet" type="text/css" media="all" />
-        <link href="MainPages/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
-        <link href="MainPages/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+        <meta charset="utf-8">
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 
         <!-- //Custom Theme files -->
         <!-- font-awesome icons -->
-        <link href="MainPages/css/font-awesome.css" rel="stylesheet">
+        <link href="css/font-awesome.css" rel="stylesheet">
         <!-- //font-awesome icons -->
         <!-- js -->
-        <script src="MainPages/js/jquery.min.js"></script>
-        <link rel="stylesheet" href="MainPages/css/jquery.countdown.css" /> <!-- countdown -->
+        <script src="js/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/jquery.countdown.css" /> <!-- countdown -->
         <!-- //js -->
         <!-- web fonts -->
         <link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
@@ -55,10 +56,30 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             });
         </script>
         <!-- //end-smooth-scrolling -->
+        
+        
+        <!-- Add Check For cookies in all pages -- -->
+            <script type="text/javascript">
+                function checkCookies(){
+                    var cookieEnabled=(navigator.cookieEnabled)? true : false;
+
+                    //if not IE4+ nor NS6+
+                    if (typeof navigator.cookieEnabled=="undefined" && !cookieEnabled){ 
+                    document.cookie="testcookie"
+                    cookieEnabled=(document.cookie.indexOf("testcookie")!=-1)? true : false
+                    }
+
+                    if (!cookieEnabled){
+                        window.location.href = "/error.html";
+                    }
+                }
+
+
+        </script>
     </head>
-    <body onload="setInterval('updateProducts()', 3000)">
+    <body onload="checkCookies();setInterval('updateProducts()', 3000)">
         <!-- for bootstrap working -->
-        <script type="text/javascript" src="MainPages/js/bootstrap-3.1.1.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
         <!-- //for bootstrap working -->
         <!-- header modal -->
         <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
@@ -190,7 +211,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     </div>
 
                                 </div>
-                                <script src="MainPages/js/easyResponsiveTabs.js" type="text/javascript"></script>
+                                <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
                                 <script type="text/javascript">
                                                                 $(document).ready(function () {
                                                                     $('#horizontalTab').easyResponsiveTabs({
@@ -310,7 +331,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="footer-copy">
                 <div class="footer-copy1">
                     <div class="footer-copy-pos">
-                        <a href="#home1" class="scroll"><img src="MainPages/images/arrow.png" alt=" " class="img-responsive" /></a>
+                        <a href="#home1" class="scroll"><img src="images/arrow.png" alt=" " class="img-responsive" /></a>
                     </div>
                 </div>
                 <div class="container">
@@ -320,10 +341,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
         <!-- //footer -->
         <!-- cart-js -->
-        <script src="MainPages/js/minicart.js"></script>
-        <script src="MainPages/js/registerationJS.js"></script>
-        <script src="MainPages/js/updateProductsJS.js"></script>
-        <script src="MainPages/js/loginJS.js"></script>
+        <script src="js/minicart.js"></script>
+        <script src="js/registerationJS.js"></script>
+        <script src="js/updateProductsJS.js"></script>
+        <script src="js/loginJS.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
 
 

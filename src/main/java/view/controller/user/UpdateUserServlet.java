@@ -32,6 +32,10 @@ public class UpdateUserServlet extends HttpServlet {
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
 
+        String username = (String) session.getAttribute("username");
+
+        DAOService user = new DAOService();
+
         User updatedUser = (User) session.getAttribute("userObject");
 
         String birthDay;
@@ -42,7 +46,7 @@ public class UpdateUserServlet extends HttpServlet {
         String address = request.getParameter(("address"));
         String job = request.getParameter(("job"));
         String interest = request.getParameter("uCategory");
-        
+
         String interestsArray[] = interest.split(";");
         ArrayList<String> interests = new ArrayList<>();
         for (String temp : interestsArray) {
@@ -59,7 +63,6 @@ public class UpdateUserServlet extends HttpServlet {
             Logger.getLogger(SignUpServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        DAOService user = new DAOService();
 
         updatedUser.setUserInterest(interests);
         updatedUser.setAddress(address);

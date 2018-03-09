@@ -37,12 +37,17 @@ public class LoginServlet extends HttpServlet {
             } else {
                 request.getServletContext().setAttribute("loginInvalidEmail", "Email does not exist");
             }
-            response.sendRedirect("generalPages/login.jsp");
+            response.sendRedirect(request.getScheme() + "://"
+                    + request.getServerName() + ":" + request.getServerPort()
+                    + request.getContextPath() + "/home.jsp");
         } else {
             HttpSession session = request.getSession(true);
             session.setAttribute("userObject", user);
-            response.sendRedirect("adminPages/updateprofile.html");
+            response.sendRedirect(request.getScheme() + "://"
+                    + request.getServerName() + ":" + request.getServerPort()
+                    + request.getContextPath() + "/updateprofile.html");
         }
+
     }
 
     @Override
@@ -55,11 +60,11 @@ public class LoginServlet extends HttpServlet {
             System.out.println("exist");
             response.setContentType("text/plain");
             PrintWriter out = response.getWriter();
-            out.write("Email already exists");
+            out.write("");
         } else {
             response.setContentType("text/plain");
             PrintWriter out = response.getWriter();
-            out.write("");
+            out.write("Email does not exist");
         }
     }
 }

@@ -18,7 +18,7 @@
 
             var files = e.dataTransfer.files;
             for (var i = 0, f; f = files[i]; i++) {
-                files = document.getElementById(profile_pic).files;
+                 files = document.getElementById(profile_pic).files;
                 // Read the File objects in this FileList.
             }
         }
@@ -57,7 +57,7 @@
         function checkUrl()
         {
             var urlRegex = /(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/;
-            if (document.getElementById('Productnumber').value.match(urlRegex))
+                    if (document.getElementById('Productnumber').value.match(urlRegex))
             {
                 document.getElementById('urlError').innerHTML = "";
                 validUrl = true;

@@ -81,11 +81,10 @@ public class SignUpServlet extends HttpServlet {
             DAOService daoService = new DAOService();
             boolean isExisted = daoService.isEmailExist(email);
             if (isExisted) {
-                //response.sendRedirect(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/generalPages/registeration.jsp");
                 request.getServletContext().setAttribute("invalidEmail", "Email already exists");
                 response.sendRedirect(request.getScheme() + "://"
                         + request.getServerName() + ":" + request.getServerPort()
-                        + request.getContextPath() + "/MainPages/home.jsp");
+                        + request.getContextPath() + "/home.jsp");
             } else {
                 //fill the data in user object
                 User user = new User();
@@ -110,17 +109,15 @@ public class SignUpServlet extends HttpServlet {
 
                 boolean isAdded = daoService.addUser(user);
                 if (isAdded) {
-                    //response.sendRedirect("generalPages/registeration.jsp");
                     response.sendRedirect(request.getScheme() + "://"
                             + request.getServerName() + ":" + request.getServerPort()
-                            + request.getContextPath() + "/MainPages/home.jsp");
+                            + request.getContextPath() + "/home.jsp");
                 }
             }
         } else {
-            // response.sendRedirect("generalPages/registeration.jsp");
             response.sendRedirect(request.getScheme() + "://"
                     + request.getServerName() + ":" + request.getServerPort()
-                    + request.getContextPath() + "/MainPages/home.jsp");
+                    + request.getContextPath() + "/home.jsp");
         }
     }
 

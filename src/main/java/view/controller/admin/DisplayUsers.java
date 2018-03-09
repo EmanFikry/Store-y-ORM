@@ -7,6 +7,7 @@ package view.controller.admin;
 
 import controller.DAODelegate.DAOService;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,18 +23,21 @@ import model.dataAccessLayer.entity.User;
 public class DisplayUsers extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest req, HttpServletResponse response)
             throws ServletException, IOException {
+  
+
         ArrayList<User> users;
         //call userdao from database
         DAOService daoService = new DAOService();
         users = daoService.getUserList();
         //create session to add all user list
-        HttpSession session = request.getSession();
+        HttpSession session = req.getSession();
         //session.setAttribute("users", users);
         System.out.println(users.size()+"tesst");
-        request.setAttribute("users", users);
-        request.getRequestDispatcher("adminPages/customerProfile.jsp").forward(request, response);
+        req.setAttribute("users", users);
+        req.getRequestDispatcher("adminPages/customerProfile.jsp").forward(req, response);
+
 
     }
 

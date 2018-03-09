@@ -19,6 +19,7 @@
 <!--        <img src="${productObject.imgURL}"/>-->
 
         <img src="https://www.w3schools.com/images/w3schools_green.jpg"/>
+        <img src="/Store-y/productPages/14.jpg"/>
         <br>
         <label for="pName"><b>Name</b></label>
         <br>
@@ -44,7 +45,6 @@
         <script>
             function backToMainPage()
             {
-//            <jsp:forward page="/generalPages/login.jsp"/>
             }
         </script>
         <c:remove var="productObject" scope="application" />

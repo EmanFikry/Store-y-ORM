@@ -69,6 +69,7 @@ public class EditProduct extends HttpServlet {
         DAOService daoService = new DAOService();
         Product product = new Product();
 
+        String id = request.getParameter("id");
         String name = request.getParameter("productName");
         String price = request.getParameter("price");
         String category = request.getParameter("category");
@@ -76,6 +77,7 @@ public class EditProduct extends HttpServlet {
         String imgURL = request.getParameter("imgURL");
         String description = request.getParameter("description");
 
+        product.setRecID(Long.parseLong(id));
         product.setName(name);
         product.setPrice(Float.parseFloat(price));
         product.setCategory(category);
@@ -84,10 +86,8 @@ public class EditProduct extends HttpServlet {
         product.setDescription(description);
 
         if (daoService.updateProduct(product)) {
-            response.sendRedirect("adminPages/viewProducts.jsp");
+            response.sendRedirect("ViewProduct");
         }
-
-        //obj mn entity el product
     }
 
 }

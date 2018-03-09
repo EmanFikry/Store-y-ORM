@@ -14,29 +14,77 @@ and open the template in the editor.
     <body>
 
         <label>Name</label><br>
-        <input type="text" name="name" id="name" onblur="checkName()"><br>
-        <input type="text" name="nameError" id="nameError" disabled><br>
+        <input type="text" name="name" id="name" maxlength="100" onblur="checkName()" required><br>
+        <label id="nameError"></label>
+
         <label>email</label><br>
-        <input type="email" name="email" id="email" onblur="checkEmail();"><br>
-        <input type="text" name="emailError" id="emailError" disabled><br>
+        <input type="email" name="email" id="email" maxlength="50" onblur="checkEmail()" required><br>
+        <label id="emailError"></label>
+
         <label>Password</label><br>
-        <input type="password" name="password" id="pass"><br>
+        <input type="password" name="password" maxlength="50" id="pass" onblur="checkPasswordStrength()" required><br>
+        <label id="passStrength"></label>
+
         <label>Confirm Password</label><br>
-        <input type="password" name="cpassword" id="cpassword" onblur="checkPassword();"><br>
-        <input type="text" name="passwordError" id="passwordError" disabled><br>
+        <input type="password" name="cpassword" maxlength="50" id="cpassword" onblur="checkPassword()" required><br>
+        <label id="passwordError"></label>
+
         <label>Date OF Birth</label><br>
-        <input type="date" name="date" id="date"><br>
-        <label>Job</label><br>
-        <input type="text" name="job" id="job"><br>
+        <input type="date" max="2000-02-28" name="date" id="date" required><br>
+        <label id="dateError"></label>
+
+        <label for="uInterests"><b>Interests</b></label>
+        <br>
+        <input type="checkbox" class="uInterests" value="Baby" />Baby<br/>
+        <input type="checkbox" class="uInterests" value="Beauty" />Beauty<br/>
+        <input type="checkbox" class="uInterests" value="Computers" />Computers<br/>
+        <input type="checkbox" class="uInterests" value="Home Decor & Furniture" />Home Decor & Furniture<br/>
+        <input type="checkbox" class="uInterests" value="Jewelry & Accessories" />Jewelry & Accessories<br/>
+        <input type="checkbox" class="uInterests" value="Mobile Phones, Tablets & Accessories" />Mobile Phones, Tablets & Accessories<br/>
+        <label for="uJob"><b>Job</b></label>
+        <br>
+        <select id="uJob">
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+            <option value="engineer">Engineer</option>
+            <option value="doctor">Doctor</option>
+            <option value="other">Other</option>
+        </select>
+        <br>
         <label>User Credit</label><br>
-        <input type="text" name="credit" id="credit"><br>
+        <input type="number" name="credit" min="1" id="credit" required><br>
+        <label id="creditLimitError"></label>
+
         <label>Address</label><br>
-        <input type="text" name="address" id="address"><br>
+        <input type="text" maxlength="70" name="address" id="address" required><br>
+
+        <input type="hidden" id="uCategory" name="uCategory" value="done">
+        <input type="hidden" id="userJob" name="userJob" value="done">
 
         <input type="button" id="submit" value="button"/><br>
 
 
         <script>
+            function checkPasswordStrength()
+            {
+                var strength = {
+                    0: "Worst",
+                    1: "Bad",
+                    2: "Weak",
+                    3: "Good",
+                    4: "Strong"
+                }
+                var val = document.getElementById('upassword').value;
+                var result = zxcvbn(val);
+
+                // Update the text indicator
+                if (val !== "") {
+                    document.getElementById('passStrength').innerHTML = "Strength: " + strength[result.score];
+                } else {
+                    document.getElementById('passStrength').innerHTML.innerHTML = "";
+                }
+            }
+
             function checkName()
             {
                 var nameRegex = /^[a-zA-Z]+([ ][a-zA-Z]*)*$/;
@@ -56,11 +104,36 @@ and open the template in the editor.
 
                 if (emailRegex.test(document.getElementById('email').value))
                 {
-                    document.getElementById('emailError').value = "";
-                    validEmail = true;
+                    document.getElementById('emailError').innerHTML = "";
+
+                    $.ajax({
+                        url: "SignUpServlet",
+                        type: 'GET',
+                        contentType: 'application/json',
+                        data: {'temail': document.getElementById('uemail').value},
+                        error: function (xhr, status, error) {
+                            console.log(xhr);
+                            console.log(status);
+                            console.log(error);
+                        },
+                        success: function (data)
+                        {
+                            $("#emailError").text(data);
+                            console.log(data);
+                            if (data !== null && data !== '')
+                            {
+                                validEmail = false;
+                            } else
+                            {
+                                validEmail = true;
+                            }
+                            console.log(validEmail);
+                        }});
+
                     console.log(validEmail);
                 } else {
-                    document.getElementById('emailError').value = "Wrong Format";
+                    document.getElementById('emailError').innerHTML = "Wrong Format";
+                    console.log("here");
                 }
             }
 
@@ -80,9 +153,27 @@ and open the template in the editor.
             }
 
 
+            function beforeSubmit()
+            {
+
+                document.getElementById('userJob').value = document.getElementById("job").value;
+
+                var checkedValue = '';
+                var inputElements = document.getElementsByClassName('uInterests');
+                for (var i = 0; inputElements[i]; i++) {
+                    if (inputElements[i].checked) {
+                        checkedValue = checkedValue + inputElements[i].value + ";";
+                    }
+                }
+                if (checkedValue != null) {
+                    document.getElementById('uCategory').value = checkedValue;
+                }
+            }
+
 
             $(document).ready(function () {
                 $("#submit").click(function () {
+                    beforeSubmit();
                     name_var = $("#name").val();
                     password_var = $("#pass").val();
                     email_var = $("#email").val();
@@ -90,6 +181,7 @@ and open the template in the editor.
                     job_var = $("#job").val();
                     address_var = $("#address").val();
                     birthdate_var = $("#date").val();
+                    interests_var = $("#uCategory").val();
                     $.post("UpdateUserServlet",
                             {
                                 name: name_var,
@@ -99,6 +191,7 @@ and open the template in the editor.
                                 job: job_var,
                                 address: address_var,
                                 credit: credit_var,
+                                interests: interests_var
 
                             },
                             function () {
@@ -106,6 +199,7 @@ and open the template in the editor.
                             });
                 });
             });
+
         </script>
     </body>
 </html>

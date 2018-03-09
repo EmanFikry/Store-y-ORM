@@ -33,7 +33,7 @@
                     <br>
                     <label for="uemail"><b>Email</b></label>
                     <br>
-                    <input type="text" placeholder="Enter Email" maxlength="50" id="uemail" name="uemail" onblur="checkEmail()" required>
+                    <input type="email" placeholder="Enter Email" maxlength="50" id="uemail" name="uemail" onblur="checkEmail()" required>
 
 
                     <label id="emailError">${invalidEmail}</label>

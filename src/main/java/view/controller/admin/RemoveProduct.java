@@ -22,15 +22,9 @@ public class RemoveProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String productID = request.getParameter("choosedProductID");
-        DAOService daoService = new DAOService();
-        boolean productdao = daoService.deleteProduct(Long.parseLong(productID));
-        if (productdao) {
-            System.out.println("delete done successfly");
-        } else {
-            System.out.println("delete failed");
-        }
-        //redirect to specific page
+        new DAOService().deleteProduct(Long.parseLong(request.getParameter("id")));
+        request.getSession().removeAttribute("products");
+        response.sendRedirect("ViewProduct");
     }
 
 }

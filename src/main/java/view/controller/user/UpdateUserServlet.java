@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.dataAccessLayer.DAO.impl.UserDAOImpl;
 import model.dataAccessLayer.entity.User;
 
 /**
@@ -42,6 +41,15 @@ public class UpdateUserServlet extends HttpServlet {
         long creditLimit = Long.parseLong(request.getParameter(("credit")));
         String address = request.getParameter(("address"));
         String job = request.getParameter(("job"));
+        String interest = request.getParameter("uCategory");
+        
+        String interestsArray[] = interest.split(";");
+        ArrayList<String> interests = new ArrayList<>();
+        for (String temp : interestsArray) {
+            if (!temp.isEmpty()) {
+                interests.add(temp);
+            }
+        }
         //convert birthday from String to sql date
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date = null;
@@ -53,6 +61,7 @@ public class UpdateUserServlet extends HttpServlet {
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         DAOService user = new DAOService();
 
+        updatedUser.setUserInterest(interests);
         updatedUser.setAddress(address);
         updatedUser.setBirthdate(sqlDate);
         updatedUser.setCreditLimit(creditLimit);

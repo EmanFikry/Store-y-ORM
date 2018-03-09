@@ -21,8 +21,7 @@
                         <div>
                             <input type="text" id="1" name="1"
                                    value="phone" required>
-                            
-                            <button type="button" id="d">delete</button>
+                            <button type="button" id="d1">delete</button>
                         </div>
                         <div>
                             <input type="text" id="2" name="2"

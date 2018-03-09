@@ -5,12 +5,16 @@
  */
 package view.controller.admin;
 
+import com.google.gson.Gson;
 import controller.DAODelegate.DAOService;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dataAccessLayer.entity.Product;
 
 /**
  *
@@ -21,8 +25,11 @@ public class ViewProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().setAttribute("products", new DAOService().getProductList());
-        response.sendRedirect("viewProduct.jsp?id=0");
+
+        PrintWriter out = response.getWriter();
+        out.print(buildJSONFromVector(new DAOService().getProductList()));
+        // request.getSession().setAttribute("products", new DAOService().getProductList());
+        //response.sendRedirect("ViewProduct.jsp");
     }
 
     @Override
@@ -39,4 +46,9 @@ public class ViewProduct extends HttpServlet {
         response.sendRedirect("updateProduct.jsp");
     }
 
+    private String buildJSONFromVector(ArrayList<Product> products) {
+
+        Gson json = new Gson();
+        return json.toJson(products);
+    }
 }

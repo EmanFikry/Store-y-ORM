@@ -63,7 +63,7 @@
         </table>
 
         <dialog open id="disDialog" class="dilg">
-            <form method="dialog">
+            <form>
                 <h1>Information</h1>
                 <fieldset>
                     <c:forEach items="${sessionScope.products}" var="pro">

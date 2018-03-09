@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <title>Admin Page</title>
         <link rel="stylesheet" href="css/adminStyles.css">
+        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     </head>
     <body onload="load_it()">
@@ -25,7 +27,7 @@
                     <th >Address</th>
                     <th >View More</th>
                 </tr>
-           
+
             </table>
         </div>
 
@@ -40,10 +42,11 @@
                     <th>Delete</th>
                     <th>View More</th>
                 </tr>
-
+                
             </table>
         </div>
 
         <script type="text/javascript" src="js/adminJS.js"></script>
+
     </body>
 </html>

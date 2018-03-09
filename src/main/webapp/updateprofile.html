@@ -63,8 +63,12 @@ and open the template in the editor.
 
         <input type="button" id="submit" value="button"/><br>
 
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
         <script>
+
+            var validName = false;
+            var validEmail = false;
+            var validPass = false;
             function checkPasswordStrength()
             {
                 var strength = {
@@ -74,7 +78,7 @@ and open the template in the editor.
                     3: "Good",
                     4: "Strong"
                 }
-                var val = document.getElementById('upassword').value;
+                var val = document.getElementById('pass').value;
                 var result = zxcvbn(val);
 
                 // Update the text indicator
@@ -90,13 +94,13 @@ and open the template in the editor.
                 var nameRegex = /^[a-zA-Z]+([ ][a-zA-Z]*)*$/;
                 if (document.getElementById('name').value.match(nameRegex))
                 {
-                    document.getElementById('nameError').value = "";
+                    document.getElementById('nameError').innerHTML = "";
                     validName = true;
                     console.log(validName);
                 } else {
                     validName = false;
                     console.log(validName);
-                    document.getElementById('nameError').value = "Wrong Format";
+                    document.getElementById('nameError').innerHTML = "Wrong Format";
                 }
             }
 
@@ -112,7 +116,7 @@ and open the template in the editor.
                         url: "SignUpServlet",
                         type: 'GET',
                         contentType: 'application/json',
-                        data: {'temail': document.getElementById('uemail').value},
+                        data: {'temail': document.getElementById('email').value},
                         error: function (xhr, status, error) {
                             console.log(xhr);
                             console.log(status);
@@ -136,6 +140,7 @@ and open the template in the editor.
                 } else {
                     document.getElementById('emailError').innerHTML = "Wrong Format";
                     console.log("here");
+                    validEmail = false;
                 }
             }
 
@@ -145,12 +150,14 @@ and open the template in the editor.
                 if (document.getElementById('pass').value === document.getElementById('cpassword').value)
                 {
 
-                    document.getElementById('passwordError').value = "";
+                    document.getElementById('passwordError').innerHTML = "";
                     validPass = true;
                     console.log(validPass);
                 } else {
                     console.log("here");
-                    document.getElementById('passwordError').value = "Passwords do not match";
+                    validPass = false;
+                    console.log(validPass);
+                    document.getElementById('passwordError').innerHTML = "Passwords do not match";
                 }
             }
 
@@ -158,7 +165,7 @@ and open the template in the editor.
             function beforeSubmit()
             {
 
-                document.getElementById('userJob').value = document.getElementById("job").value;
+                document.getElementById('userJob').value = document.getElementById("uJob").value;
 
                 var checkedValue = '';
                 var inputElements = document.getElementsByClassName('uInterests');
@@ -167,6 +174,8 @@ and open the template in the editor.
                         checkedValue = checkedValue + inputElements[i].value + ";";
                     }
                 }
+                console.log(checkedValue);
+                console.log("entered before submit");
                 if (checkedValue != null) {
                     document.getElementById('uCategory').value = checkedValue;
                 }
@@ -176,29 +185,33 @@ and open the template in the editor.
             $(document).ready(function () {
                 $("#submit").click(function () {
                     beforeSubmit();
-                    name_var = $("#name").val();
-                    password_var = $("#pass").val();
-                    email_var = $("#email").val();
-                    credit_var = $("#credit").val();
-                    job_var = $("#job").val();
-                    address_var = $("#address").val();
-                    birthdate_var = $("#date").val();
-                    interests_var = $("#uCategory").val();
-                    $.post("UpdateUserServlet",
-                            {
-                                name: name_var,
-                                email: email_var,
-                                password: password_var,
-                                birthdate: birthdate_var,
-                                job: job_var,
-                                address: address_var,
-                                credit: credit_var,
-                                interests: interests_var
+                    if (validName && validEmail && validPass)
+                    {
+                        name_var = $("#name").val();
+                        password_var = $("#pass").val();
+                        email_var = $("#email").val();
+                        credit_var = $("#credit").val();
+                        job_var = $("#uJob option:selected").text();
+                        address_var = $("#address").val();
+                        birthdate_var = $("#date").val();
+                        interests_var = $("#uCategory").val();
+                        $.post("UpdateUserServlet",
+                                {
+                                    name: name_var,
+                                    email: email_var,
+                                    password: password_var,
+                                    birthdate: birthdate_var,
+                                    job: job_var,
+                                    address: address_var,
+                                    credit: credit_var,
+                                    interests: interests_var
 
-                            },
-                            function () {
-                                alert("success");
-                            });
+                                },
+                                function () {
+                                    alert("success");
+                                });
+                    }
+
                 });
             });
 

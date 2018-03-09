@@ -37,16 +37,15 @@ public class LoginServlet extends HttpServlet {
             } else {
                 request.getServletContext().setAttribute("loginInvalidEmail", "Email does not exist");
             }
-            response.sendRedirect(request.getScheme() + "://"
-                    + request.getServerName() + ":" + request.getServerPort()
-                    + request.getContextPath() + "/home.jsp");
+            
         } else {
             HttpSession session = request.getSession(true);
             session.setAttribute("userObject", user);
-            response.sendRedirect(request.getScheme() + "://"
-                    + request.getServerName() + ":" + request.getServerPort()
-                    + request.getContextPath() + "/updateprofile.html");
+            
         }
+        response.sendRedirect(request.getScheme() + "://"
+                    + request.getServerName() + ":" + request.getServerPort()
+                    + request.getContextPath() + "/home.jsp");
 
     }
 

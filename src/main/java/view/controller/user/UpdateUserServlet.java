@@ -32,7 +32,7 @@ public class UpdateUserServlet extends HttpServlet {
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
 
-        String username = (String) session.getAttribute("username");
+       
 
         DAOService user = new DAOService();
 
@@ -45,7 +45,7 @@ public class UpdateUserServlet extends HttpServlet {
         long creditLimit = Long.parseLong(request.getParameter(("credit")));
         String address = request.getParameter(("address"));
         String job = request.getParameter(("job"));
-        String interest = request.getParameter("uCategory");
+        String interest = request.getParameter("interests");
 
         String interestsArray[] = interest.split(";");
         ArrayList<String> interests = new ArrayList<>();
@@ -74,6 +74,9 @@ public class UpdateUserServlet extends HttpServlet {
 
         boolean updated = user.editProfile(updatedUser);
 
+        response.sendRedirect(request.getScheme() + "://"
+                + request.getServerName() + ":" + request.getServerPort()
+                + request.getContextPath() + "/home.jsp");
         if (updated) {
             out.println("success");
         } else {

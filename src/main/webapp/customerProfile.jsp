@@ -11,42 +11,63 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Customer Profile</title>
+        <style>
+            .dilg {
+                display: block; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 3px; /* Location of the box */
+                left: 20;
+                top: 20;
+                width: 80%; /* Full width */
+                height: 80%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
-        <div class="span12">
 
-            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
-                <thead>
-                    <tr> 
-                        <th>Customer Name</th>
-                        <th>Customer Email</th>
-                        <th>Customer Address</th>
-                        <th>Customer Password</th>
-                        <th>Customer Birthdate</th>
-                        <th>Customer Job</th>
-                        <th>Customer Creditlimit</th>
-                    </tr>
-                </thead> 
-                <tbody>
-                    <c:if test="${!empty requestScope.users}">
-                        <c:set var="usersList" value="${requestScope.users}" scope="request"/>
-                    </c:if>
-                    <c:if test="${!empty requestScope.usersList}">
-                        <c:forEach items="${requestScope.usersList}" var="user">
-                            <tr class="odd gradeX">
-                                <td>${user.name}</td>
-                                <td>${user.email}</td>
-                                <td class="center">${user.address}</td>
-                                <td>${user.password}</td>
-                                <td>${user.birthdate}</td>
-                                <td>${user.job}</td>
-                                <td>${user.creditLimit}</td>
-                              
-                            </tr>
-                        </c:forEach>
-                    </c:if>
-                </tbody>
-            </table>
-        </div>
+
+        <table id="example">
+            <tr> 
+                <th>Customer Name</th>
+                <th>Customer Email</th>
+            </tr>
+        </table>
+
+        <script>
+            updateProducts();
+            function  updateProducts()
+            {
+                console.log("hereeeeeeeeeeeee 123344");
+                $.ajax({
+                    url: "DisplayUsers",
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    error: function (xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status);
+                        console.log(error);
+                    },
+                    success: function (data)
+                    {
+                        console.log("he");
+                        for (i = 0; i < data.length; i++) {
+                            $("#example").append('<tr><td>' + data[i].name + '</td><td>' + data[i].email + '</td></tr>');
+
+                        }
+                    }
+                });
+            }
+
+        </script>
+
+
+
     </body>
 </html>

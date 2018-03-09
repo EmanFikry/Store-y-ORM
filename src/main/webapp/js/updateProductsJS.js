@@ -46,10 +46,13 @@ function  updateProducts()
                         '<form action="#" method="post">' +
                         '<input type="hidden" name="cmd" value="_cart>' +
                         '<input type="hidden" name="add" value="1">' +
+                        '<input type="hidden" name="id" value="' + data[i].recID + '">' +
                         '<input type="hidden" name="w3ls_item" value="' + data[i].name + '">' +
                         '<input type="hidden" name="amount" value="' + data[i].price + '">' +
                         '<button type="submit" class="w3ls-cart">Add to cart</button>\n\
                         </form></div></div></div>';
+                
+                
             }
             mainProductDiv[0].innerHTML = productRender;
 

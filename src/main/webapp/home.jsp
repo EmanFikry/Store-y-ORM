@@ -76,8 +76,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
         </script>
+        
     </head>
     <body onload="checkCookies();setInterval('updateProducts()', 3000)">
+        <noscript>
+            <style type="text/css">
+                .pagecontainer {display:none;}
+            </style>
+            <div class="noscriptmsg">
+            You don't have javascript enabled.  Good luck with that.
+            </div>
+        </noscript>
+        <div class="pagecontainer">
         <!-- for bootstrap working -->
         <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
         <!-- //for bootstrap working -->
@@ -339,6 +349,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
             </div>
         </div>
+        </div>
         <!-- //footer -->
         <!-- cart-js -->
         <script src="js/minicart.js"></script>
@@ -396,5 +407,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         <c:remove var="loginInvalidPassword" scope="application" />
         <c:remove var="loginInvalidEmail" scope="application" />
+        
     </body>
 </html>

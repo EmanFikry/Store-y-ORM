@@ -26,6 +26,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- //for-mobile-apps -->
         <!-- Custom Theme files -->
+        <meta charset="utf-8">
         <link href="MainPages/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <link href="MainPages/css/style.css" rel="stylesheet" type="text/css" media="all" />
         <link href="MainPages/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
@@ -55,8 +56,28 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             });
         </script>
         <!-- //end-smooth-scrolling -->
+        
+        
+        <!-- Add Check For cookies in all pages -- -->
+            <script type="text/javascript">
+                function checkCookies(){
+                    var cookieEnabled=(navigator.cookieEnabled)? true : false;
+
+                    //if not IE4+ nor NS6+
+                    if (typeof navigator.cookieEnabled=="undefined" && !cookieEnabled){ 
+                    document.cookie="testcookie"
+                    cookieEnabled=(document.cookie.indexOf("testcookie")!=-1)? true : false
+                    }
+
+                    if (!cookieEnabled){
+                        window.location.href = "/error.html";
+                    }
+                }
+
+
+        </script>
     </head>
-    <body onload="setInterval('updateProducts()', 3000)">
+    <body onload="checkCookies();setInterval('updateProducts()', 3000)">
         <!-- for bootstrap working -->
         <script type="text/javascript" src="MainPages/js/bootstrap-3.1.1.min.js"></script>
         <!-- //for bootstrap working -->

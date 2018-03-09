@@ -97,6 +97,6 @@
         <url-pattern>/DisplayProductDetailsServlet</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>productPages/test.jsp</welcome-file>
+        <welcome-file>MainPages/home.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

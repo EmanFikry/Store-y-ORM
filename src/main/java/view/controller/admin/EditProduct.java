@@ -75,17 +75,17 @@ public class EditProduct extends HttpServlet {
         String amount = request.getParameter("amount");
         String imgURL = request.getParameter("imgURL");
         String description = request.getParameter("description");
-        
+
         product.setName(name);
         product.setPrice(Float.parseFloat(price));
         product.setCategory(category);
         product.setAmount(Integer.parseInt(amount));
         product.setImgURL(imgURL);
         product.setDescription(description);
-        
-        if (daoService.updateProduct(product))
+
+        if (daoService.updateProduct(product)) {
             response.sendRedirect("adminPages/viewProducts.jsp");
-        
+        }
 
         //obj mn entity el product
     }

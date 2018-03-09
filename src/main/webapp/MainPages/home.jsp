@@ -483,6 +483,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <form action="#" method="post">
                                     <input type="hidden" name="cmd" value="_cart">
                                     <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="available_quantity">
                                     <input type="hidden" name="w3ls_item" value="Red Laptop">
                                     <input type="hidden" name="amount" value="500.00">
                                     <button type="submit" class="w3ls-cart">Add to cart</button>
@@ -565,9 +566,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src="MainPages/js/minicart.js"></script>
         <script src="MainPages/js/registerationJS.js"></script>
         <script>
+
             w3ls.render();
             $("#check-btn").click(function () {
+                var products = [];
                 console.log(w3ls.cart._items);
+                for (i = 0, len = w3ls.cart._items.length; i < len; i++) {
+                    products.push(w3ls.cart._items[i]._data.w3ls_item+":"+w3ls.cart._items[i]._data.quantity+":"+w3ls.cart._items[i]._data.amount);
+
+                }
+                console.log(products);
+
+                $.ajax({
+                    url: "BuyServlet",
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(products),
+                    error: function (xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status);
+                        console.log(error);
+                    }
+                });
             });
             w3ls.cart.on('w3sb_checkout', function (evt) {
                 var items, len, i;
@@ -580,6 +601,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     }
                 }
             });
+
         </script>
         <!-- //cart-js -->
     </body>

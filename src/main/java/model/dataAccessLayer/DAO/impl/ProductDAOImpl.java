@@ -151,4 +151,26 @@ public class ProductDAOImpl implements ProductDAOInt {
         }
         return list;
     }
+
+    /**
+     * ******************* get product Amount *****************
+     */
+    @Override
+    public int productAmount(Long id) {
+        int pAmount = -1;
+        PreparedStatement ps = Database.getInstance().getPreparedStatement("SELECT amount FROM ITI_STORE_Y_PRODUCT WHERE productID=?");
+        try {
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                pAmount = rs.getInt("amount");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Database.getInstance().release();
+        }
+        return pAmount;
+
+    }
 }

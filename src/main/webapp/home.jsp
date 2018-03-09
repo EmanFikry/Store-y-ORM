@@ -56,299 +56,302 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             });
         </script>
         <!-- //end-smooth-scrolling -->
-        
-        
+
+
         <!-- Add Check For cookies in all pages -- -->
-            <script type="text/javascript">
-                function checkCookies(){
-                    var cookieEnabled=(navigator.cookieEnabled)? true : false;
+        <script type="text/javascript">
+            function checkCookies() {
+                var cookieEnabled = (navigator.cookieEnabled) ? true : false;
 
-                    //if not IE4+ nor NS6+
-                    if (typeof navigator.cookieEnabled=="undefined" && !cookieEnabled){ 
-                    document.cookie="testcookie"
-                    cookieEnabled=(document.cookie.indexOf("testcookie")!=-1)? true : false
-                    }
-
-                    if (!cookieEnabled){
-                        window.location.href = "/error.html";
-                    }
+                //if not IE4+ nor NS6+
+                if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled) {
+                    document.cookie = "testcookie"
+                    cookieEnabled = (document.cookie.indexOf("testcookie") != -1) ? true : false
                 }
+
+                if (!cookieEnabled) {
+                    window.location.href = "/error.html";
+                }
+            }
 
 
         </script>
-        
+
     </head>
     <body onload="checkCookies();setInterval('updateProducts()', 3000)">
         <noscript>
-            <style type="text/css">
-                .pagecontainer {display:none;}
-            </style>
-            <div class="noscriptmsg">
+        <style type="text/css">
+            .pagecontainer {display:none;}
+        </style>
+        <div class="noscriptmsg">
             You don't have javascript enabled.  Good luck with that.
-            </div>
+        </div>
         </noscript>
         <div class="pagecontainer">
-        <!-- for bootstrap working -->
-        <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
-        <!-- //for bootstrap working -->
-        <!-- header modal -->
-        <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
-             aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            &times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Don't Wait, Login now!</h4>
-                    </div>
-                    <div class="modal-body modal-body-sub">
-                        <div class="row">
-                            <div class="col-md-8 modal_body_left modal_body_left1" style="border-right: 1px dotted #C2C2C2;padding-right:3em; width:80%;">
-                                <div class="sap_tabs">
-                                    <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
-                                        <ul>
-                                            <li class="resp-tab-item" aria-controls="tab_item-0"><span>Sign in</span></li>
-                                            <li class="resp-tab-item" aria-controls="tab_item-1"><span>Sign up</span></li>
-                                        </ul>
-                                        <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
-                                            <div class="facts">
-                                                <div class="register">
-                                                    <form action="LoginServlet" method="post" 
-                                                          onsubmit="return checkEmailExistance();">
-                                                        <h1>Sign In</h1>
-                                                        <br>
-                                                        <label for="loginemail"><b>Email</b></label>
-                                                        <br>
-                                                        <input type="text" placeholder="Enter Email" id="loginemail" name="loginemail"
-                                                               onblur="checkEmailExistance()" required>
-                                                        <label id="loginEmailError">${loginInvalidEmail}</label>
-                                                        <br>
-                                                        <br>
-                                                        <label for="loginpas"><b>Password</b></label>
-                                                        <br>
-                                                        <input type="password" placeholder="Enter Password" id="loginpas" name="loginpas"
-                                                               required>
-                                                        <label>${loginInvalidPassword}</label>
-                                                        <br>
-                                                        <div class="sign-up">
-                                                            <input type="submit" value="Sign in"/>
-                                                        </div>
-                                                    </form>
+            <!-- for bootstrap working -->
+            <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+            <!-- //for bootstrap working -->
+            <!-- header modal -->
+            <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Don't Wait, Login now!</h4>
+                        </div>
+                        <div class="modal-body modal-body-sub">
+                            <div class="row">
+                                <div class="col-md-8 modal_body_left modal_body_left1" style="border-right: 1px dotted #C2C2C2;padding-right:3em; width:80%;">
+                                    <div class="sap_tabs">
+                                        <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+                                            <ul>
+                                                <li class="resp-tab-item" aria-controls="tab_item-0"><span>Sign in</span></li>
+                                                <li class="resp-tab-item" aria-controls="tab_item-1"><span>Sign up</span></li>
+                                            </ul>
+                                            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+                                                <div class="facts">
+                                                    <div class="register">
+                                                        <form action="LoginServlet" method="post" 
+                                                              onsubmit="return checkEmailExistance();">
+                                                            <h1>Sign In</h1>
+                                                            <br>
+                                                            <label for="loginemail"><b>Email</b></label>
+                                                            <br>
+                                                            <input type="text" placeholder="Enter Email" id="loginemail" name="loginemail"
+                                                                   onblur="checkEmailExistance()" required>
+                                                            <label id="loginEmailError">${loginInvalidEmail}</label>
+                                                            <br>
+                                                            <br>
+                                                            <label for="loginpas"><b>Password</b></label>
+                                                            <br>
+                                                            <input type="password" placeholder="Enter Password" id="loginpas" name="loginpas"
+                                                                   required>
+                                                            <label>${loginInvalidPassword}</label>
+                                                            <br>
+                                                            <div class="sign-up">
+                                                                <input type="submit" value="Sign in"/>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
+                                                <div class="facts">
+                                                    <div class="register">
+                                                        <form method="post" action="SignUpServlet" onsubmit="beforeSubmit();
+                                                                return submitForm();">
+
+                                                            <div>
+                                                                <h1>Sign Up</h1>
+                                                                <label for="uname"><b>Name</b></label>
+                                                                <br>
+                                                                <input type="text" placeholder="Enter Name" maxlength="100" id="uname" name="uname" onblur="checkName()" required>
+
+                                                                <label id="nameError">${invalidName}</label>
+                                                                <br>
+                                                                <label for="ubd"><b>Birthday</b></label>
+                                                                <br>
+                                                                <input type="date" max="2000-02-28" name="ubd" id="ubd" required>
+
+                                                                <label id="dateError">${invalidDate}</label>
+                                                                <br>
+                                                                <label for="uemail"><b>Email</b></label>
+                                                                <br>
+                                                                <input type="email" placeholder="Enter Email" maxlength="50" id="uemail" name="uemail" onblur="checkEmail()" required>
+
+
+                                                                <label id="emailError">${invalidEmail}</label>
+                                                                <br>
+                                                                <label for="upassword"><b>Password</b></label>
+                                                                <br>
+                                                                <input type="password" placeholder="Enter Password" maxlength="50" id="upassword" name="upassword" onblur="checkPasswordStrength()" required>
+                                                                <label id="passStrength"></label>
+                                                                <br>
+
+                                                                <label for="uconfirmPassword"><b>Confirm Password</b></label>
+                                                                <br>
+                                                                <input type="password" placeholder="Confirm Password" maxlength="50" id="uconfirmPassword" name="uconfirmPassword" onblur="checkPassword()" required>
+
+
+                                                                <label id="passwordError">${invalidPassword}</label>
+                                                                <br>
+                                                                <label for="ucreditLimit"><b>Credit Limit</b></label>
+                                                                <br>
+                                                                <input type="number" min="1" placeholder="Enter Credit Limit" id="ucreditLimit" name="ucreditLimit" required>
+
+                                                                <label id="creditLimitError">${invalidCreditLimit}</label>
+                                                                <br>
+                                                                <label for="uInterests"><b>Interests</b></label>
+                                                                <br>
+                                                                <input type="checkbox" class="uInterests" value="Baby" />Baby<br/>
+                                                                <input type="checkbox" class="uInterests" value="Beauty" />Beauty<br/>
+                                                                <input type="checkbox" class="uInterests" value="Computers" />Computers<br/>
+                                                                <input type="checkbox" class="uInterests" value="Home Decor & Furniture" />Home Decor & Furniture<br/>
+                                                                <input type="checkbox" class="uInterests" value="Jewelry & Accessories" />Jewelry & Accessories<br/>
+                                                                <input type="checkbox" class="uInterests" value="Mobile Phones, Tablets & Accessories" />Mobile Phones, Tablets & Accessories<br/>
+                                                                <label for="uJob"><b>Job</b></label>
+                                                                <br>
+                                                                <select id="uJob">
+                                                                    <option value="student">Student</option>
+                                                                    <option value="teacher">Teacher</option>
+                                                                    <option value="engineer">Engineer</option>
+                                                                    <option value="doctor">Doctor</option>
+                                                                    <option value="other">Other</option>
+                                                                </select>
+                                                                <br>
+                                                                <label for="uaddress"><b>Address</b></label>
+                                                                <br>
+                                                                <input type="text" placeholder="Enter Address" maxlength="70" id="uaddress" name="uaddress" required>
+
+                                                                <label id="AddressError">${invalidAddress}</label>
+                                                                <br>
+                                                            </div>
+                                                            <input type="hidden" id="uCategory" name="uCategory" value="done">
+                                                            <input type="hidden" id="userJob" name="userJob" value="done">
+
+                                                            <div class="sign-up">
+                                                                <input type="submit" value="Create Account"/>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
-                                            <div class="facts">
-                                                <div class="register">
-                                                    <form method="post" action="SignUpServlet" onsubmit="beforeSubmit();
-                                                            return submitForm();">
 
-                                                        <div>
-                                                            <h1>Sign Up</h1>
-                                                            <label for="uname"><b>Name</b></label>
-                                                            <br>
-                                                            <input type="text" placeholder="Enter Name" maxlength="100" id="uname" name="uname" onblur="checkName()" required>
-
-                                                            <label id="nameError">${invalidName}</label>
-                                                            <br>
-                                                            <label for="ubd"><b>Birthday</b></label>
-                                                            <br>
-                                                            <input type="date" max="2000-02-28" name="ubd" id="ubd" required>
-
-                                                            <label id="dateError">${invalidDate}</label>
-                                                            <br>
-                                                            <label for="uemail"><b>Email</b></label>
-                                                            <br>
-                                                            <input type="email" placeholder="Enter Email" maxlength="50" id="uemail" name="uemail" onblur="checkEmail()" required>
-
-
-                                                            <label id="emailError">${invalidEmail}</label>
-                                                            <br>
-                                                            <label for="upassword"><b>Password</b></label>
-                                                            <br>
-                                                            <input type="password" placeholder="Enter Password" maxlength="50" id="upassword" name="upassword" onblur="checkPasswordStrength()" required>
-                                                            <label id="passStrength"></label>
-                                                            <br>
-
-                                                            <label for="uconfirmPassword"><b>Confirm Password</b></label>
-                                                            <br>
-                                                            <input type="password" placeholder="Confirm Password" maxlength="50" id="uconfirmPassword" name="uconfirmPassword" onblur="checkPassword()" required>
-
-
-                                                            <label id="passwordError">${invalidPassword}</label>
-                                                            <br>
-                                                            <label for="ucreditLimit"><b>Credit Limit</b></label>
-                                                            <br>
-                                                            <input type="number" min="1" placeholder="Enter Credit Limit" id="ucreditLimit" name="ucreditLimit" required>
-
-                                                            <label id="creditLimitError">${invalidCreditLimit}</label>
-                                                            <br>
-                                                            <label for="uInterests"><b>Interests</b></label>
-                                                            <br>
-                                                            <input type="checkbox" class="uInterests" value="Baby" />Baby<br/>
-                                                            <input type="checkbox" class="uInterests" value="Beauty" />Beauty<br/>
-                                                            <input type="checkbox" class="uInterests" value="Computers" />Computers<br/>
-                                                            <input type="checkbox" class="uInterests" value="Home Decor & Furniture" />Home Decor & Furniture<br/>
-                                                            <input type="checkbox" class="uInterests" value="Jewelry & Accessories" />Jewelry & Accessories<br/>
-                                                            <input type="checkbox" class="uInterests" value="Mobile Phones, Tablets & Accessories" />Mobile Phones, Tablets & Accessories<br/>
-                                                            <label for="uJob"><b>Job</b></label>
-                                                            <br>
-                                                            <select id="uJob">
-                                                                <option value="student">Student</option>
-                                                                <option value="teacher">Teacher</option>
-                                                                <option value="engineer">Engineer</option>
-                                                                <option value="doctor">Doctor</option>
-                                                                <option value="other">Other</option>
-                                                            </select>
-                                                            <br>
-                                                            <label for="uaddress"><b>Address</b></label>
-                                                            <br>
-                                                            <input type="text" placeholder="Enter Address" maxlength="70" id="uaddress" name="uaddress" required>
-
-                                                            <label id="AddressError">${invalidAddress}</label>
-                                                            <br>
-                                                        </div>
-                                                        <input type="hidden" id="uCategory" name="uCategory" value="done">
-                                                        <input type="hidden" id="userJob" name="userJob" value="done">
-
-                                                        <div class="sign-up">
-                                                            <input type="submit" value="Create Account"/>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
+                                    <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+                                    <script type="text/javascript">
+                                                                    $(document).ready(function () {
+                                                                        $('#horizontalTab').easyResponsiveTabs({
+                                                                            type: 'default', //Types: default, vertical, accordion
+                                                                            width: 'auto', //auto or any width like 600px
+                                                                            fit: true   // 100% fit in a container
+                                                                        });
+                                                                    });
+                                    </script>
 
                                 </div>
-                                <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
-                                <script type="text/javascript">
-                                                                $(document).ready(function () {
-                                                                    $('#horizontalTab').easyResponsiveTabs({
-                                                                        type: 'default', //Types: default, vertical, accordion
-                                                                        width: 'auto', //auto or any width like 600px
-                                                                        fit: true   // 100% fit in a container
-                                                                    });
-                                                                });
-                                </script>
 
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <script>
-            $('#myModal88').modal('show');
-        </script>
-        <!-- header modal -->
-        <!-- header -->
-        <div class="header" id="home1">
-            <div class="container">
-                <div class="w3l_login">
-                    <a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
-                </div>
-                <div class="w3l_logo" style="text-align:center;">
-                    <h1 ><a href="index.html">Store-Y<span>Your stores. Your place.</span></a></h1>
-                    <br>
-                    <button class="" type="button" name="checkout-btn" value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="check-btn">Check Out</button>
-                </div>
-                <div class="cart cart box_1">
-                    <form action="#" method="post" class="last">
-                        <input type="hidden" name="cmd" value="_cart" />
-                        <input type="hidden" name="display" value="1" />
-                        <button class="w3view-cart" type="submit" name="submit" value="" style="color:#fff;"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-                    </form>
+            <script>
+                $('#myModal88').modal('show');
+            </script>
+            <!-- header modal -->
+            <!-- header -->
+            <div class="header" id="home1">
+                <div class="container">
+                    <div class="w3l_login">
+                        <a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                    </div>
+                    <div class="w3l_logo" style="text-align:center;">
+                        <h1 ><a href="index.html">Store-Y<span>Your stores. Your place.</span></a></h1>
+                        <br>
+                        <c:if test="${sessionScope.userObject != null}">
+                            <button class="" type="button" name="checkout-btn" value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="check-btn">Check Out</button>
+                            <p>${sessionScope.userObject.name}</p>
+                        </c:if>
+                    </div>
+                    <div class="cart cart box_1">
+                        <form action="#" method="post" class="last">
+                            <input type="hidden" name="cmd" value="_cart" />
+                            <input type="hidden" name="display" value="1" />
+                            <button class="w3view-cart" type="submit" name="submit" value="" style="color:#fff;"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- //header -->
-        <!-- navigation -->
-        <div class="navigation" style="background:#ba3e9d;">
-            <div class="container" >
-                <nav class="navbar navbar-default">
-                    <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- //header -->
+            <!-- navigation -->
+            <div class="navigation" style="background:#ba3e9d;">
+                <div class="container" >
+                    <nav class="navbar navbar-default">
+                        <!-- Brand and toggle get grouped for better mobile display -->
 
-                </nav>
-            </div>
-        </div>
-
-        <!-- new-products -->
-        <div class="new-products">
-            <div class="container">
-                <h3>Products</h3>
-                <!--main div of products-->
-                <div class="agileinfo_new_products_grids">
-
+                    </nav>
                 </div>
             </div>
-        </div>
-        <!-- //new-products -->
 
-        <!-- footer -->
-        <div class="footer">
-            <div class="container">
-                <div class="w3_footer_grids">
-                    <div class="col-md-3 w3_footer_grid">
-                        <h3>Contact</h3>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
-                        <ul class="address">
-                            <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
-                            <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
-                            <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
-                        </ul>
+            <!-- new-products -->
+            <div class="new-products">
+                <div class="container">
+                    <h3>Products</h3>
+                    <!--main div of products-->
+                    <div class="agileinfo_new_products_grids">
+
                     </div>
-                    <div class="col-md-3 w3_footer_grid">
-                        <h3>Information</h3>
-                        <ul class="info">
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="mail.html">Contact Us</a></li>
-                            <li><a href="codes.html">Short Codes</a></li>
-                            <li><a href="faq.html">FAQ's</a></li>
-                            <li><a href="products.html">Special Products</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 w3_footer_grid">
-                        <h3>Category</h3>
-                        <ul class="info">
-                            <li><a href="products.html">Mobiles</a></li>
-                            <li><a href="products1.html">Laptops</a></li>
-                            <li><a href="products.html">Purifiers</a></li>
-                            <li><a href="products1.html">Wearables</a></li>
-                            <li><a href="products2.html">Kitchen</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 w3_footer_grid">
-                        <h3>Profile</h3>
-                        <ul class="info">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="products.html">Today's Deals</a></li>
-                        </ul>
-                        <h4>Follow Us</h4>
-                        <div class="agileits_social_button">
-                            <ul>
-                                <li><a href="#" class="facebook"> </a></li>
-                                <li><a href="#" class="twitter"> </a></li>
-                                <li><a href="#" class="google"> </a></li>
-                                <li><a href="#" class="pinterest"> </a></li>
+                </div>
+            </div>
+            <!-- //new-products -->
+
+            <!-- footer -->
+            <div class="footer">
+                <div class="container">
+                    <div class="w3_footer_grids">
+                        <div class="col-md-3 w3_footer_grid">
+                            <h3>Contact</h3>
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+                            <ul class="address">
+                                <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
+                                <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
+                                <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
                             </ul>
                         </div>
+                        <div class="col-md-3 w3_footer_grid">
+                            <h3>Information</h3>
+                            <ul class="info">
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="mail.html">Contact Us</a></li>
+                                <li><a href="codes.html">Short Codes</a></li>
+                                <li><a href="faq.html">FAQ's</a></li>
+                                <li><a href="products.html">Special Products</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 w3_footer_grid">
+                            <h3>Category</h3>
+                            <ul class="info">
+                                <li><a href="products.html">Mobiles</a></li>
+                                <li><a href="products1.html">Laptops</a></li>
+                                <li><a href="products.html">Purifiers</a></li>
+                                <li><a href="products1.html">Wearables</a></li>
+                                <li><a href="products2.html">Kitchen</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 w3_footer_grid">
+                            <h3>Profile</h3>
+                            <ul class="info">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="products.html">Today's Deals</a></li>
+                            </ul>
+                            <h4>Follow Us</h4>
+                            <div class="agileits_social_button">
+                                <ul>
+                                    <li><a href="#" class="facebook"> </a></li>
+                                    <li><a href="#" class="twitter"> </a></li>
+                                    <li><a href="#" class="google"> </a></li>
+                                    <li><a href="#" class="pinterest"> </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"> </div>
                     </div>
-                    <div class="clearfix"> </div>
+                </div>
+                <div class="footer-copy">
+                    <div class="footer-copy1">
+                        <div class="footer-copy-pos">
+                            <a href="#home1" class="scroll"><img src="images/arrow.png" alt=" " class="img-responsive" /></a>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <p>&copy; 2017 Store-Y. All rights reserved</p>
+                    </div>
                 </div>
             </div>
-            <div class="footer-copy">
-                <div class="footer-copy1">
-                    <div class="footer-copy-pos">
-                        <a href="#home1" class="scroll"><img src="images/arrow.png" alt=" " class="img-responsive" /></a>
-                    </div>
-                </div>
-                <div class="container">
-                    <p>&copy; 2017 Store-Y. All rights reserved</p>
-                </div>
-            </div>
-        </div>
         </div>
         <!-- //footer -->
         <!-- cart-js -->
@@ -361,40 +364,40 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         <script>
 
-            w3ls.render();
-            $("#check-btn").click(function () {
-                var products = [];
-                console.log(w3ls.cart._items);
-                for (i = 0, len = w3ls.cart._items.length; i < len; i++) {
-                    products.push(w3ls.cart._items[i]._data.w3ls_item + ":" + w3ls.cart._items[i]._data.quantity + ":" + w3ls.cart._items[i]._data.amount);
+                w3ls.render();
+                $("#check-btn").click(function () {
+                    var products = [];
+                    console.log(w3ls.cart._items);
+                    for (i = 0, len = w3ls.cart._items.length; i < len; i++) {
+                        products.push(w3ls.cart._items[i]._data.w3ls_item + ":" + w3ls.cart._items[i]._data.quantity + ":" + w3ls.cart._items[i]._data.amount);
 
-                }
-                console.log(products);
+                    }
+                    console.log(products);
 
-                $.ajax({
-                    url: "BuyServlet",
-                    type: 'POST',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    data: JSON.stringify(products),
-                    error: function (xhr, status, error) {
-                        console.log(xhr);
-                        console.log(status);
-                        console.log(error);
+                    $.ajax({
+                        url: "BuyServlet",
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify(products),
+                        error: function (xhr, status, error) {
+                            console.log(xhr);
+                            console.log(status);
+                            console.log(error);
+                        }
+                    });
+                });
+                w3ls.cart.on('w3sb_checkout', function (evt) {
+                    var items, len, i;
+
+                    if (this.subtotal() > 0) {
+                        items = this.items();
+
+                        for (i = 0, len = items.length; i < len; i++) {
+                            console.log(items[i]);
+                        }
                     }
                 });
-            });
-            w3ls.cart.on('w3sb_checkout', function (evt) {
-                var items, len, i;
-
-                if (this.subtotal() > 0) {
-                    items = this.items();
-
-                    for (i = 0, len = items.length; i < len; i++) {
-                        console.log(items[i]);
-                    }
-                }
-            });
 
         </script>
         <!-- //cart-js -->
@@ -407,6 +410,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         <c:remove var="loginInvalidPassword" scope="application" />
         <c:remove var="loginInvalidEmail" scope="application" />
-        
+
     </body>
 </html>

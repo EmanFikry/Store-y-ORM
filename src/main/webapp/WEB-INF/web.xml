@@ -97,6 +97,6 @@
         <url-pattern>/AddProduct</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>customerProfile.jsp</welcome-file>
+        <welcome-file>adminHome.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

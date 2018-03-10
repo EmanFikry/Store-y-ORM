@@ -31,37 +31,31 @@ function submitForm()
 function checkName()
 {
     var nameRegex = /^[a-zA-Z]+([ ][a-zA-Z]*)*$/;
-    if (document.getElementById('Productname').value.match(nameRegex))
-    {
-        document.getElementById('nameError').innerHTML = "";
-        validName = true;
-    } else {
-        document.getElementById('nameError').innerHTML = "Wrong Format";
+    var checkExistance = document.getElementById('Productname');
+    if (checkExistance !== null) {
+        if (document.getElementById('Productname').value.match(nameRegex))
+        {
+            document.getElementById('nameError').innerHTML = "";
+            validName = true;
+        } else {
+            document.getElementById('nameError').innerHTML = "Wrong Format";
+        }
     }
 }
 function checkNumber()
 {
     var nameRegex = /[0-9]+.[0-9]+/;
-    if (document.getElementById('Productnumber').value.match(numberRegex))
-    {
-        document.getElementById('numberError').innerHTML = "";
-        validNumber = true;
-    } else {
-        document.getElementById('numberError').innerHTML = "Wrong Format";
+    var checkExistance = document.getElementById('Productnumber');
+    if (checkExistance !== null) {
+        if (document.getElementById('Productnumber').value.match(numberRegex))
+        {
+            document.getElementById('numberError').innerHTML = "";
+            validNumber = true;
+        } else {
+            document.getElementById('numberError').innerHTML = "Wrong Format";
+        }
     }
 }
-function checkUrl()
-{
-    var urlRegex = /(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/;
-    if (document.getElementById('Productnumber').value.match(urlRegex))
-    {
-        document.getElementById('urlError').innerHTML = "";
-        validUrl = true;
-    } else {
-        document.getElementById('urlError').innerHTML = "Wrong Format";
-    }
-}
-
 users_link.onclick = function () {
     users_table.style.display = "table";
     products_table.style.display = "none";

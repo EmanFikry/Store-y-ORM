@@ -67,7 +67,7 @@ public class AddProduct extends HttpServlet {
                     }
                 } else {
                     ServletContext context = request.getServletContext();
-                    String realpath = context.getRealPath("/MainPages/images");
+                    String realpath = context.getRealPath("images");
                     System.out.println(realpath + "\\" + item.getName());
                     item.write(new File(realpath + "\\" + item.getName()));
                     product.setImgURL(realpath + "\\" + item.getName());

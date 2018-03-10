@@ -29,22 +29,19 @@ public class UpdateUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        PrintWriter out = response.getWriter();
-
-       
+        HttpSession session = request.getSession(false);
 
         DAOService user = new DAOService();
 
         User updatedUser = (User) session.getAttribute("userObject");
 
-        String birthDay;
-        birthDay = request.getParameter("birthdate");
-        String email = request.getParameter(("email"));
-        String password = request.getParameter(("password"));
-        long creditLimit = Long.parseLong(request.getParameter(("credit")));
-        String address = request.getParameter(("address"));
-        String job = request.getParameter(("job"));
+        String birthDay = request.getParameter("birthdate");
+        String name =  request.getParameter("name");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        
+        String address = request.getParameter("address");
+        String job = request.getParameter("job");
         String interest = request.getParameter("interests");
 
         String interestsArray[] = interest.split(";");
@@ -54,6 +51,9 @@ public class UpdateUserServlet extends HttpServlet {
                 interests.add(temp);
             }
         }
+        String credit = request.getParameter("credit");
+        
+        long creditLimit = (long)(Double.parseDouble(credit));
         //convert birthday from String to sql date
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date = null;
@@ -71,17 +71,13 @@ public class UpdateUserServlet extends HttpServlet {
         updatedUser.setPassword(password);
         updatedUser.setJob(job);
         updatedUser.setEmail(email);
+        updatedUser.setName(name);
 
-        boolean updated = user.editProfile(updatedUser);
+        user.editProfile(updatedUser);
 
         response.sendRedirect(request.getScheme() + "://"
                 + request.getServerName() + ":" + request.getServerPort()
                 + request.getContextPath() + "/home.jsp");
-        if (updated) {
-            out.println("success");
-        } else {
-            out.println("fail");
-        }
     }
 
 }

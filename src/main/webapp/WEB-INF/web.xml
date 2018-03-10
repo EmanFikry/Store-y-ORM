@@ -40,7 +40,6 @@
         <servlet-name>SignOutServlet</servlet-name>
         <servlet-class>view.controller.user.SignOutServlet</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>DisplayProductDetailsServlet</servlet-name>
         <servlet-class>view.controller.user.DisplayProductDetailsServlet</servlet-class>
@@ -52,6 +51,10 @@
     <servlet>
         <servlet-name>AddProduct</servlet-name>
         <servlet-class>view.controller.admin.AddProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserDetailsServlet</servlet-name>
+        <servlet-class>view.controller.user.UserDetailsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BuyServlet</servlet-name>
@@ -105,7 +108,6 @@
         <servlet-name>AdminDisplayProductDetailsServlet</servlet-name>
         <url-pattern>/AdminDisplayProductDetailsServlet</url-pattern>
     </servlet-mapping>
-    
     <filter>
         <filter-name>
             SignUpFilter
@@ -154,6 +156,10 @@
             /adminHome.jsp
         </url-pattern>
     </filter-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDetailsServlet</servlet-name>
+        <url-pattern>/UserDetailsServlet</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>adminHome.jsp</welcome-file>
     </welcome-file-list>

@@ -66,6 +66,29 @@ users_link.onclick = function () {
     products_link.style.color = "#fff";
     add_product_link.style.background = "#39424a";
     add_product_link.style.color = "#fff";
+
+    $.ajax({
+        url: "DisplayUsers",
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        },
+        success: function (data)
+        {
+            console.log("ajax customer");
+            for (i = 0; i < data.length; i++) {
+                $("#customers").append('<tr><td>' + data[i].name
+                        + '</td><td>' + data[i].email + '</td><td>' + data[i].address +
+                        '</td><td>'
+                        + '<input id="V" type="button" value="MORE" onclick="userShowMore(' + data[i].recID + ')"/>' + '</td></tr>');
+
+            }
+        }
+    });
 }
 products_link.onclick = function () {
     products_table.style.display = "table";
@@ -160,6 +183,29 @@ add_product_link.onclick = function () {
 function load_it() {
     users_link.style.background = "#fff";
     users_link.style.color = "#000";
+
+    $.ajax({
+        url: "DisplayUsers",
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        },
+        success: function (data)
+        {
+            console.log("ajax customer");
+            for (i = 0; i < data.length; i++) {
+                $("#customers").append('<tr><td>' + data[i].name
+                        + '</td><td>' + data[i].email + '</td><td>' + data[i].address +
+                        '</td><td>'
+                        + '<input id="V" type="button" value="MORE" onclick="userShowMore(' + data[i].recID + ')"/>' + '</td></tr>');
+
+            }
+        }
+    });
 }
 
 var req = null;
@@ -223,8 +269,55 @@ function refrehPage() {
     }
 }
 
+function userShowMore(id)
+{
+    $.ajax({
+        url: "UserDetailsServlet",
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: {"userid": id},
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        },
+        success: function (data)
+        {
+            $("#userDialog").append(
+                    '<form> <h1>Information</h1> <fieldset> <label for="name">Name:</label>' +
+                    '<br>' +
+                    '<input type="text" readonly value="' + data.name + '"/>' +
+                    '<br>' +
+                    '<label for="price">Email:</label>' +
+                    '<br>' +
+                    '<input type="text" readonly value="' + data.email + '"/>' +
+                    '<br>' +
+                    '<label for="price">Address:</label>' +
+                    '<br>' +
+                    '<input type="text"  readonly value="' + data.address + '"/>' +
+                    '<br>' +
+                    '<label for="price">Job:</label>' +
+                    '<br>' +
+                    '<input type="text" readonly value="' + data.job + '"/>' +
+                    '<br>' +
+                    '<label for="price">Birthdate:</label>' +
+                    '<br>' +
+                    '<input type="text" readonly value="' + data.birthdate + '"/>' +
+                    '<br>' +
+                    '<label for="price">credit Limit:</label>' +
+                    '<br>' +
+                    '<input type="text" readonly value="' + data.creditLimit + '"/>' +
+                    '<br>' +
+                    '</fieldset> <button type="button" onclick="closePopup()">OK</button> </form>'
+                    );
+
+            // private String imgURL;
+        }
+    });
+}
 function ShowMore(id) {
-    alert(id);
+
     $.ajax({
         url: "AdminDisplayProductDetailsServlet",
         type: 'GET',

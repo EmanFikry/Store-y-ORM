@@ -49,6 +49,7 @@
         <div id='addProductDiv'></div>
 
         <dialog open id="disDialog" class="dilg"></dialog>
+        <dialog open id="userDialog" class="dilg"></dialog>
         <script type="text/javascript" src="js/adminJS.js"></script>
 
     </body>

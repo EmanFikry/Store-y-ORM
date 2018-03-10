@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.dataAccessLayer.entity.User;
-import view.util.user.Validation;
 
 /**
  *
@@ -29,14 +28,11 @@ public class SignUpServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //System.out.println(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+"/generalPages/registeration.jsp");
 
-        Validation validate = new Validation();
         String name = request.getParameter("uname");
         String birthday = request.getParameter("ubd");
         String email = request.getParameter("uemail");
         String password = request.getParameter("upassword");
-        String confirmPassword = request.getParameter("uconfirmPassword");
         String creditLimit = request.getParameter("ucreditLimit");
         String address = request.getParameter("uaddress");
         String job = request.getParameter("userJob");
@@ -50,74 +46,41 @@ public class SignUpServlet extends HttpServlet {
             }
         }
 
-        boolean validData = true;
-        if (!validate.validateName(name)) {
-            request.getServletContext().setAttribute("invalidName", "Wrong Format");
-            validData = false;
-        }
-        if (!validate.validateAddress(address)) {
-            request.getServletContext().setAttribute("invalidAddress", "Wrong Format");
-            validData = false;
-        }
-        if (!validate.validateEmail(email)) {
-            request.getServletContext().setAttribute("invalidEmail", "Wrong Format");
-            validData = false;
-        }
-        if (!validate.validateDate(birthday)) {
-            request.getServletContext().setAttribute("invalidDate", "Enter date before '2000-02-28'");
-            validData = false;
-        }
-        if (!validate.validatePassword(password, confirmPassword)) {
-            request.getServletContext().setAttribute("invalidPassword", "Passwords do not match");
-            validData = false;
-        }
-        if (!validate.validateCreditLimit(creditLimit)) {
-            request.getServletContext().setAttribute("invalidCreditLimit", "Enter number greater than 0");
-            validData = false;
-        }
-
-        if (validData) {
-
-            DAOService daoService = new DAOService();
-            boolean isExisted = daoService.isEmailExist(email);
-            if (isExisted) {
-                request.getServletContext().setAttribute("invalidEmail", "Email already exists");
-                response.sendRedirect(request.getScheme() + "://"
-                        + request.getServerName() + ":" + request.getServerPort()
-                        + request.getContextPath() + "/home.jsp");
-            } else {
-                //fill the data in user object
-                User user = new User();
-                user.setAddress(address);
-                user.setCreditLimit(Float.parseFloat(creditLimit));
-                user.setEmail(email);
-                user.setUserInterest(interests);
-                user.setJob(job);
-                user.setName(name);
-                user.setPassword(password);
-
-                //convert birthday from String to sql date
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                java.util.Date date = null;
-                try {
-                    date = formatter.parse(birthday);
-                } catch (ParseException ex) {
-                    Logger.getLogger(SignUpServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                user.setBirthdate(sqlDate);
-
-                boolean isAdded = daoService.addUser(user);
-                if (isAdded) {
-                    response.sendRedirect(request.getScheme() + "://"
-                            + request.getServerName() + ":" + request.getServerPort()
-                            + request.getContextPath() + "/home.jsp");
-                }
-            }
-        } else {
+        DAOService daoService = new DAOService();
+        boolean isExisted = daoService.isEmailExist(email);
+        if (isExisted) {
+            request.getServletContext().setAttribute("invalidEmail", "Email already exists");
             response.sendRedirect(request.getScheme() + "://"
                     + request.getServerName() + ":" + request.getServerPort()
                     + request.getContextPath() + "/home.jsp");
+        } else {
+            //fill the data in user object
+            User user = new User();
+            user.setAddress(address);
+            user.setCreditLimit(Float.parseFloat(creditLimit));
+            user.setEmail(email);
+            user.setUserInterest(interests);
+            user.setJob(job);
+            user.setName(name);
+            user.setPassword(password);
+
+            //convert birthday from String to sql date
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date = null;
+            try {
+                date = formatter.parse(birthday);
+            } catch (ParseException ex) {
+                Logger.getLogger(SignUpServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            user.setBirthdate(sqlDate);
+
+            boolean isAdded = daoService.addUser(user);
+            if (isAdded) {
+                response.sendRedirect(request.getScheme() + "://"
+                        + request.getServerName() + ":" + request.getServerPort()
+                        + request.getContextPath() + "/home.jsp");
+            }
         }
     }
 
@@ -127,7 +90,8 @@ public class SignUpServlet extends HttpServlet {
         String email = request.getParameter("temail");
         DAOService daoService = new DAOService();
         boolean isExisted = daoService.isEmailExist(email);
-        if (isExisted) {
+
+        if (isExisted || email.equals("admin@hotmail.com")) {
             System.out.println("exist");
             response.setContentType("text/plain");
             PrintWriter out = response.getWriter();

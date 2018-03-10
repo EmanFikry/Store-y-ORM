@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.controller.user;
+package view.controller.admin;
 
+import com.google.gson.Gson;
 import controller.DAODelegate.DAOService;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +19,14 @@ import model.dataAccessLayer.entity.Product;
  *
  * @author Eman-PC
  */
-public class DisplayProductDetailsServlet extends HttpServlet {
+public class AdminDisplayProductDetailsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String productID = request.getParameter("productID");
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        String productID = request.getParameter("id");
         DAOService daoService = new DAOService();
         //Product product = daoService.getProductByID(Long.parseLong(productID));
         Product product = new Product();
@@ -32,9 +36,14 @@ public class DisplayProductDetailsServlet extends HttpServlet {
         product.setName("teeest");
         product.setPrice(100);
         product.setImgURL("images/34.jpg");
-        request.getServletContext().setAttribute("productObject", product);
-        response.sendRedirect("productDetails.jsp");
+        out.print(buildJSONFromVector(product));
 
+    }
+
+    private String buildJSONFromVector(Product product) {
+
+        Gson json = new Gson();
+        return json.toJson(product);
     }
 
 }

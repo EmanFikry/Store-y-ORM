@@ -28,8 +28,6 @@ public class ViewProduct extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         out.print(buildJSONFromVector(new DAOService().getProductList()));
-        // request.getSession().setAttribute("products", new DAOService().getProductList());
-        //response.sendRedirect("ViewProduct.jsp");
     }
 
     @Override

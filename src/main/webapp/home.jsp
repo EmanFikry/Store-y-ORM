@@ -114,7 +114,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                 <div class="facts">
                                                     <div class="register">
                                                         <form action="LoginServlet" method="post" 
-                                                              onsubmit="return checkEmailExistance();">
+                                                              onsubmit="return loginSubmit();">
                                                             <h1>Sign In</h1>
                                                             <br>
                                                             <label for="loginemail"><b>Email</b></label>

@@ -3,10 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ var valid = '';
+function loginSubmit()
+{
+    console.log("isvalid" + valid);
+    return valid;
+}
 function checkEmailExistance()
 {
-    var valid = '';
+   
     $.ajax({
         url: "LoginServlet",
         type: 'GET',
@@ -32,5 +37,5 @@ function checkEmailExistance()
                 console.log("login valid");
             }
         }});
-    return valid;
+    
 }

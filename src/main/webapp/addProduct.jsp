@@ -8,63 +8,7 @@
 <!DOCTYPE html>
 <html>
     <script>
-        var validName = false;
-        var validNumber = false;
-        var validUrl = false;
-
-        function handleDrop(e) {
-            e.stopPropagation(); // Stops some browsers from redirecting.
-            e.preventDefault();
-
-            var files = e.dataTransfer.files;
-            for (var i = 0, f; f = files[i]; i++) {
-                 files = document.getElementById(profile_pic).files;
-                // Read the File objects in this FileList.
-            }
-        }
-        function submitForm()
-        {
-            if (validName && validUrl && validNumber)
-            {
-                return true;
-            } else
-            {
-                return false;
-            }
-        }
-        function checkName()
-        {
-            var nameRegex = /^[a-zA-Z]+([ ][a-zA-Z]*)*$/;
-            if (document.getElementById('Productname').value.match(nameRegex))
-            {
-                document.getElementById('nameError').innerHTML = "";
-                validName = true;
-            } else {
-                document.getElementById('nameError').innerHTML = "Wrong Format";
-            }
-        }
-        function checkNumber()
-        {
-            var nameRegex = /[0-9]+.[0-9]+/;
-            if (document.getElementById('Productnumber').value.match(numberRegex))
-            {
-                document.getElementById('numberError').innerHTML = "";
-                validNumber = true;
-            } else {
-                document.getElementById('numberError').innerHTML = "Wrong Format";
-            }
-        }
-        function checkUrl()
-        {
-            var urlRegex = /(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/;
-                    if (document.getElementById('Productnumber').value.match(urlRegex))
-            {
-                document.getElementById('urlError').innerHTML = "";
-                validUrl = true;
-            } else {
-                document.getElementById('urlError').innerHTML = "Wrong Format";
-            }
-        }
+     
 
 
     </script>

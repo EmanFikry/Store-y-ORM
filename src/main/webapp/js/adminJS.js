@@ -4,6 +4,64 @@ var add_product_link = document.getElementById('add_products_link');
 var users_table = document.getElementById('customers');
 var products_table = document.getElementById('Products');
 
+var validName = false;
+var validNumber = false;
+var validUrl = false;
+
+function handleDrop(e) {
+    e.stopPropagation(); // Stops some browsers from redirecting.
+    e.preventDefault();
+
+    var files = e.dataTransfer.files;
+    for (var i = 0, f; f = files[i]; i++) {
+        files = document.getElementById(profile_pic).files;
+        // Read the File objects in this FileList.
+    }
+}
+function submitForm()
+{
+    if (validName && validUrl && validNumber)
+    {
+        return true;
+    } else
+    {
+        return false;
+    }
+}
+function checkName()
+{
+    var nameRegex = /^[a-zA-Z]+([ ][a-zA-Z]*)*$/;
+    if (document.getElementById('Productname').value.match(nameRegex))
+    {
+        document.getElementById('nameError').innerHTML = "";
+        validName = true;
+    } else {
+        document.getElementById('nameError').innerHTML = "Wrong Format";
+    }
+}
+function checkNumber()
+{
+    var nameRegex = /[0-9]+.[0-9]+/;
+    if (document.getElementById('Productnumber').value.match(numberRegex))
+    {
+        document.getElementById('numberError').innerHTML = "";
+        validNumber = true;
+    } else {
+        document.getElementById('numberError').innerHTML = "Wrong Format";
+    }
+}
+function checkUrl()
+{
+    var urlRegex = /(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?/;
+    if (document.getElementById('Productnumber').value.match(urlRegex))
+    {
+        document.getElementById('urlError').innerHTML = "";
+        validUrl = true;
+    } else {
+        document.getElementById('urlError').innerHTML = "Wrong Format";
+    }
+}
+
 users_link.onclick = function () {
     users_table.style.display = "table";
     products_table.style.display = "none";
@@ -70,6 +128,40 @@ add_product_link.onclick = function () {
     users_link.style.color = "#fff";
     add_product_link.style.background = "#fff";
     add_product_link.style.color = "#000";
+
+    $("#addProductDiv").append(
+            '<form method=post ENCTYPE="MULTIPART/FORM-DATA" action="AddProduct">' +
+            '<fieldset> <legend>Add Product:</legend>' +
+            'Product name:<br>' +
+            '<input type="text" name="productName"  id="productName" maxlength="50"  placeholder="Enter Name" onblur="checkName()" required >' +
+            '<br>' +
+            '<label id="nameError"></label>' +
+            '<br>' +
+            'Product price:<br>' +
+            '<input type="number" id="productPrice" name="productPrice" maxlength="50" placeholder="Enter price" onblur="checkNumber()" required>' +
+            '<br>' +
+            '<label id="priceError"></label>' +
+            '<br>' +
+            'Product category:<br>' +
+            '<input type="text" id="productCategory" name="productCategory"  maxlength="50" placeholder="Enter category" onblur="checkName()" required>' +
+            '<br>' +
+            '<label id="categoryError"></label>' +
+            '<br>' +
+            'Product amount:<br>' +
+            '<input type="number" id="productAmount" name="productAmount"  maxlength="50" placeholder="Enter amount" onblur="checkNumber()" required>' +
+            '<br>' +
+            '<label id="amountError"></label>' +
+            '<br>' +
+            'Product imgurl:<br>' +
+            '<label for="profile_pic">Choose file to upload</label>' +
+            '<br>' +
+            '<input type="file" id="profile_pic" name="profile_pic" accept=".jpg, .jpeg, .png" ><br>' +
+            '<br>' +
+            'Product description:<br>' +
+            '<input type="text" id="productDescription" name="productDescription" maxlength="100" placeholder="Enter description" onblur="checkName()" required>' +
+            '<br>' +
+            '<label id="descriptionError"></label>' +
+            '<br> <br> <input type="submit" value="Submit" > </fieldset> </form>');
 }
 function load_it() {
     users_link.style.background = "#fff";
@@ -138,7 +230,47 @@ function refrehPage() {
 }
 
 function ShowMore(id) {
-    window.location.href = "ViewProduct.jsp";
+    alert(id);
+    $.ajax({
+        url: "AdminDisplayProductDetailsServlet",
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: {"id": id},
+        error: function (xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        },
+        success: function (data)
+        {
+            $("#disDialog").append(
+                    '<form> <h1>Information</h1> <fieldset> <label for="name">Name:</label>' +
+                    '<br>' +
+                    '<input type="text" readonly value="' + data.name + '"/>' +
+                    '<br>' +
+                    '<label for="price">Price:</label>' +
+                    '<br>' +
+                    '<input type="text" readonly value="' + data.price + '"/>' +
+                    '<br>' +
+                    '<label for="price">Category:</label>' +
+                    '<br>' +
+                    '<input type="text"  readonly value="' + data.category + '"/>' +
+                    '<br>' +
+                    '<label for="price">Amount:</label>' +
+                    '<br>' +
+                    '<input type="text" readonly value="' + data.amount + '"/>' +
+                    '<br>' +
+                    '<label for="price">Description:</label>' +
+                    '<br>' +
+                    '<input type="text" readonly value="' + data.description + '"/>' +
+                    '<br>' +
+                    '</fieldset> <button type="button" onclick="closePopup()">OK</button> </form>'
+                    );
+
+            // private String imgURL;
+        }
+    });
 }
 
 function closePopup() {

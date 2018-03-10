@@ -4989,3 +4989,29 @@ td.invert-image a img {
 		margin-bottom: 1em;
 	}
 }
+
+#cart {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    padding: 10px;
+}
+
+#cart td, #cart th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#cart tr:nth-child(even){background-color: #f2f2f2;}
+
+#cart tr:hover {background-color: #ddd;}
+
+#cart th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #c566d4;
+    color: white;
+}
+
+

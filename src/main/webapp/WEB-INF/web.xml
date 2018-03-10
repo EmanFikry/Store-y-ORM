@@ -56,6 +56,10 @@
         <servlet-name>UserDetailsServlet</servlet-name>
         <servlet-class>view.controller.user.UserDetailsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateCartServlet</servlet-name>
+        <servlet-class>view.controller.user.UpdateCartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BuyServlet</servlet-name>
         <url-pattern>/BuyServlet</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>UserDetailsServlet</servlet-name>
         <url-pattern>/UserDetailsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCartServlet</servlet-name>
+        <url-pattern>/UpdateCartServlet</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>adminHome.jsp</welcome-file>

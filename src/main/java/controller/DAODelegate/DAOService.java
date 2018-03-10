@@ -71,8 +71,13 @@ public class DAOService {
     }
 
     public boolean editProfile(User user) {
-        boolean isEdited = userDAORef.editProfile(user);
-        return isEdited;
+        boolean isUpdated = false;
+        if (userDAORef.editProfile(user) && !userDAORef.isEmailExist(user.getEmail())) {
+            if (userDAORef.deleteUserInterests(user)) {
+                isUpdated = userDAORef.addAllUserInterest(user);
+            }
+        }
+        return isUpdated;
     }
 
     public User getUserById(Long id) throws SQLException {

@@ -82,7 +82,27 @@ public class UserDAOImpl implements UserDAOInt {
     }
 
     /**
-     * ******************* update product *****************
+     * ******************* delete user interests *****************
+     */
+    @Override
+    public boolean deleteUserInterests(User user) {
+        boolean isDeleted = false;
+        PreparedStatement ps = Database.getInstance().getPreparedStatement("DELETE FROM ITI_STORE_Y_INTEREST WHERE USERID=? ");
+        try {
+            ps.setLong(1, user.getRecID());
+            if (ps.executeUpdate() > 0) {
+                isDeleted = true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Database.getInstance().release();
+        }
+        return isDeleted;
+    }
+
+    /**
+     * ******************* update User *****************
      */
     @Override
     public boolean editProfile(User user) {

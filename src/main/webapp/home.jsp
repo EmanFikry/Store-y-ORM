@@ -62,7 +62,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script type="text/javascript">
             function checkCookies() {
                 var cookieEnabled = (navigator.cookieEnabled) ? true : false;
-
                 //if not IE4+ nor NS6+
                 if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled) {
                     document.cookie = "testcookie"
@@ -78,7 +77,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </script>
 
     </head>
-    <body onload="checkCookies();setInterval('updateProducts()', 3000)">
+    <body onload="checkCookies();
+            setInterval('updateProducts()', 3000)">
         <noscript>
         <style type="text/css">
             .pagecontainer {display:none;}
@@ -239,9 +239,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
                 </div>
             </div>
-            <script>
-                $('#myModal88').modal('show');
-            </script>
+
             <!-- header modal -->
             <!-- header -->
             <div class="header" id="home1">
@@ -277,6 +275,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
             </div>
 
+
             <!-- new-products -->
             <div class="new-products">
                 <div class="container">
@@ -285,6 +284,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="agileinfo_new_products_grids">
 
                     </div>
+                </div>
+            </div>
+            <div style="padding:10px; text-align: center;">
+                <h3>Your Cart</h3>
+                <div>
+                    <table id="cart">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Amount</th>
+                            <th>Add</th>
+                            <th>Remove</th>
+                        </tr>
+
+                    </table>
                 </div>
             </div>
             <!-- //new-products -->
@@ -362,44 +376,121 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
 
 
+
+
         <script>
+                                                                    var listItems = [];
+                                                                    $("#check-btn").click(function () {
 
-                w3ls.render();
-                $("#check-btn").click(function () {
-                    var products = [];
-                    console.log(w3ls.cart._items);
-                    for (i = 0, len = w3ls.cart._items.length; i < len; i++) {
-                        products.push(w3ls.cart._items[i]._data.w3ls_item + ":" + w3ls.cart._items[i]._data.quantity + ":" + w3ls.cart._items[i]._data.amount);
+                                                                    });
 
-                    }
-                    console.log(products);
+                                                                    function addToCart(el) {
+                                                                        console.log(el.innerText);
+                                                                        var button = el;
+                                                                        var divParentOfButton = button.parentElement;
+                                                                        console.log(divParentOfButton);
+                                                                        var namefield = divParentOfButton.querySelector("#name").value;
+                                                                        var pricefield = divParentOfButton.querySelector("#price").value;
+                                                                        var idfield = divParentOfButton.querySelector("#id").value;
+                                                                        console.log(namefield);
+                                                                        addItems(namefield, pricefield, idfield);
+                                                                    }
 
-                    $.ajax({
-                        url: "BuyServlet",
-                        type: 'POST',
-                        dataType: 'json',
-                        contentType: 'application/json',
-                        data: JSON.stringify(products),
-                        error: function (xhr, status, error) {
-                            console.log(xhr);
-                            console.log(status);
-                            console.log(error);
-                        }
-                    });
-                });
-                w3ls.cart.on('w3sb_checkout', function (evt) {
-                    var items, len, i;
+                                                                    function addItems(name, price, id) {
+                                                                        console.log("passed name: " + name);
+                                                                        for (var i = 0; i < listItems.length; i++) {
+                                                                            console.log(listItems[i].name);
+                                                                            if (listItems[i].name === name) {
+                                                                                listItems[i].amount++;
+                                                                                console.log(listItems);
+                                                                                createTable(listItems);
+                                                                                return;
+                                                                            }
+                                                                        }
+                                                                        listItems.push({"name": name, "price": price, "amount": 1, "id": id});
+                                                                        createTable(listItems);
+                                                                        sendAjax();
+                                                                    }
+                                                                    function createTable(listItems) {
 
-                    if (this.subtotal() > 0) {
-                        items = this.items();
+                                                                        var table = document.getElementById("cart");
+                                                                        table.innerHTML = "<tr><th>Product Name</th><th>Price</th><th>Amount</th><th>Add</th><th>Remove</th></tr>";
+                                                                        for (var i = 0; i < listItems.length; i++) {
+                                                                            if (listItems[i].amount > 0) {
 
-                        for (i = 0, len = items.length; i < len; i++) {
-                            console.log(items[i]);
-                        }
-                    }
-                });
+                                                                                var row = document.createElement("tr");
+                                                                                var col_name = document.createElement("td");
+                                                                                var col_price = document.createElement("td");
+                                                                                var col_amount = document.createElement("td");
+                                                                                var col_remove = document.createElement("td");
+                                                                                var col_add = document.createElement("td");
+                                                                                col_name.innerHTML = listItems[i].name;
+                                                                                col_price.innerHTML = listItems[i].price;
+                                                                                col_amount.innerHTML = listItems[i].amount;
+                                                                                col_add.innerHTML = "<a onclick='inc(this)'>Add</a>";
+                                                                                col_remove.innerHTML = "<a onclick='dec(this)'>Remove</a>";
+                                                                                row.appendChild(col_name);
+                                                                                row.appendChild(col_price);
+                                                                                row.appendChild(col_amount);
+                                                                                row.appendChild(col_add);
+                                                                                row.appendChild(col_remove);
+                                                                                var ulcart = document.getElementById("cart");
+                                                                                ulcart.appendChild(row);
+                                                                                console.log(listItems);
+                                                                            }
+                                                                        }
+
+                                                                    }
+                                                                    function inc(btn) {
+                                                                        var td = btn.parentElement;
+                                                                        var tr = td.parentElement;
+                                                                        var nameTd = tr.childNodes[0];
+                                                                        var amountTd = tr.childNodes[2];
+                                                                        console.log(nameTd.textContent);
+                                                                        for (var i = 0; i < listItems.length; i++) {
+                                                                            if (listItems[i].name === nameTd.textContent) {
+                                                                                listItems[i].amount++;
+                                                                            }
+                                                                        }
+                                                                        console.log(listItems);
+                                                                        createTable(listItems);
+                                                                        sendAjax();
+                                                                    }
+                                                                    function dec(btn) {
+                                                                        var td = btn.parentElement;
+                                                                        var tr = td.parentElement;
+                                                                        var nameTd = tr.childNodes[0];
+                                                                        var amountTd = tr.childNodes[2];
+                                                                        console.log(nameTd.textContent);
+                                                                        for (var i = 0; i < listItems.length; i++) {
+                                                                            if (listItems[i].name === nameTd.textContent) {
+                                                                                listItems[i].amount--;
+                                                                            }
+                                                                        }
+                                                                        console.log(listItems);
+                                                                        createTable(listItems);
+                                                                        sendAjax();
+                                                                    }
+
+                                                                    function sendAjax() {
+
+                                                                        var listWanted = '';
+                                                                        for (var i = 0; i < listItems.length; i++) {
+                                                                            listWanted += listItems[i] + 'sep';
+                                                                        }
+                                                                        console.log(listWanted);
+                                                                        $.post("UpdateCartServlet",
+                                                                                {
+                                                                                    listItem: listWanted,
+                                                                                },
+                                                                                function () {
+                                                                                    alert("success");
+                                                                                });
+                                                                    }
+                                                                    ;
 
         </script>
+
         <!-- //cart-js -->
         <c:remove var="invalidName" scope="application" />
         <c:remove var="invalidAddress" scope="application" />

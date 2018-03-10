@@ -30,4 +30,6 @@ public interface UserDAOInt {
     public User checkLogin(String email, String password);
 
     public ArrayList<User> getUserList();
+
+    public boolean deleteUserInterests(User user);
 }

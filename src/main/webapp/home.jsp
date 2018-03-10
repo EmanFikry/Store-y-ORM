@@ -245,7 +245,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="header" id="home1">
                 <div class="container">
                     <div class="w3l_login">
-                        <a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                        <a href="#" data-toggle="modal" data-target="#myModal88" style="margin-left:5px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                        <br>
+                        <button class="" type="button"  value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="check-btn">LogOut</button> 
                     </div>
                     <div class="w3l_logo" style="text-align:center;">
                         <h1 ><a href="index.html">Store-Y<span>Your stores. Your place.</span></a></h1>
@@ -473,22 +475,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                                         sendAjax();
                                                                     }
 
-                                                                    function sendAjax() {
+                                                                   function sendAjax() {
 
-                                                                        var listWanted = '';
-                                                                        for (var i = 0; i < listItems.length; i++) {
-                                                                            listWanted += listItems[i] + 'sep';
+                                                                        console.log('listItems');
+                                                                        console.log(listItems);
+
+                                                                        $.ajax({
+                                                                            url: "UpdateCartServlet",
+                                                                            type: 'POST',
+                                                                            dataType: 'json',
+                                                                            contentType: 'application/json',
+                                                                            data: JSON.stringify(listItems),
+                                                                            error: function (xhr, status, error) {
+                                                                                console.log(xhr);
+                                                                                console.log(status);
+                                                                                console.log(error);
+                                                                            }
                                                                         }
-                                                                        console.log(listWanted);
-                                                                        $.post("UpdateCartServlet",
-                                                                                {
-                                                                                    listItem: listWanted,
-                                                                                },
-                                                                                function () {
-                                                                                    alert("success");
-                                                                                });
+                                                                        );
                                                                     }
-                                                                    ;
 
         </script>
 

@@ -474,20 +474,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                                                                     function sendAjax() {
 
-                                                                        var listWanted = '';
-                                                                        for (var i = 0; i < listItems.length; i++) {
-                                                                            listWanted += listItems[i] + 'sep';
+                                                                        console.log('listItems');
+                                                                        console.log(listItems);
+
+                                                                        $.ajax({
+                                                                            url: "UpdateCartServlet",
+                                                                            type: 'POST',
+                                                                            dataType: 'json',
+                                                                            contentType: 'application/json',
+                                                                            data: JSON.stringify(listItems),
+                                                                            error: function (xhr, status, error) {
+                                                                                console.log(xhr);
+                                                                                console.log(status);
+                                                                                console.log(error);
+                                                                            }
                                                                         }
-                                                                        console.log(listWanted);
-                                                                        $.post("UpdateCartServlet",
-                                                                                {
-                                                                                    listItem: listWanted,
-                                                                                },
-                                                                                function () {
-                                                                                    alert("success");
-                                                                                });
+                                                                        );
                                                                     }
-                                                                    ;
+
 
         </script>
 

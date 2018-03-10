@@ -254,6 +254,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <button class="" type="button" name="checkout-btn" value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="check-btn">Check Out</button>
                             <p>${sessionScope.userObject.name}</p>
                         </c:if>
+                            <a href="updateprofile.html" class="" type="button" value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="edit-btn">Edit Profile</a>
                     </div>
                     <div class="cart cart box_1">
                         <form action="#" method="post" class="last">

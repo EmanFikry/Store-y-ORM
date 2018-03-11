@@ -219,7 +219,7 @@
                                 interests: interests_var
                             },
                             function () {
-                                console.log("success");
+                                window.location.href = "home.jsp";
                             });
 
 

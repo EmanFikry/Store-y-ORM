@@ -18,12 +18,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <head>
         <title>Store-Y</title>
         <!-- for-mobile-apps -->
+        <meta HTTP-EQUIV="refresh"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="Electronic Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
               SmartPhone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-            function hideURLbar(){ window.scrollTo(0,1); } </script>
+            function hideURLbar(){ window.scrollTo(0,1); } 
+            var check =${sessionScope.userObject != null};
+        </script>
         <!-- //for-mobile-apps -->
         <!-- Custom Theme files -->
         <meta charset="utf-8">
@@ -48,12 +51,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!-- //web fonts -->
         <!-- start-smooth-scrolling -->
         <script type="text/javascript">
-            jQuery(document).ready(function ($) {
-                $(".scroll").click(function (event) {
-                    event.preventDefault();
-                    $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-                });
-            });
+jQuery(document).ready(function ($) {
+    $(".scroll").click(function (event) {
+        event.preventDefault();
+        $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+    });
+});
         </script>
         <!-- //end-smooth-scrolling -->
 
@@ -248,7 +251,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <a href="#" data-toggle="modal" data-target="#myModal88" style="margin-left:5px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
                         <br>
                         <c:if test="${sessionScope.userObject != null}">
-                            <button class="" type="button"  value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="check-btn">LogOut</button> 
+                            <form action="SignOutServlet" method="get">
+                                <button class="" type="submit"  value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="log-btn">LogOut</button> 
+                            </form>
                         </c:if>
                     </div>
                     <div class="w3l_logo" style="text-align:center;">
@@ -386,6 +391,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         <script>
                                                                     var listItems = [];
+
                                                                     $("#check-btn").click(function () {
 
                                                                     });

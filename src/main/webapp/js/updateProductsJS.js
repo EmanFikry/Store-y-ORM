@@ -19,23 +19,16 @@ function  updateProducts()
         },
         success: function (data)
         {
-            console.log("hereeeeeeeeeeeee");
+            console.log(check);
             var productRender = '';
             var mainProductDiv = document.getElementsByClassName("agileinfo_new_products_grids");
             for (i = 0; i < data.length; i++)
             {
-//                data[i].imgURL
-//                data[i].name
-//                data[i].price
-//                data[i].category
-//                data[i].amount
-//                data[i].description
-
                 productRender = productRender + '<div class="col-md-3 agileinfo_new_products_grid">' +
                         '<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">' +
                         '<div class="hs-wrapper hs-wrapper1">' +
                         '<img src="' + data[i].imgURL + '"class="img - responsive"/>' +
-                        '<img src="' + data[i].imgURL + '"class="img - responsive"/>'+
+                        '<img src="' + data[i].imgURL + '"class="img - responsive"/>' +
                         '<div class="w3_hs_bottom w3_hs_bottom_sub">' +
                         '<ul><li>' +
                         '<a href="single.html">' +
@@ -49,14 +42,15 @@ function  updateProducts()
                         '<input type="hidden" name="add" value="1">' +
                         '<input type="hidden" id="name" name="w3ls_item" value="' + data[i].name + '">' +
                         '<input type="hidden" id="price" name="amount" value="' + data[i].price + '">' +
-                         '<input type="hidden" id="id" name="id" value="' + data[i].recID + '">' +
-                        '<button onclick="addToCart(this);" class="w3ls-cart">Add to cart</button>\n\
-                        </div></div></div></div>';
-                
-                
+                        '<input type="hidden" id="id" name="id" value="' + data[i].recID + '">';
+
+                if (check) {
+                    productRender += '<button onclick="addToCart(this);" class="w3ls-cart">Add to cart</button>';
+                }
+                productRender += '</div></div></div></div>';
+                console.log("test hereeeeeeeee");
             }
             mainProductDiv[0].innerHTML = productRender;
-
         }
     });
 }

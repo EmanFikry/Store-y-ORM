@@ -72,8 +72,12 @@ public class DAOService {
 
     public boolean editProfile(User user) {
         boolean isUpdated = false;
-        if (userDAORef.editProfile(user) && !userDAORef.isEmailExist(user.getEmail())) {
-            if (userDAORef.deleteUserInterests(user)) {
+        if (userDAORef.editProfile(user)) {
+            if (userDAORef.hasInterests(user)) {
+                if (userDAORef.deleteUserInterests(user)) {
+                    isUpdated = userDAORef.addAllUserInterest(user);
+                }
+            } else {
                 isUpdated = userDAORef.addAllUserInterest(user);
             }
         }

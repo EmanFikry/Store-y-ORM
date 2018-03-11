@@ -25,6 +25,9 @@ public class SignOutServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         session.removeAttribute("userObject");
         session.invalidate();
+        System.out.println(request.getScheme() + "://"
+                + request.getServerName() + ":" + request.getServerPort()
+                + request.getContextPath() + "/home.jsp");
         response.sendRedirect(request.getScheme() + "://"
                 + request.getServerName() + ":" + request.getServerPort()
                 + request.getContextPath() + "/home.jsp");

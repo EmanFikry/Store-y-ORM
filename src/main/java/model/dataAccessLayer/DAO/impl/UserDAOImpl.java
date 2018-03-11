@@ -98,7 +98,29 @@ public class UserDAOImpl implements UserDAOInt {
         } finally {
             Database.getInstance().release();
         }
+
         return isDeleted;
+    }
+    
+     /**
+     * ******************* check if  user has interests *****************
+     */
+    @Override
+    public boolean hasInterests(User user){
+        boolean hasInterest = false;
+        PreparedStatement ps = Database.getInstance().getPreparedStatement("select recid FROM ITI_STORE_Y_INTEREST where userid=?");
+        try {
+            ps.setLong(1, user.getRecID());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                hasInterest = true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Database.getInstance().release();
+        }
+        return hasInterest;
     }
 
     /**

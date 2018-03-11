@@ -18,6 +18,8 @@ public interface UserDAOInt {
     public boolean addUser(User user);
     
     public boolean addAllUserInterest(User user);
+    
+    public boolean hasInterests(User user);
 
     public boolean editProfile(User user);
 

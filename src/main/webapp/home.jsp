@@ -400,6 +400,7 @@ jQuery(document).ready(function ($) {
 
         <script>
                                                                     var listItems = [];
+                                                                     var quantityfield = divParentOfButton.querySelector("#quantity").value;
 
                                                                     $("#check-btn").click(function () {
 
@@ -471,6 +472,7 @@ jQuery(document).ready(function ($) {
                                                                         console.log(nameTd.textContent);
                                                                         for (var i = 0; i < listItems.length; i++) {
                                                                             if (listItems[i].name === nameTd.textContent) {
+                                                                                if(listItems[i].amount<quantityfield)
                                                                                 listItems[i].amount++;
                                                                             }
                                                                         }

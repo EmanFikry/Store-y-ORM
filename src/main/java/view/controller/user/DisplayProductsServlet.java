@@ -29,28 +29,9 @@ public class DisplayProductsServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         DAOService daoService = new DAOService();
-        //ArrayList<Product> products = daoService.getProductList();
-        //out.print(buildJSONFromVector(products));
-        ArrayList<Product> products = new ArrayList<>();
-        Product product = new Product();
-        product.setAmount(100);
-        product.setRecID(5L);
-        product.setCategory("c1");
-        product.setDescription("test1");
-        product.setName("p1");
-        product.setPrice(100);
-        product.setImgURL("images/c.jpg");
-        products.add(product);
-        Product product2 = new Product();
-        product2.setAmount(200);
-        product2.setRecID(6L);
-        product2.setCategory("c2");
-        product2.setDescription("test2");
-        product2.setName("p2");
-        product2.setPrice(100);
-        product2.setImgURL("images/c.jpg");
-        products.add(product2);
+        ArrayList<Product> products = daoService.getProductList();
         out.print(buildJSONFromVector(products));
+        
 
     }
 

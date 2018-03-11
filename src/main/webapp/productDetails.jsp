@@ -11,37 +11,50 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
         <title>JSP Page</title>
+        <style>
+            input{
+                width:60%;
+                height:5%;
+                margin-left:10px;
+            }
+        </style>
     </head>
-    <body>
+    <body style="text-align: center; font-family: 'Raleway', sans-serif;">
 
         <h1>Product details</h1>
 <!--        <img src="${productObject.imgURL}"/>-->
 
-        <img src="https://www.w3schools.com/images/w3schools_green.jpg"/>
-        <img src="/Store-y/productPages/14.jpg"/>
-        <br>
-        <label for="pName"><b>Name</b></label>
-        <br>
-        <input type="text" id="pName" name="pName" value="${productObject.name}" readonly/>
-        <br>
-        <label for="pPrice"><b>Price</b></label>
-        <br>
-        <input type="text" id="pPrice" name="pPrice" value="${productObject.price}" readonly/>
-        <br>
-        <label for="pCategory"><b>Category</b></label>
-        <br>
-        <input type="text" id="pCategory" name="pCategory" value="${productObject.category}" readonly/>
-        <br>
-        <label for="pAmount"><b>Total amount</b></label>
-        <br>
-        <input type="text" id="pAmount" name="pAmount" value="${productObject.amount}" readonly/>
-        <br>
-        <label for="pDescription"><b>Description</b></label>
-        <br>
-        <input type="text" id="pDescription" name="pDescription" value="${productObject.description}" readonly/>
-        <br>
-        <input type="button" value="Back" onclick="backToMainPage()">
+        <table>
+            <br>
+            <label for="pName"><b>Name</b></label>
+            &nbsp
+            <input type="text" id="pName" name="pName" value="" readonly/>
+            <br>
+            <br>
+            <label for="pPrice"><b>Price</b></label>
+            &nbsp
+            <input type="text" id="pPrice" name="pPrice" value="" readonly/>
+            <br>
+            <br>
+            <label for="pCategory"><b>Category</b></label>
+            &nbsp
+            <input type="text" id="pCategory" name="pCategory" value="" readonly/>
+            <br>
+            <br>
+            <label for="pAmount"><b>Total amount</b></label>
+            &nbsp
+            <input type="text" id="pAmount" name="pAmount" value="" readonly/>
+            <br>
+            <br>
+            <label for="pDescription"><b>Description</b></label>
+            &nbsp
+            <input type="text" id="pDescription" name="pDescription" value="" readonly/>
+            <br>
+            <br>
+            <input style="width:40%; height:48px;border-width:0;background-color:#ba3e9d; color:#fff;" type="button" value="Back" onclick="backToMainPage()">
+        </table>       
         <script>
             function backToMainPage()
             {

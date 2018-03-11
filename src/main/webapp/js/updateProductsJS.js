@@ -18,7 +18,6 @@ function  updateProducts()
         },
         success: function (data)
         {
-            console.log(check);
             var productRender = '';
             var mainProductDiv = document.getElementsByClassName("agileinfo_new_products_grids");
             for (i = 0; i < data.length; i++)
@@ -48,7 +47,6 @@ function  updateProducts()
                     productRender += '<button onclick="addToCart(this);" class="w3ls-cart">Add to cart</button>';
                 }
                 productRender += '</div></div></div></div>';
-                console.log("test hereeeeeeeee");
             }
             mainProductDiv[0].innerHTML = productRender;
         }

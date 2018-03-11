@@ -17,7 +17,7 @@
     <body>
         <form method=post action="EditProduct" id="infoForm">
             <fieldset>
-                <legend><span class="number">1</span>Product info</legend>
+                <center><legend>Product info</legend></center>
                 <div>
                     <label for="name">Name:</label>
                     <input type="hidden" name="id" value="${id}">

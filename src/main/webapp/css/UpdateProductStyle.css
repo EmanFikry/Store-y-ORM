@@ -1,6 +1,5 @@
 
 
-
 *, *:before, *:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -83,13 +82,13 @@ select {
 #update {
   padding: 19px 39px 18px 39px;
   color: #FFF;
-  background-color: #009999;
+  background-color: #009dc7;
   font-size: 18px;
   text-align: center;
   font-style: normal;
   border-radius: 5px;
   width: 100%;
-  border: 1px solid  #006666;
+  border: 1px solid  #009dc7;
   border-width: 1px 1px 3px;
   box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
   margin-bottom: 10px;

@@ -80,6 +80,7 @@ users_link.onclick = function () {
         success: function (data)
         {
             console.log("ajax customer");
+            document.getElementById("customers").innerHTML = '';
             for (i = 0; i < data.length; i++) {
                 $("#customers").append('<tr><td>' + data[i].name
                         + '</td><td>' + data[i].email + '</td><td>' + data[i].address +
@@ -112,8 +113,8 @@ products_link.onclick = function () {
         success: function (data)
         {
             console.log("hereeeeeeeeeeeee");
-            var productRender = '';
-
+           
+            document.getElementById("Products").innerHTML = '';
             for (i = 0; i < data.length; i++) {
                 var updateButton = data[i].recID + "U";
                 var deleteButton = data[i].recID + "D";
@@ -146,6 +147,7 @@ add_product_link.onclick = function () {
     add_product_link.style.background = "#fff";
     add_product_link.style.color = "#000";
 
+    document.getElementById("addProductDiv").innerHTML = '';
     $("#addProductDiv").append(
             '<form method=post ENCTYPE="MULTIPART/FORM-DATA" action="AddProduct">' +
             '<fieldset> <legend>Add Product:</legend>' +
@@ -197,6 +199,7 @@ function load_it() {
         success: function (data)
         {
             console.log("ajax customer");
+            document.getElementById("customers").innerHTML = '';
             for (i = 0; i < data.length; i++) {
                 $("#customers").append('<tr><td>' + data[i].name
                         + '</td><td>' + data[i].email + '</td><td>' + data[i].address +
@@ -284,6 +287,7 @@ function userShowMore(id)
         },
         success: function (data)
         {
+            document.getElementById("userDialog").innerHTML = '';
             $("#userDialog").append(
                     '<form> <h1>Information</h1> <fieldset> <label for="name">Name:</label>' +
                     '<br>' +
@@ -331,6 +335,7 @@ function ShowMore(id) {
         },
         success: function (data)
         {
+            document.getElementById("disDialog").innerHTML = '';
             $("#disDialog").append(
                     '<form> <h1>Information</h1> <fieldset> <label for="name">Name:</label>' +
                     '<br>' +

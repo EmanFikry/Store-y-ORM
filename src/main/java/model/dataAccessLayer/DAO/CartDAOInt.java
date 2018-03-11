@@ -14,4 +14,5 @@ import model.dataAccessLayer.entity.Cart;
 public interface CartDAOInt {
     public boolean addCart(Cart cart);
     public Long getLastCartID ();
+     public boolean updateCart(Cart cart);
 }

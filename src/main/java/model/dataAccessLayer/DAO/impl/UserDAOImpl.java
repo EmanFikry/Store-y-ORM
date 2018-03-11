@@ -101,12 +101,12 @@ public class UserDAOImpl implements UserDAOInt {
 
         return isDeleted;
     }
-    
-     /**
-     * ******************* check if  user has interests *****************
+
+    /**
+     * ******************* check if user has interests *****************
      */
     @Override
-    public boolean hasInterests(User user){
+    public boolean hasInterests(User user) {
         boolean hasInterest = false;
         PreparedStatement ps = Database.getInstance().getPreparedStatement("select recid FROM ITI_STORE_Y_INTEREST where userid=?");
         try {

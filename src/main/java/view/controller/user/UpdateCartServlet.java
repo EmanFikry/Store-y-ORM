@@ -5,6 +5,7 @@
  */
 package view.controller.user;
 
+import controller.DAODelegate.DAOService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -43,11 +44,15 @@ public class UpdateCartServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("userObject");
-        
+
         WishList wishList = new WishList();
         wishList.setUserID(user.getRecID());
         wishList.setNumOfItem(Long.parseLong(amount));
         wishList.setProductID(Long.parseLong(id));
+
+        DAOService daoService = new DAOService();
+        boolean isAdded = daoService.addWishList(wishList);
+        System.out.println(isAdded);
         response.getWriter().write("success");
         //add to db 
     }

@@ -6,6 +6,7 @@
 package model.databasedao.factory;
 
 import model.dataAccessLayer.DAO.impl.*;
+
 /**
  *
  * @author Eman-PC
@@ -16,7 +17,7 @@ public class DAOsFactory {
     private static ProductCartDAOImpl productCartDAOImplInstance = null;
     private static UserDAOImpl userDAOImplInstance = null;
     private static ProductDAOImpl productDAOImplInstance = null;
-
+    private static WishListDAOImpl wishListDAOImplInstance = null;
 
     public static CartDAOImpl getCartDAOImpl() {
 
@@ -48,5 +49,13 @@ public class DAOsFactory {
             productDAOImplInstance = new ProductDAOImpl();
         }
         return productDAOImplInstance;
+    }
+
+    public static WishListDAOImpl getWishListDAOImpl() {
+
+        if (wishListDAOImplInstance == null) {
+            wishListDAOImplInstance = new WishListDAOImpl();
+        }
+        return wishListDAOImplInstance;
     }
 }

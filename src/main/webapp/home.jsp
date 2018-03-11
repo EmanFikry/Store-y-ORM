@@ -266,13 +266,7 @@ jQuery(document).ready(function ($) {
                             <a href="editProfile.jsp" class="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="edit-btn">Edit Profile</a>
                         </c:if>
                     </div>
-                    <div class="cart cart box_1">
-                        <form action="#" method="post" class="last">
-                            <input type="hidden" name="cmd" value="_cart" />
-                            <input type="hidden" name="display" value="1" />
-                            <button class="w3view-cart" type="submit" name="submit" value="" style="color:#fff;"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-                        </form>
-                    </div>
+
                 </div>
             </div>
             <!-- //header -->
@@ -297,21 +291,23 @@ jQuery(document).ready(function ($) {
                     </div>
                 </div>
             </div>
-            <div style="padding:10px; text-align: center;">
-                <h3>Your Cart</h3>
-                <div>
-                    <table id="cart">
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Price</th>
-                            <th>Amount</th>
-                            <th>Add</th>
-                            <th>Remove</th>
-                        </tr>
+            <c:if test="${sessionScope.userObject != null}">
+                <div id="cartx" style="padding:10px; text-align: center;">
+                    <h3 style="margin-bottom:5px;">Your Cart</h3>
+                    <div>
+                        <table id="cart">
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Amount</th>
+                                <th>Add</th>
+                                <th>Remove</th>
+                            </tr>
 
-                    </table>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </c:if>
             <!-- //new-products -->
 
             <!-- footer -->
@@ -378,6 +374,19 @@ jQuery(document).ready(function ($) {
                 </div>
             </div>
         </div>
+        <!-- The Modal -->
+        <div id="myModal" class="modalX">
+
+            <!-- Modal content -->
+            <div class="modal-contentX">
+
+                <p style="font-size: 32px">Confirm CheckOut</p>
+                <br>
+                <button id="yes-btn" class="btn-X">Yes</button>
+                <button id="no-btn" class="btn-X">No</button>
+            </div>
+
+        </div>
         <!-- //footer -->
         <!-- cart-js -->
         <script src="js/minicart.js"></script>
@@ -393,6 +402,7 @@ jQuery(document).ready(function ($) {
                                                                     var listItems = [];
 
                                                                     $("#check-btn").click(function () {
+
 
                                                                     });
 
@@ -504,6 +514,66 @@ jQuery(document).ready(function ($) {
                                                                         );
                                                                     }
 
+                                                                    var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+                                                                    var btn = document.getElementById('check-btn');
+
+
+// Get the <span> element that closes the modal
+                                                                    var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+                                                                    btn.onclick = function () {
+                                                                        if (listItems.length > 0)
+                                                                            modal.style.display = "block";
+
+                                                                    }
+
+// When the user clicks on <span> (x), close the modal
+                                                                    span.onclick = function () {
+                                                                        modal.style.display = "none";
+                                                                    }
+
+// When the user clicks anywhere outside of the modal, close it
+                                                                    window.onclick = function (event) {
+                                                                        if (event.target == modal) {
+                                                                            modal.style.display = "none";
+                                                                        }
+                                                                    }
+                                                                    $("#yes-btn").click(function () {
+                                                                        var sum = 0;
+                                                                        for (var i = 0; i < listItems.length; i++) {
+                                                                            sum += listItems[i].amount * listItems[i].price;
+                                                                        }
+                                                                        listItems.push({"sum": sum});
+                                                                        console.log(listItems);
+
+                                                                        var products = [];
+                                                                        console.log(listItems);
+                                                                        for (i = 0, len = listItems.length-1; i < len; i++) {
+                                                                            products.push(listItems[i].amount + ":" + listItems[i].id + ":" + sum);
+
+
+                                                                        }
+                                                                        createTable([]);
+                                                                        $.ajax({
+                                                                            url: "BuyServlet",
+                                                                            type: 'POST',
+                                                                            dataType: 'json',
+                                                                            contentType: 'application/json',
+                                                                            data: JSON.stringify(products),
+                                                                            error: function (xhr, status, error) {
+                                                                                console.log(xhr);
+                                                                                console.log(status);
+                                                                                console.log(error);
+                                                                            }
+                                                                        });
+                                                                        modal.style.display = "none";
+                                                                    });
+                                                                    $("#no-btn").click(function () {
+                                                                        modal.style.display = "none";
+                                                                    });
         </script>
 
         <!-- //cart-js -->
@@ -516,6 +586,10 @@ jQuery(document).ready(function ($) {
 
         <c:remove var="loginInvalidPassword" scope="application" />
         <c:remove var="loginInvalidEmail" scope="application" />
+
+
+
+
 
     </body>
 </html>

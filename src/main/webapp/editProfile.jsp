@@ -45,7 +45,7 @@
         <label for="uJob"><b>Job</b></label>
         <br>
         <select id="uJob">
-            <option value="student">Student</option>
+            <option value="student" >Student</option>
             <option value="teacher">Teacher</option>
             <option value="engineer">Engineer</option>
             <option value="doctor">Doctor</option>
@@ -76,7 +76,19 @@
                 document.getElementById('name').value = "${sessionScope.userObject.name}";
                 document.getElementById('credit').value = "${sessionScope.userObject.creditLimit}";
                 document.getElementById('date').value = "${sessionScope.userObject.birthdate}";
-                document.getElementById('uJob').value = "${sessionScope.userObject.job}";
+                var job = "${sessionScope.userObject.job}";
+                console.log(job);
+                //document.getElementById('uJob').value = 
+                var sel = document.getElementById('uJob');
+                
+                for (var i = 0, j = sel.options.length; i < j; ++i) {
+                    if (sel.options[i].innerText.toLowerCase() == job.toLowerCase()) {
+                        sel.selectedIndex = i;
+                        break;
+                    }
+                }
+
+
 
             }
             function checkPasswordStrength()
@@ -192,38 +204,36 @@
 
             $(document).ready(function () {
                 $("#submit").click(function () {
-                    beforeSubmit();
-                    console.log(validName);
-                    console.log(validEmail);
-                    console.log(validPass);
-
-                    name_var = $("#name").val();
-                    password_var = $("#pass").val();
-                    email_var = $("#email").val();
-                    credit_var = $("#credit").val();
-                    job_var = $("#uJob option:selected").text();
-                    address_var = $("#address").val();
-                    birthdate_var = $("#date").val();
-                    interests_var = $("#uCategory").val();
-
-
-                    $.post("UpdateUserServlet",
-                            {
-                                name: name_var,
-                                email: email_var,
-                                password: password_var,
-                                birthdate: birthdate_var,
-                                job: job_var,
-                                address: address_var,
-                                credit: credit_var,
-                                interests: interests_var
-                            },
-                            function () {
-                                window.location.href = "home.jsp";
-                            });
-
-
+                    if (validEmail && validName && validPass) {
+                        beforeSubmit();
+                        console.log(validName);
+                        console.log(validEmail);
+                        console.log(validPass);
+                        name_var = $("#name").val();
+                        password_var = $("#pass").val();
+                        email_var = $("#email").val();
+                        credit_var = $("#credit").val();
+                        job_var = $("#uJob option:selected").text();
+                        address_var = $("#address").val();
+                        birthdate_var = $("#date").val();
+                        interests_var = $("#uCategory").val();
+                        $.post("UpdateUserServlet",
+                                {
+                                    name: name_var,
+                                    email: email_var,
+                                    password: password_var,
+                                    birthdate: birthdate_var,
+                                    job: job_var,
+                                    address: address_var,
+                                    credit: credit_var,
+                                    interests: interests_var
+                                },
+                                function () {
+                                    window.location.href = "home.jsp";
+                                });
+                    }
                 });
+
             });
 
 

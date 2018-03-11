@@ -11,6 +11,7 @@ import model.dataAccessLayer.DAO.*;
 import model.dataAccessLayer.entity.Cart;
 import model.dataAccessLayer.entity.Product;
 import model.dataAccessLayer.entity.User;
+import model.dataAccessLayer.entity.WishList;
 import model.databasedao.factory.DAOsFactory;
 
 /**
@@ -23,7 +24,11 @@ public class DAOService {
     ProductCartDAOInt productCartDAORef = DAOsFactory.getProductCartDAOImpl();
     UserDAOInt userDAORef = DAOsFactory.getUserDAOImpl();
     ProductDAOInt productDAORef = DAOsFactory.getProductDAOImpl();
+    WishListDAOInt wishListDAORef = DAOsFactory.getWishListDAOImpl();
 
+    /**
+     * ******************** product methods **********************
+     */
     public boolean addProduct(Product product) {
         boolean isStored = productDAORef.addProduct(product);
         return isStored;
@@ -54,6 +59,9 @@ public class DAOService {
         return productExist;
     }
 
+    /**
+     * ******************** User methods **********************
+     */
     public boolean addUser(User user) {
         boolean isAdded = false;
         if (userDAORef.addUser(user) && userDAORef.getUserIdByEmail(user.getEmail()) > 0) {
@@ -83,6 +91,12 @@ public class DAOService {
         }
         return isUpdated;
     }
+    
+    public boolean updateUser(User user)
+    {
+        boolean isUpdated = userDAORef.editProfile(user);
+        return isUpdated;
+    }
 
     public User getUserById(Long id) throws SQLException {
         User user = userDAORef.getUserById(id);
@@ -99,6 +113,9 @@ public class DAOService {
         return users;
     }
 
+    /**
+     * ******************** Cart methods **********************
+     */
     public boolean addCart(Cart cart) {
         boolean isAdded = cartDAORef.addCart(cart);
         return isAdded;
@@ -112,5 +129,33 @@ public class DAOService {
     public boolean addOrder(Long cartID, Long productID, Long numOfItem) {
         boolean isAdded = productCartDAORef.addOrder(cartID, productID, numOfItem);
         return isAdded;
+    }
+
+    public boolean updateCart(Cart cart) {
+        boolean isUpdated = cartDAORef.updateCart(cart);
+        return isUpdated;
+    }
+
+    /**
+     * ******************** Wishlist methods **********************
+     */
+    public boolean addWishList(WishList wishList) {
+        boolean isAdded = false;
+        if (wishListDAORef.isProductExist(wishList.getProductID(), wishList.getUserID())) {
+            //   isAdded = wishListDAORef.addWishList(wishList.getUserID(), wishList.getProductID(), wishList.getNumOfItem());
+            isAdded = wishListDAORef.updateMyWishList(wishList);
+
+        } else {
+            isAdded = wishListDAORef.addWishList(wishList.getUserID(), wishList.getProductID(), wishList.getNumOfItem());
+        }
+        return isAdded;
+    }
+
+    public boolean deleteProductOfWishList(Long productID, Long userID) {
+        return wishListDAORef.deleteProductOfWishList(productID, userID);
+    }
+
+    public boolean updateMyWishList(WishList wishList) {
+        return wishListDAORef.updateMyWishList(wishList);
     }
 }

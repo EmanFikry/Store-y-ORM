@@ -43,6 +43,25 @@ public class CartDAOImpl implements CartDAOInt {
         return isStored;
     }
 
+    public boolean updateCart(Cart cart) {
+        boolean isUpdated = false;
+        PreparedStatement ps = Database.getInstance().getPreparedStatement("update ITI_STORE_Y_CART set totalsum = ? where recid=? ");
+        try {
+            ps.setLong(2, cart.getRecID());
+            ps.setDouble(1, cart.getTotalSum());
+
+            int rowsEffected = ps.executeUpdate();
+            if (rowsEffected == 1) {
+                isUpdated = true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Database.getInstance().release();
+        }
+        return isUpdated;
+    }
+
     /**
      * ******************* Get last cart id *****************
      */

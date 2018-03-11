@@ -160,6 +160,22 @@
             /adminHome.jsp
         </url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>
+            EditProfileFilter
+        </filter-name>
+        <filter-class>
+            view.controller.filter.EditProfileFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>
+            EditProfileFilter
+        </filter-name>
+        <url-pattern>
+            /editProfile.jsp
+        </url-pattern>
+    </filter-mapping>
     <servlet-mapping>
         <servlet-name>UserDetailsServlet</servlet-name>
         <url-pattern>/UserDetailsServlet</url-pattern>

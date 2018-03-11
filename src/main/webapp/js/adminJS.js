@@ -113,7 +113,7 @@ products_link.onclick = function () {
         success: function (data)
         {
             console.log("hereeeeeeeeeeeee");
-           
+
             document.getElementById("Products").innerHTML = '';
             for (i = 0; i < data.length; i++) {
                 var updateButton = data[i].recID + "U";
@@ -149,7 +149,7 @@ add_product_link.onclick = function () {
 
     document.getElementById("addProductDiv").innerHTML = '';
     $("#addProductDiv").append(
-            '<form method=post ENCTYPE="MULTIPART/FORM-DATA" action="AddProduct">' +
+            '<form method=post action="AddProduct">' +
             '<fieldset> <legend>Add Product:</legend>' +
             'Product name:<br>' +
             '<input type="text" name="productName"  id="productName" maxlength="50"  placeholder="Enter Name" onblur="checkName()" required >' +
@@ -222,24 +222,16 @@ function Update(id)
 
     req.onreadystatechange = openUpdateScreen;
 
-    name = document.getElementById("name" + id).innerHTML;
-    price = document.getElementById("price" + id).innerHTML;
-    category = document.getElementById("category" + id).innerHTML;
-    amount = document.getElementById("amount" + id).innerHTML;
-    imgURL = document.getElementById("imgURL" + id).innerHTML;
-    description = document.getElementById("description" + id).innerHTML;
-
     url = "ViewProduct";
     req.open("POST", url, true);
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    req.send("id=" + id
-            + "&name=" + name
-            + "&price=" + price
-            + "&category=" + category
-            + "&amount=" + amount
-            + "&imgURL=" + imgURL
-            + "&description=" + description
-            );
+    req.send("id=" + id);
+}
+function openUpdateScreen() {
+    if (req.readyState == 4 && req.status == 200) {
+        xmlvalue = req.responseText;
+        window.location.href = "UpdateProduct.jsp"
+    }
 }
 function openUpdateScreen() {
     if (req.readyState == 4 && req.status == 200) {

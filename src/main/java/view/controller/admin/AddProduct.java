@@ -70,7 +70,7 @@ public class AddProduct extends HttpServlet {
                     String realpath = context.getRealPath("images");
                     System.out.println(realpath + "\\" + item.getName());
                     item.write(new File(realpath + "\\" + item.getName()));
-                    product.setImgURL(realpath + "\\" + item.getName());
+                    product.setImgURL("images" + "\\" + item.getName());
                 }
             }
 
@@ -83,5 +83,6 @@ public class AddProduct extends HttpServlet {
         }
 
         daoService.addProduct(product);
+        response.sendRedirect("adminHome.jsp");
     }
 }

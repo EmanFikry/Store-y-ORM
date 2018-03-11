@@ -6,7 +6,6 @@
 
 function  updateProducts()
 {
-    console.log("hereeeeeeeeeeeee 123344");
     $.ajax({
         url: "DisplayProductsServlet",
         type: 'GET',
@@ -49,7 +48,6 @@ function  updateProducts()
                     productRender += '<button onclick="addToCart(this);" class="w3ls-cart">Add to cart</button>';
                 }
                 productRender += '</div></div></div></div>';
-                console.log("test hereeeeeeeee");
             }
             mainProductDiv[0].innerHTML = productRender;
         }

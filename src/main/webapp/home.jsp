@@ -51,12 +51,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!-- //web fonts -->
         <!-- start-smooth-scrolling -->
         <script type="text/javascript">
-jQuery(document).ready(function ($) {
-    $(".scroll").click(function (event) {
-        event.preventDefault();
-        $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-    });
-});
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
+                    event.preventDefault();
+                    $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+                });
+            });
         </script>
         <!-- //end-smooth-scrolling -->
 
@@ -247,9 +247,12 @@ jQuery(document).ready(function ($) {
             <!-- header -->
             <div class="header" id="home1">
                 <div class="container">
+                    
                     <div class="w3l_login">
+                       <c:if test="${sessionScope.userObject == null}">
                         <a href="#" data-toggle="modal" data-target="#myModal88" style="margin-left:5px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
                         <br>
+                        </c:if>
                         <c:if test="${sessionScope.userObject != null}">
                             <form action="SignOutServlet" method="get">
                                 <button class="" type="submit"  value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="log-btn">LogOut</button> 
@@ -324,31 +327,6 @@ jQuery(document).ready(function ($) {
                             </ul>
                         </div>
                         <div class="col-md-3 w3_footer_grid">
-                            <h3>Information</h3>
-                            <ul class="info">
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="mail.html">Contact Us</a></li>
-                                <li><a href="codes.html">Short Codes</a></li>
-                                <li><a href="faq.html">FAQ's</a></li>
-                                <li><a href="products.html">Special Products</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-3 w3_footer_grid">
-                            <h3>Category</h3>
-                            <ul class="info">
-                                <li><a href="products.html">Mobiles</a></li>
-                                <li><a href="products1.html">Laptops</a></li>
-                                <li><a href="products.html">Purifiers</a></li>
-                                <li><a href="products1.html">Wearables</a></li>
-                                <li><a href="products2.html">Kitchen</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-3 w3_footer_grid">
-                            <h3>Profile</h3>
-                            <ul class="info">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="products.html">Today's Deals</a></li>
-                            </ul>
                             <h4>Follow Us</h4>
                             <div class="agileits_social_button">
                                 <ul>
@@ -394,13 +372,8 @@ jQuery(document).ready(function ($) {
         <script src="js/updateProductsJS.js"></script>
         <script src="js/loginJS.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
-
-
-
-
         <script>
                                                                     var listItems = [];
-                                                                     var quantityfield = divParentOfButton.querySelector("#quantity").value;
 
                                                                     $("#check-btn").click(function () {
 
@@ -421,10 +394,14 @@ jQuery(document).ready(function ($) {
 
                                                                     function addItems(name, price, id) {
                                                                         console.log("passed name: " + name);
+
                                                                         for (var i = 0; i < listItems.length; i++) {
                                                                             console.log(listItems[i].name);
+                                                                            var quantity = document.getElementById("quantity" + listItems[i].id).value;
+
                                                                             if (listItems[i].name === name) {
-                                                                                listItems[i].amount++;
+                                                                                if (listItems[i].amount < quantity)
+                                                                                    listItems[i].amount++;
                                                                                 console.log(listItems);
                                                                                 createTable(listItems);
                                                                                 return;
@@ -470,10 +447,13 @@ jQuery(document).ready(function ($) {
                                                                         var nameTd = tr.childNodes[0];
                                                                         var amountTd = tr.childNodes[2];
                                                                         console.log(nameTd.textContent);
+
                                                                         for (var i = 0; i < listItems.length; i++) {
+                                                                            var quantity = document.getElementById("quantity" + listItems[i].id).value;
+
                                                                             if (listItems[i].name === nameTd.textContent) {
-                                                                                if(listItems[i].amount<quantityfield)
-                                                                                listItems[i].amount++;
+                                                                                if (listItems[i].amount < quantity)
+                                                                                    listItems[i].amount++;
                                                                             }
                                                                         }
                                                                         console.log(listItems);
@@ -553,7 +533,7 @@ jQuery(document).ready(function ($) {
 
                                                                         var products = [];
                                                                         console.log(listItems);
-                                                                        for (i = 0, len = listItems.length-1; i < len; i++) {
+                                                                        for (i = 0, len = listItems.length - 1; i < len; i++) {
                                                                             products.push(listItems[i].amount + ":" + listItems[i].id + ":" + sum);
 
 

@@ -9,7 +9,6 @@
 body {
   font-family: 'Nunito', sans-serif;
   color: #384047;
-    background-image:url("index.jpg");
   height: 110%; 
   background-position: center;
   background-repeat: no-repeat;
@@ -128,19 +127,7 @@ label.light {
   border-radius: 100%;
 }
 
-.dilg {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 3px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+
 
 @media screen and (min-width: 480px) {
 

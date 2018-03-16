@@ -38,7 +38,7 @@ function  updateProducts()
                         ' <div id="productDiv">' +
                         '<input type="hidden" name="cmd" value="_cart>' +
                         '<input type="hidden" name="add" value="1">' +
-                        '<input type="hidden" id="quantity" name="quantity" value="' + data[i].amount + '">' +
+                        '<input type="hidden" id="quantity' + data[i].recID + '" name="quantity" value="' + data[i].amount + '">' +
                         '<input type="hidden" id="name" name="w3ls_item" value="' + data[i].name + '">' +
                         '<input type="hidden" id="price" name="amount" value="' + data[i].price + '">' +
                         '<input type="hidden" id="id" name="id" value="' + data[i].recID + '">';

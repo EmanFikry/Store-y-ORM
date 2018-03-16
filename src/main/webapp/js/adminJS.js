@@ -233,13 +233,6 @@ function openUpdateScreen() {
         window.location.href = "UpdateProduct.jsp"
     }
 }
-function openUpdateScreen() {
-    if (req.readyState == 4 && req.status == 200) {
-        xmlvalue = req.responseText;
-        window.location.href = "updateProduct.jsp"
-    }
-}
-
 
 function Delete(id)
 {

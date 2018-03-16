@@ -42,7 +42,7 @@ public class ViewProduct extends HttpServlet {
         request.getSession().setAttribute("amount", product.getAmount());
         request.getSession().setAttribute("imgURL", product.getImgURL());
         request.getSession().setAttribute("description", product.getDescription());
-        response.sendRedirect("/UpdateProduct.jsp");
+        response.sendRedirect("UpdateProduct.jsp");
     }
 
     private String buildJSONFromVector(ArrayList<Product> products) {

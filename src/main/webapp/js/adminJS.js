@@ -149,7 +149,7 @@ add_product_link.onclick = function () {
 
     document.getElementById("addProductDiv").innerHTML = '';
     $("#addProductDiv").append(
-            '<form method=post action="AddProduct">' +
+            '<form method=post action="AddProduct" ENCTYPE="MULTIPART/FORM-DATA">' +
             '<fieldset> <legend>Add Product:</legend>' +
             'Product name:<br>' +
             '<input type="text" name="productName"  id="productName" maxlength="50"  placeholder="Enter Name" onblur="checkName()" required >' +
@@ -342,7 +342,7 @@ function ShowMore(id) {
                     '<br>' +
                     '<input type="text" readonly value="' + data.description + '"/>' +
                     '<br>' +
-                    '</fieldset> <button type="button" onclick="closePopup()">OK</button> </form>'
+                    '</fieldset> <button type="button" onclick="closePopup2()">OK</button> </form>'
                     );
 
             // private String imgURL;
@@ -351,6 +351,9 @@ function ShowMore(id) {
 }
 
 function closePopup() {
+    document.getElementById('userDialog').style.display = "none";
+}
+function closePopup2() {
     document.getElementById('disDialog').style.display = "none";
 }
 

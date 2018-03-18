@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.dataAccessLayer.entity.Database;
-import model.dataAccessLayer.entity.ProductCart;
+import model.dataAccessLayer.entity.ItiStoreYProductcart;
 import model.dataAccessLayer.DAO.ProductCartDAOInt;
 
 /**
@@ -18,7 +18,7 @@ import model.dataAccessLayer.DAO.ProductCartDAOInt;
  */
 public class ProductCartDAOImpl implements ProductCartDAOInt {
 
-    ProductCart productCart = new ProductCart();
+    ItiStoreYProductcart productCart = new ItiStoreYProductcart();
 
     /**
      * **************** product Exist *****************

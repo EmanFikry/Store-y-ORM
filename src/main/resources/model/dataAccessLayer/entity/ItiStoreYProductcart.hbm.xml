@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 18, 2018 10:53:53 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.dataAccessLayer.entity.ItiStoreYProductcart" table="ITI_STORE_Y_PRODUCTCART" schema="STORE_Y" optimistic-lock="version">
+        <id name="recid" type="big_decimal">
+            <column name="RECID" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="itiStoreYCart" class="model.dataAccessLayer.entity.ItiStoreYCart" fetch="select">
+            <column name="CARTID" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="itiStoreYProduct" class="model.dataAccessLayer.entity.ItiStoreYProduct" fetch="select">
+            <column name="PRODUCTID" precision="22" scale="0" />
+        </many-to-one>
+        <property name="numofitems" type="big_decimal">
+            <column name="NUMOFITEMS" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

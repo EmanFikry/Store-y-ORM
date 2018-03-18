@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.dataAccessLayer.entity.Database;
-import model.dataAccessLayer.entity.Product;
+import model.dataAccessLayer.entity.ItiStoreYProduct;
 import model.dataAccessLayer.DAO.ProductDAOInt;
 
 /**
@@ -19,13 +19,13 @@ import model.dataAccessLayer.DAO.ProductDAOInt;
  */
 public class ProductDAOImpl implements ProductDAOInt {
 
-    Product product = new Product();
+    ItiStoreYProduct product = new ItiStoreYProduct();
 
     /**
      * ******************* add new product *****************
      */
     @Override
-    public boolean addProduct(Product product) {
+    public boolean addProduct(ItiStoreYProduct product) {
         boolean isStored = false;
         PreparedStatement ps = Database.getInstance().getPreparedStatement("INSERT INTO ITI_STORE_Y_PRODUCT (name,price,category,amount,imgURL,description) VALUES (?,?,?,?,?,?)");
         try {
@@ -73,7 +73,7 @@ public class ProductDAOImpl implements ProductDAOInt {
      * ******************* update product *****************
      */
     @Override
-    public boolean updateProduct(Product product) {
+    public boolean updateProduct(ItiStoreYProduct product) {
         boolean isUpdated = false;
         PreparedStatement ps = Database.getInstance().getPreparedStatement("update ITI_STORE_Y_PRODUCT  set name=?, price=?,category=?,amount=?,imgURL=?,description=? where Recid=?");
 
@@ -128,7 +128,7 @@ public class ProductDAOImpl implements ProductDAOInt {
      * ******************* get all products *****************
      */
     @Override
-    public ArrayList<Product> getProductList() {
+    public ArrayList<ItiStoreYProduct> getProductList() {
         ArrayList<Product> list = new ArrayList<Product>();
         PreparedStatement ps = Database.getInstance().getPreparedStatement("SELECT * FROM ITI_STORE_Y_PRODUCT");
         try {

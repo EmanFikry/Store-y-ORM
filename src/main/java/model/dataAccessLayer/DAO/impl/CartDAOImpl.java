@@ -8,7 +8,7 @@ package model.dataAccessLayer.DAO.impl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.dataAccessLayer.entity.Cart;
+import model.dataAccessLayer.entity.ItiStoreYCart;
 import model.dataAccessLayer.DAO.CartDAOInt;
 import model.dataAccessLayer.entity.Database;
 
@@ -18,13 +18,13 @@ import model.dataAccessLayer.entity.Database;
  */
 public class CartDAOImpl implements CartDAOInt {
 
-    Cart cart = new Cart();
+    ItiStoreYCart cart = new ItiStoreYCart();
 
     /**
      * ******************* add new Cart *****************
      */
     @Override
-    public boolean addCart(Cart cart) {
+    public boolean addCart(ItiStoreYCart cart) {
         boolean isStored = false;
         PreparedStatement ps = Database.getInstance().getPreparedStatement("INSERT INTO ITI_STORE_Y_CART (USERID,TOTALSUM) VALUES (?,?)");
         try {
@@ -43,7 +43,7 @@ public class CartDAOImpl implements CartDAOInt {
         return isStored;
     }
 
-    public boolean updateCart(Cart cart) {
+    public boolean updateCart(ItiStoreYCart cart) {
         boolean isUpdated = false;
         PreparedStatement ps = Database.getInstance().getPreparedStatement("update ITI_STORE_Y_CART set totalsum = ? where recid=? ");
         try {

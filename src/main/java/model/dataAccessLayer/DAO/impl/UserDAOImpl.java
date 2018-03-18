@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.dataAccessLayer.entity.Database;
-import model.dataAccessLayer.entity.User;
+import model.dataAccessLayer.entity.ItiStoreYUser;
 
 /**
  *
@@ -19,13 +19,13 @@ import model.dataAccessLayer.entity.User;
  */
 public class UserDAOImpl implements UserDAOInt {
 
-    User user = new User();
+    ItiStoreYUser user = new ItiStoreYUser();
 
     /**
      * ******************* add new User *****************
      */
     @Override
-    public boolean addUser(User user) {
+    public boolean addUser(ItiStoreYUser user) {
         boolean isStored = false;
         PreparedStatement ps = Database.getInstance().getPreparedStatement("INSERT INTO ITI_STORE_Y_USER (NAME,PASSWORD,EMAIL,ADDRESS,JOB,BIRTHDATE,CREDITLIMIT) VALUES (?,?,?,?,?,?,?)");
         try {
@@ -54,7 +54,7 @@ public class UserDAOImpl implements UserDAOInt {
      * ******************* add all User interest *****************
      */
     @Override
-    public boolean addAllUserInterest(User user) {
+    public boolean addAllUserInterest(ItiStoreYUser user) {
         boolean isStored = true;
         for (String i : user.getUserInterest()) {
             isStored = addUserInterest(user, i);
@@ -65,7 +65,7 @@ public class UserDAOImpl implements UserDAOInt {
     /**
      * ******************* add single interest *****************
      */
-    private boolean addUserInterest(User user, String interest) {
+    private boolean addUserInterest(ItiStoreYUser user, String interest) {
         boolean isStored = false;
         PreparedStatement ps = Database.getInstance().getPreparedStatement("INSERT INTO ITI_STORE_Y_INTEREST (USERID,NAME) VALUES (?,?)");
         try {
@@ -85,7 +85,7 @@ public class UserDAOImpl implements UserDAOInt {
      * ******************* delete user interests *****************
      */
     @Override
-    public boolean deleteUserInterests(User user) {
+    public boolean deleteUserInterests(ItiStoreYUser user) {
         boolean isDeleted = false;
         PreparedStatement ps = Database.getInstance().getPreparedStatement("DELETE FROM ITI_STORE_Y_INTEREST WHERE USERID=? ");
         try {
@@ -106,7 +106,7 @@ public class UserDAOImpl implements UserDAOInt {
      * ******************* check if user has interests *****************
      */
     @Override
-    public boolean hasInterests(User user) {
+    public boolean hasInterests(ItiStoreYUser user) {
         boolean hasInterest = false;
         PreparedStatement ps = Database.getInstance().getPreparedStatement("select recid FROM ITI_STORE_Y_INTEREST where userid=?");
         try {
@@ -127,7 +127,7 @@ public class UserDAOImpl implements UserDAOInt {
      * ******************* update User *****************
      */
     @Override
-    public boolean editProfile(User user) {
+    public boolean editProfile(ItiStoreYUser user) {
         boolean isUpdated = false;
         PreparedStatement ps = Database.getInstance().getPreparedStatement("update ITI_STORE_Y_USER  set NAME=?, PASSWORD=?,EMAIL=?,ADDRESS=?,JOB=?,BIRTHDATE=?, CREDITLIMIT=? where Recid=?");
 
@@ -177,7 +177,7 @@ public class UserDAOImpl implements UserDAOInt {
      * ***************** get user by id ***************
      */
     @Override
-    public User getUserById(Long id) throws SQLException {
+    public ItiStoreYUser getUserById(Long id) throws SQLException {
         User user = new User();
         PreparedStatement ps = Database.getInstance().getPreparedStatement("SELECT * FROM ITI_STORE_Y_USER WHERE recid=?");
         try {
@@ -227,7 +227,7 @@ public class UserDAOImpl implements UserDAOInt {
      * **************** Login method ******************
      */
     @Override
-    public User checkLogin(String email, String password) {
+    public ItiStoreYUser checkLogin(String email, String password) {
         User existUser = null;
         if (isEmailExist(email)) {
             PreparedStatement ps = Database.getInstance().getPreparedStatement("SELECT * FROM ITI_STORE_Y_USER WHERE email=? AND password=?");
@@ -251,7 +251,7 @@ public class UserDAOImpl implements UserDAOInt {
      * **************** list all users ******************
      */
     @Override
-    public ArrayList<User> getUserList() {
+    public ArrayList<ItiStoreYUser> getUserList() {
         ArrayList<User> list = new ArrayList<User>();
         PreparedStatement ps = Database.getInstance().getPreparedStatement("SELECT * FROM ITI_STORE_Y_USER");
         try {

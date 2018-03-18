@@ -5,14 +5,14 @@
  */
 package model.dataAccessLayer.DAO;
 
-import model.dataAccessLayer.entity.Cart;
+import model.dataAccessLayer.entity.ItiStoreYCart;
 
 /**
  *
  * @author Eman-PC
  */
 public interface CartDAOInt {
-    public boolean addCart(Cart cart);
+    public boolean addCart(ItiStoreYCart cart);
     public Long getLastCartID ();
-     public boolean updateCart(Cart cart);
+     public boolean updateCart(ItiStoreYCart cart);
 }

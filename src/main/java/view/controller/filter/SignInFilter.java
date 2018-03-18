@@ -15,7 +15,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dataAccessLayer.entity.User;
+import model.dataAccessLayer.entity.ItiStoreYUser;
 
 /**
  *
@@ -53,7 +53,7 @@ public class SignInFilter implements Filter {
             } else {
                 //check if user exists in db or not
                 DAOService daoService = new DAOService();
-                User user = daoService.checkLogin(email, password);
+                ItiStoreYUser user = daoService.checkLogin(email, password);
                 if (user == null) {
                     boolean isExisted = daoService.isEmailExist(email);
                     if (isExisted) {

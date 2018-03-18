@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dataAccessLayer.entity.Product;
+import model.dataAccessLayer.entity.ItiStoreYProduct;
 
 /**
  *
@@ -28,19 +28,12 @@ public class AdminDisplayProductDetailsServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String productID = request.getParameter("id");
         DAOService daoService = new DAOService();
-        //Product product = daoService.getProductByID(Long.parseLong(productID));
-        Product product = new Product();
-        product.setAmount(100);
-        product.setCategory("hsdjhsdjsd");
-        product.setDescription("dshsjhhshsdhsj");
-        product.setName("teeest");
-        product.setPrice(100);
-        product.setImgURL("images/34.jpg");
+        ItiStoreYProduct product = daoService.getProductByID(Long.parseLong(productID));
         out.print(buildJSONFromVector(product));
 
     }
 
-    private String buildJSONFromVector(Product product) {
+    private String buildJSONFromVector(ItiStoreYProduct product) {
 
         Gson json = new Gson();
         return json.toJson(product);

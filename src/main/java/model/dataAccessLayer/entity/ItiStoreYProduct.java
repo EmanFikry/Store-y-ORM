@@ -12,9 +12,9 @@ public class ItiStoreYProduct implements java.io.Serializable {
 
     private Long recid;
     private String name;
-    private BigDecimal price;
+    private float price;
     private String category;
-    private BigDecimal amount;
+    private float amount;
     private String imgurl;
     private String description;
     private Set itiStoreYProductcarts = new HashSet(0);
@@ -26,7 +26,7 @@ public class ItiStoreYProduct implements java.io.Serializable {
         this.recid = recid;
     }
 
-    public ItiStoreYProduct(Long recid, String name, BigDecimal price, String category, BigDecimal amount, String imgurl, String description, Set itiStoreYProductcarts) {
+    public ItiStoreYProduct(Long recid, String name, float price, String category, float amount, String imgurl, String description, Set itiStoreYProductcarts) {
         this.recid = recid;
         this.name = name;
         this.price = price;
@@ -53,11 +53,11 @@ public class ItiStoreYProduct implements java.io.Serializable {
         this.name = name;
     }
 
-    public BigDecimal getPrice() {
+    public float getPrice() {
         return this.price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -69,11 +69,11 @@ public class ItiStoreYProduct implements java.io.Serializable {
         this.category = category;
     }
 
-    public BigDecimal getAmount() {
+    public float getAmount() {
         return this.amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 

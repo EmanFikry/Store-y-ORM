@@ -14,7 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dataAccessLayer.entity.Product;
+import model.dataAccessLayer.entity.ItiStoreYProduct;
 
 /**
  *
@@ -34,18 +34,18 @@ public class ViewProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Product product = new DAOService().getProductByID(Long.parseLong(request.getParameter("id")));
-        request.getSession().setAttribute("id", product.getRecID());
+        ItiStoreYProduct product = new DAOService().getProductByID(Long.parseLong(request.getParameter("id")));
+        request.getSession().setAttribute("id", product.getRecid());
         request.getSession().setAttribute("name", product.getName());
         request.getSession().setAttribute("price", product.getPrice());
         request.getSession().setAttribute("category", product.getCategory());
         request.getSession().setAttribute("amount", product.getAmount());
-        request.getSession().setAttribute("imgURL", product.getImgURL());
+        request.getSession().setAttribute("imgURL", product.getImgurl());
         request.getSession().setAttribute("description", product.getDescription());
         response.sendRedirect("UpdateProduct.jsp");
     }
 
-    private String buildJSONFromVector(ArrayList<Product> products) {
+    private String buildJSONFromVector(ArrayList<ItiStoreYProduct> products) {
 
         Gson json = new Gson();
         return json.toJson(products);

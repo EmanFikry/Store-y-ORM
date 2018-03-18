@@ -17,7 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dataAccessLayer.entity.Product;
+import model.dataAccessLayer.entity.ItiStoreYProduct;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -33,7 +33,7 @@ public class AddProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOService daoService = new DAOService();
-        Product product = new Product();
+        ItiStoreYProduct product = new ItiStoreYProduct();
         try {
             DiskFileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);
@@ -70,7 +70,7 @@ public class AddProduct extends HttpServlet {
                     String realpath = context.getRealPath("images");
                     System.out.println(realpath + "\\" + item.getName());
                     item.write(new File(realpath + "\\" + item.getName()));
-                    product.setImgURL("images" + "\\" + item.getName());
+                    product.setImgurl("images" + "\\" + item.getName());
                 }
             }
 

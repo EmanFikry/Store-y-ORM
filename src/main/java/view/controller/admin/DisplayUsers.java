@@ -14,7 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dataAccessLayer.entity.User;
+import model.dataAccessLayer.entity.ItiStoreYUser;
 
 /**
  *
@@ -26,7 +26,7 @@ public class DisplayUsers extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        ArrayList<User> users;
+        ArrayList<ItiStoreYUser> users;
         //call userdao from database
         DAOService daoService = new DAOService();
         users = daoService.getUserList();
@@ -40,7 +40,7 @@ public class DisplayUsers extends HttpServlet {
         out.print(buildJSONFromVector(users));
     }
 
-    private String buildJSONFromVector(ArrayList<User> users) {
+    private String buildJSONFromVector(ArrayList<ItiStoreYUser> users) {
 
         Gson json = new Gson();
         return json.toJson(users);

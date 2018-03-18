@@ -11,7 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dataAccessLayer.entity.Product;
+import model.dataAccessLayer.entity.ItiStoreYProduct;
 import view.util.user.ProductValidation;
 
 /**
@@ -67,7 +67,7 @@ public class EditProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAOService daoService = new DAOService();
-        Product product = new Product();
+        ItiStoreYProduct product = new ItiStoreYProduct();
 
         String id = request.getParameter("id");
         String name = request.getParameter("productName");
@@ -77,12 +77,12 @@ public class EditProduct extends HttpServlet {
         String imgURL = request.getParameter("imgURL");
         String description = request.getParameter("description");
 
-        product.setRecID(Long.parseLong(id));
+        product.setRecid(Long.parseLong(id));
         product.setName(name);
         product.setPrice(Float.parseFloat(price));
         product.setCategory(category);
         product.setAmount(Integer.parseInt(amount));
-        product.setImgURL(imgURL);
+        product.setImgurl(imgURL);
         product.setDescription(description);
 
         if (daoService.updateProduct(product)) {

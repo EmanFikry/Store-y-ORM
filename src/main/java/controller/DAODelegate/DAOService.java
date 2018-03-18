@@ -8,10 +8,9 @@ package controller.DAODelegate;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.dataAccessLayer.DAO.*;
-import model.dataAccessLayer.entity.Cart;
-import model.dataAccessLayer.entity.Product;
-import model.dataAccessLayer.entity.User;
-import model.dataAccessLayer.entity.WishList;
+import model.dataAccessLayer.entity.ItiStoreYCart;
+import model.dataAccessLayer.entity.ItiStoreYProduct;
+import model.dataAccessLayer.entity.ItiStoreYUser;
 import model.databasedao.factory.DAOsFactory;
 
 /**
@@ -24,12 +23,11 @@ public class DAOService {
     ProductCartDAOInt productCartDAORef = DAOsFactory.getProductCartDAOImpl();
     UserDAOInt userDAORef = DAOsFactory.getUserDAOImpl();
     ProductDAOInt productDAORef = DAOsFactory.getProductDAOImpl();
-    WishListDAOInt wishListDAORef = DAOsFactory.getWishListDAOImpl();
 
     /**
      * ******************** product methods **********************
      */
-    public boolean addProduct(Product product) {
+    public boolean addProduct(ItiStoreYProduct product) {
         boolean isStored = productDAORef.addProduct(product);
         return isStored;
     }
@@ -39,7 +37,7 @@ public class DAOService {
         return isDeleted;
     }
 
-    public boolean updateProduct(Product product) {
+    public boolean updateProduct(ItiStoreYProduct product) {
         boolean isUpdated = productDAORef.updateProduct(product);
         return isUpdated;
     }
@@ -49,8 +47,8 @@ public class DAOService {
         return product;
     }
 
-    public ArrayList<Product> getProductList() {
-        ArrayList<Product> products = productDAORef.getProductList();
+    public ArrayList<ItiStoreYProduct> getProductList() {
+        ArrayList<ItiStoreYProduct> products = productDAORef.getProductList();
         return products;
     }
 
@@ -62,7 +60,7 @@ public class DAOService {
     /**
      * ******************** User methods **********************
      */
-    public boolean addUser(User user) {
+    public boolean addUser(ItiStoreYUser user) {
         boolean isAdded = false;
         if (userDAORef.addUser(user) && userDAORef.getUserIdByEmail(user.getEmail()) > 0) {
             user.setRecID(userDAORef.getUserIdByEmail(user.getEmail()));
@@ -78,7 +76,7 @@ public class DAOService {
         return isExisted;
     }
 
-    public boolean editProfile(User user) {
+    public boolean editProfile(ItiStoreYUser user) {
         boolean isUpdated = false;
         if (userDAORef.editProfile(user)) {
             if (userDAORef.hasInterests(user)) {
@@ -91,32 +89,31 @@ public class DAOService {
         }
         return isUpdated;
     }
-    
-    public boolean updateUser(User user)
-    {
+
+    public boolean updateUser(ItiStoreYUser user) {
         boolean isUpdated = userDAORef.editProfile(user);
         return isUpdated;
     }
 
-    public User getUserById(Long id) throws SQLException {
-        User user = userDAORef.getUserById(id);
+    public ItiStoreYUser getUserById(Long id) throws SQLException {
+        ItiStoreYUser user = userDAORef.getUserById(id);
         return user;
     }
 
-    public User checkLogin(String email, String password) {
-        User user = userDAORef.checkLogin(email, password);
+    public ItiStoreYUser checkLogin(String email, String password) {
+        ItiStoreYUser user = userDAORef.checkLogin(email, password);
         return user;
     }
 
-    public ArrayList<User> getUserList() {
-        ArrayList<User> users = userDAORef.getUserList();
+    public ArrayList<ItiStoreYUser> getUserList() {
+        ArrayList<ItiStoreYUser> users = userDAORef.getUserList();
         return users;
     }
 
     /**
      * ******************** Cart methods **********************
      */
-    public boolean addCart(Cart cart) {
+    public boolean addCart(ItiStoreYCart cart) {
         boolean isAdded = cartDAORef.addCart(cart);
         return isAdded;
     }
@@ -131,31 +128,8 @@ public class DAOService {
         return isAdded;
     }
 
-    public boolean updateCart(Cart cart) {
+    public boolean updateCart(ItiStoreYCart cart) {
         boolean isUpdated = cartDAORef.updateCart(cart);
         return isUpdated;
-    }
-
-    /**
-     * ******************** Wishlist methods **********************
-     */
-    public boolean addWishList(WishList wishList) {
-        boolean isAdded = false;
-        if (wishListDAORef.isProductExist(wishList.getProductID(), wishList.getUserID())) {
-            //   isAdded = wishListDAORef.addWishList(wishList.getUserID(), wishList.getProductID(), wishList.getNumOfItem());
-            isAdded = wishListDAORef.updateMyWishList(wishList);
-
-        } else {
-            isAdded = wishListDAORef.addWishList(wishList.getUserID(), wishList.getProductID(), wishList.getNumOfItem());
-        }
-        return isAdded;
-    }
-
-    public boolean deleteProductOfWishList(Long productID, Long userID) {
-        return wishListDAORef.deleteProductOfWishList(productID, userID);
-    }
-
-    public boolean updateMyWishList(WishList wishList) {
-        return wishListDAORef.updateMyWishList(wishList);
     }
 }

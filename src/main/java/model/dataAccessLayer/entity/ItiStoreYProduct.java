@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class ItiStoreYProduct implements java.io.Serializable {
 
-    private BigDecimal recid;
+    private Long recid;
     private String name;
     private BigDecimal price;
     private String category;
@@ -22,11 +22,11 @@ public class ItiStoreYProduct implements java.io.Serializable {
     public ItiStoreYProduct() {
     }
 
-    public ItiStoreYProduct(BigDecimal recid) {
+    public ItiStoreYProduct(Long recid) {
         this.recid = recid;
     }
 
-    public ItiStoreYProduct(BigDecimal recid, String name, BigDecimal price, String category, BigDecimal amount, String imgurl, String description, Set itiStoreYProductcarts) {
+    public ItiStoreYProduct(Long recid, String name, BigDecimal price, String category, BigDecimal amount, String imgurl, String description, Set itiStoreYProductcarts) {
         this.recid = recid;
         this.name = name;
         this.price = price;
@@ -37,11 +37,11 @@ public class ItiStoreYProduct implements java.io.Serializable {
         this.itiStoreYProductcarts = itiStoreYProductcarts;
     }
 
-    public BigDecimal getRecid() {
+    public Long getRecid() {
         return this.recid;
     }
 
-    public void setRecid(BigDecimal recid) {
+    public void setRecid(Long recid) {
         this.recid = recid;
     }
 

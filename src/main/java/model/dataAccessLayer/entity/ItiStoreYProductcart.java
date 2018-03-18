@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  */
 public class ItiStoreYProductcart implements java.io.Serializable {
 
-    private BigDecimal recid;
+    private Long recid;
     private ItiStoreYCart itiStoreYCart;
     private ItiStoreYProduct itiStoreYProduct;
     private BigDecimal numofitems;
@@ -16,22 +16,22 @@ public class ItiStoreYProductcart implements java.io.Serializable {
     public ItiStoreYProductcart() {
     }
 
-    public ItiStoreYProductcart(BigDecimal recid) {
+    public ItiStoreYProductcart(Long recid) {
         this.recid = recid;
     }
 
-    public ItiStoreYProductcart(BigDecimal recid, ItiStoreYCart itiStoreYCart, ItiStoreYProduct itiStoreYProduct, BigDecimal numofitems) {
+    public ItiStoreYProductcart(Long recid, ItiStoreYCart itiStoreYCart, ItiStoreYProduct itiStoreYProduct, BigDecimal numofitems) {
         this.recid = recid;
         this.itiStoreYCart = itiStoreYCart;
         this.itiStoreYProduct = itiStoreYProduct;
         this.numofitems = numofitems;
     }
 
-    public BigDecimal getRecid() {
+    public Long getRecid() {
         return this.recid;
     }
 
-    public void setRecid(BigDecimal recid) {
+    public void setRecid(Long recid) {
         this.recid = recid;
     }
 

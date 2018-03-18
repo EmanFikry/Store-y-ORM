@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import model.dataAccessLayer.entity.Database;
 import model.dataAccessLayer.entity.ItiStoreYUser;
 
+
 /**
  *
  * @author Eman-PC
@@ -20,7 +21,7 @@ import model.dataAccessLayer.entity.ItiStoreYUser;
 public class UserDAOImpl implements UserDAOInt {
 
     ItiStoreYUser user = new ItiStoreYUser();
-
+Long x;
     /**
      * ******************* add new User *****************
      */

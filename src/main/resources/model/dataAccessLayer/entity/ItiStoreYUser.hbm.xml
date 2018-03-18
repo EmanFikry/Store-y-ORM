@@ -4,7 +4,7 @@
 <!-- Generated Mar 18, 2018 10:53:53 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="model.dataAccessLayer.entity.ItiStoreYUser" table="ITI_STORE_Y_USER" schema="STORE_Y" optimistic-lock="version">
-        <id name="recid" type="big_decimal">
+        <id name="recid" type="java.lang.Long">
             <column name="RECID" precision="22" scale="0" />
             <generator class="assigned" />
         </id>

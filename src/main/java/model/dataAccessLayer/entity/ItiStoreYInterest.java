@@ -8,28 +8,28 @@ import java.math.BigDecimal;
  */
 public class ItiStoreYInterest implements java.io.Serializable {
 
-    private BigDecimal recid;
+    private Long recid;
     private ItiStoreYUser itiStoreYUser;
     private String name;
 
     public ItiStoreYInterest() {
     }
 
-    public ItiStoreYInterest(BigDecimal recid) {
+    public ItiStoreYInterest(Long recid) {
         this.recid = recid;
     }
 
-    public ItiStoreYInterest(BigDecimal recid, ItiStoreYUser itiStoreYUser, String name) {
+    public ItiStoreYInterest(Long recid, ItiStoreYUser itiStoreYUser, String name) {
         this.recid = recid;
         this.itiStoreYUser = itiStoreYUser;
         this.name = name;
     }
 
-    public BigDecimal getRecid() {
+    public Long getRecid() {
         return this.recid;
     }
 
-    public void setRecid(BigDecimal recid) {
+    public void setRecid(Long recid) {
         this.recid = recid;
     }
 

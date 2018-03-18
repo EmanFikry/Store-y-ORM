@@ -42,8 +42,8 @@ public class DAOService {
         return isUpdated;
     }
 
-    public Product getProductByID(Long id) {
-        Product product = productDAORef.getProductByID(id);
+    public ItiStoreYProduct getProductByID(Long id) {
+        ItiStoreYProduct product = productDAORef.getProductByID(id);
         return product;
     }
 
@@ -63,7 +63,7 @@ public class DAOService {
     public boolean addUser(ItiStoreYUser user) {
         boolean isAdded = false;
         if (userDAORef.addUser(user) && userDAORef.getUserIdByEmail(user.getEmail()) > 0) {
-            user.setRecID(userDAORef.getUserIdByEmail(user.getEmail()));
+            user.setRecid(userDAORef.getUserIdByEmail(user.getEmail()));
             if (userDAORef.addAllUserInterest(user)) {
                 isAdded = true;
             }

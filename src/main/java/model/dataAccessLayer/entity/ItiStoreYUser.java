@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class ItiStoreYUser implements java.io.Serializable {
 
-    private BigDecimal recid;
+    private Long recid;
     private String name;
     private String password;
     private String email;
@@ -26,11 +26,11 @@ public class ItiStoreYUser implements java.io.Serializable {
     public ItiStoreYUser() {
     }
 
-    public ItiStoreYUser(BigDecimal recid) {
+    public ItiStoreYUser(Long recid) {
         this.recid = recid;
     }
 
-    public ItiStoreYUser(BigDecimal recid, String name, String password, String email, String address, String job, Date birthdate, BigDecimal creditlimit, Set itiStoreYInterests, Set itiStoreYCarts, Set itiStoreYWishlists) {
+    public ItiStoreYUser(Long recid, String name, String password, String email, String address, String job, Date birthdate, BigDecimal creditlimit, Set itiStoreYInterests, Set itiStoreYCarts, Set itiStoreYWishlists) {
         this.recid = recid;
         this.name = name;
         this.password = password;
@@ -44,11 +44,11 @@ public class ItiStoreYUser implements java.io.Serializable {
         this.itiStoreYWishlists = itiStoreYWishlists;
     }
 
-    public BigDecimal getRecid() {
+    public Long getRecid() {
         return this.recid;
     }
 
-    public void setRecid(BigDecimal recid) {
+    public void setRecid(Long recid) {
         this.recid = recid;
     }
 

@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class ItiStoreYCart implements java.io.Serializable {
 
-    private BigDecimal recid;
+    private Long recid;
     private ItiStoreYUser itiStoreYUser;
     private BigDecimal totalsum;
     private Set itiStoreYProductcarts = new HashSet(0);
@@ -18,22 +18,22 @@ public class ItiStoreYCart implements java.io.Serializable {
     public ItiStoreYCart() {
     }
 
-    public ItiStoreYCart(BigDecimal recid) {
+    public ItiStoreYCart(Long recid) {
         this.recid = recid;
     }
 
-    public ItiStoreYCart(BigDecimal recid, ItiStoreYUser itiStoreYUser, BigDecimal totalsum, Set itiStoreYProductcarts) {
+    public ItiStoreYCart(Long recid, ItiStoreYUser itiStoreYUser, BigDecimal totalsum, Set itiStoreYProductcarts) {
         this.recid = recid;
         this.itiStoreYUser = itiStoreYUser;
         this.totalsum = totalsum;
         this.itiStoreYProductcarts = itiStoreYProductcarts;
     }
 
-    public BigDecimal getRecid() {
+    public Long getRecid() {
         return this.recid;
     }
 
-    public void setRecid(BigDecimal recid) {
+    public void setRecid(Long recid) {
         this.recid = recid;
     }
 

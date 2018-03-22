@@ -29,6 +29,7 @@ public class ProductCartDAOImpl implements ProductCartDAOInt {
     /**
      * **************** product Exist *****************
      */
+    //tested
     @Override
     public boolean isProductExist(Long cartID, Long productID) {
 
@@ -50,6 +51,7 @@ public class ProductCartDAOImpl implements ProductCartDAOInt {
         return isExist;
     }
 
+    //tested
     @Override
     public void addOrder(Long cartID, Long productID, Long numOfItem) {
         ItiStoreYCart cart = (ItiStoreYCart) session.load(ItiStoreYCart.class, cartID);

@@ -58,7 +58,7 @@ public class ProductCartDAOImpl implements ProductCartDAOInt {
         productcart.setItiStoreYCart(cart);
         productcart.setItiStoreYProduct(product);
         productcart.setNumofitems(new BigDecimal(numOfItem));
-    
+
         session.beginTransaction();
         session.save(productcart);
         session.getTransaction().commit();

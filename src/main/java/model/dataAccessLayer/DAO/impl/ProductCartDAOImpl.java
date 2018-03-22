@@ -5,12 +5,16 @@
  */
 package model.dataAccessLayer.DAO.impl;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import model.dataAccessLayer.entity.Database;
+import java.math.BigDecimal;
+import java.util.List;
 import model.dataAccessLayer.entity.ItiStoreYProductcart;
 import model.dataAccessLayer.DAO.ProductCartDAOInt;
+import model.dataAccessLayer.entity.ItiStoreYCart;
+import model.dataAccessLayer.entity.ItiStoreYProduct;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -18,6 +22,8 @@ import model.dataAccessLayer.DAO.ProductCartDAOInt;
  */
 public class ProductCartDAOImpl implements ProductCartDAOInt {
 
+    SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+    Session session = sessionFactory.openSession();
     ItiStoreYProductcart productCart = new ItiStoreYProductcart();
 
     /**
@@ -25,40 +31,36 @@ public class ProductCartDAOImpl implements ProductCartDAOInt {
      */
     @Override
     public boolean isProductExist(Long cartID, Long productID) {
+
         boolean isExist = false;
-        PreparedStatement ps = Database.getInstance().getPreparedStatement("SELECT recid FROM ITI_STORE_Y_PRODUCTCART WHERE cartID=? AND productID=?");
-        try {
-            ps.setLong(1, cartID);
-            ps.setLong(2, productID);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+        ItiStoreYCart cart = (ItiStoreYCart) session.load(ItiStoreYCart.class, cartID);
+        ItiStoreYProduct product = (ItiStoreYProduct) session.load(ItiStoreYProduct.class, productID);
+        if (cart != null && product != null) {
+            Query query
+                    = session.createQuery("SELECT recid FROM ItiStoreYProductcart p WHERE "
+                            + "p.itiStoreYCart=:cart AND p.itiStoreYProduct=:product");
+            query.setParameter("cart", cart);
+            query.setParameter("product", product);
+
+            List result = query.list();
+            if (result.size() > 0) {
                 isExist = true;
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Database.getInstance().release();
         }
         return isExist;
     }
-    @Override
-    public boolean addOrder(Long cartID, Long productID, Long numOfItem) {
-        boolean isAdded = false;
-        PreparedStatement ps = Database.getInstance().getPreparedStatement("INSERT INTO ITI_STORE_Y_PRODUCTCART (CARTID, PRODUCTID, NUMOFITEMS) VALUES (?,?,?)");
-        try {
-            ps.setLong(1, cartID);
-            ps.setLong(2, productID);
-            ps.setLong(3, numOfItem);
 
-            int rowsEffected = ps.executeUpdate();
-            if (rowsEffected == 1) {
-                isAdded= true;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Database.getInstance().release();
-        }
-        return isAdded;
+    @Override
+    public void addOrder(Long cartID, Long productID, Long numOfItem) {
+        ItiStoreYCart cart = (ItiStoreYCart) session.load(ItiStoreYCart.class, cartID);
+        ItiStoreYProduct product = (ItiStoreYProduct) session.load(ItiStoreYProduct.class, productID);
+        ItiStoreYProductcart productcart = new ItiStoreYProductcart();
+        productcart.setItiStoreYCart(cart);
+        productcart.setItiStoreYProduct(product);
+        productcart.setNumofitems(new BigDecimal(numOfItem));
+    
+        session.beginTransaction();
+        session.save(productcart);
+        session.getTransaction().commit();
     }
 }

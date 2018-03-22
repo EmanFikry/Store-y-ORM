@@ -12,7 +12,10 @@ import model.dataAccessLayer.entity.ItiStoreYCart;
  * @author Eman-PC
  */
 public interface CartDAOInt {
+
     public boolean addCart(ItiStoreYCart cart);
-    public Long getLastCartID ();
-     public boolean updateCart(ItiStoreYCart cart);
+
+    public Long getLastCartID();
+
+    public boolean updateCart(ItiStoreYCart cart);
 }

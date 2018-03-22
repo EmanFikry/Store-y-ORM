@@ -10,7 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.dataAccessLayer.entity.ItiStoreYCart;
 import model.dataAccessLayer.DAO.CartDAOInt;
-import model.dataAccessLayer.entity.Database;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -18,6 +20,8 @@ import model.dataAccessLayer.entity.Database;
  */
 public class CartDAOImpl implements CartDAOInt {
 
+    SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+    Session session = sessionFactory.openSession();
     ItiStoreYCart cart = new ItiStoreYCart();
 
     /**

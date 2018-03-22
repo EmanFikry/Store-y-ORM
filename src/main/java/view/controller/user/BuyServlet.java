@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.dataAccessLayer.entity.Cart;
-import model.dataAccessLayer.entity.Product;
-import model.dataAccessLayer.entity.User;
 
 /**
  *

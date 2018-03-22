@@ -7,7 +7,6 @@ package model.dataAccessLayer.DAO.impl;
 
 import model.dataAccessLayer.DAO.UserDAOInt;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;

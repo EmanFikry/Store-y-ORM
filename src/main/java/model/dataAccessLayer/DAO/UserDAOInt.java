@@ -16,15 +16,15 @@ import model.dataAccessLayer.entity.ItiStoreYUser;
 public interface UserDAOInt {
 
     public void addUser(ItiStoreYUser user);
-    
+
     public void addAllUserInterest(ItiStoreYUser user);
-    
+
     public boolean hasInterests(ItiStoreYUser user);
 
     public void editProfile(ItiStoreYUser user);
 
     public boolean isEmailExist(String email);
-    
+
     public Long getUserIdByEmail(String email);
 
     public ItiStoreYUser getUserById(Long id) throws SQLException;

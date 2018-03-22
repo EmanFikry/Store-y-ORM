@@ -6,7 +6,7 @@
     <class name="model.dataAccessLayer.entity.ItiStoreYProductcart" table="ITI_STORE_Y_PRODUCTCART" schema="STORE_Y" optimistic-lock="version">
         <id name="recid" type="java.lang.Long">
             <column name="RECID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="itiStoreYCart" class="model.dataAccessLayer.entity.ItiStoreYCart" fetch="select">
             <column name="CARTID" precision="22" scale="0" />

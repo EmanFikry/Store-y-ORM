@@ -28,7 +28,6 @@ public class DAOService {
     /**
      * ******************** product methods **********************
      */
-    
     public boolean addProduct(ItiStoreYProduct product) {
         boolean isStored = productDAORef.addProduct(product);
         return isStored;
@@ -62,7 +61,6 @@ public class DAOService {
     /**
      * ******************** User methods **********************
      */
-    
     public void addUser(ItiStoreYUser user) {
         userDAORef.addUser(user);
         userDAORef.deleteUserInterests(user);
@@ -104,7 +102,6 @@ public class DAOService {
     /**
      * ******************** Cart methods **********************
      */
-    
     public boolean addCart(ItiStoreYCart cart) {
         boolean isAdded = cartDAORef.addCart(cart);
         return isAdded;
@@ -115,9 +112,9 @@ public class DAOService {
         return cartID;
     }
 
-    public boolean addOrder(Long cartID, Long productID, Long numOfItem) {
-        boolean isAdded = productCartDAORef.addOrder(cartID, productID, numOfItem);
-        return isAdded;
+    public void addOrder(Long cartID, Long productID, Long numOfItem) {
+        productCartDAORef.addOrder(cartID, productID, numOfItem);
+
     }
 
     public boolean updateCart(ItiStoreYCart cart) {

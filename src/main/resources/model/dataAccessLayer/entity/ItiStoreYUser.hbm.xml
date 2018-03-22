@@ -6,7 +6,7 @@
     <class name="model.dataAccessLayer.entity.ItiStoreYUser" table="ITI_STORE_Y_USER" schema="STORE_Y" optimistic-lock="version">
         <id name="recid" type="java.lang.Long">
             <column name="RECID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="name" type="string">
             <column name="NAME" length="100" />
@@ -26,7 +26,7 @@
         <property name="birthdate" type="date">
             <column name="BIRTHDATE" length="7" />
         </property>
-        <property name="creditlimit" type="big_decimal">
+        <property name="creditlimit" type="float">
             <column name="CREDITLIMIT" precision="22" scale="0" />
         </property>
         <set name="itiStoreYInterests" table="ITI_STORE_Y_INTEREST" inverse="true" lazy="true" fetch="select">
@@ -40,12 +40,6 @@
                 <column name="USERID" precision="22" scale="0" />
             </key>
             <one-to-many class="model.dataAccessLayer.entity.ItiStoreYCart" />
-        </set>
-        <set name="itiStoreYWishlists" table="ITI_STORE_Y_WISHLIST" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="USERID" precision="22" scale="0" />
-            </key>
-            <one-to-many class="model.dataAccessLayer.entity.ItiStoreYWishlist" />
         </set>
     </class>
 </hibernate-mapping>

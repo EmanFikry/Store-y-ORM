@@ -6,10 +6,8 @@
 package controller.DAODelegate;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 import model.dataAccessLayer.DAO.*;
-import model.dataAccessLayer.entity.ItiStoreYCart;
-import model.dataAccessLayer.entity.ItiStoreYProduct;
 import model.dataAccessLayer.entity.ItiStoreYUser;
 import model.databasedao.factory.DAOsFactory;
 
@@ -56,19 +54,14 @@ public class DAOService {
         boolean productExist = productCartDAORef.isProductExist(cartID, productID);
         return productExist;
     }
-
     /**
      * ******************** User methods **********************
      */
-    public boolean addUser(ItiStoreYUser user) {
-        boolean isAdded = false;
-        if (userDAORef.addUser(user) && userDAORef.getUserIdByEmail(user.getEmail()) > 0) {
-            user.setRecid(userDAORef.getUserIdByEmail(user.getEmail()));
-            if (userDAORef.addAllUserInterest(user)) {
-                isAdded = true;
-            }
-        }
-        return isAdded;
+    public void addUser(ItiStoreYUser user) {
+        userDAORef.addUser(user);
+        userDAORef.deleteUserInterests(user);
+        user.getItiStoreYInterests().clear();
+        userDAORef.addAllUserInterest(user);
     }
 
     public boolean isEmailExist(String email) {
@@ -76,23 +69,15 @@ public class DAOService {
         return isExisted;
     }
 
-    public boolean editProfile(ItiStoreYUser user) {
-        boolean isUpdated = false;
-        if (userDAORef.editProfile(user)) {
-            if (userDAORef.hasInterests(user)) {
-                if (userDAORef.deleteUserInterests(user)) {
-                    isUpdated = userDAORef.addAllUserInterest(user);
-                }
-            } else {
-                isUpdated = userDAORef.addAllUserInterest(user);
-            }
-        }
-        return isUpdated;
+    public void editProfile(ItiStoreYUser user) {
+        userDAORef.editProfile(user);
+        userDAORef.deleteUserInterests(user);
+        user.getItiStoreYInterests().clear();
+        userDAORef.addAllUserInterest(user);
     }
 
-    public boolean updateUser(ItiStoreYUser user) {
-        boolean isUpdated = userDAORef.editProfile(user);
-        return isUpdated;
+    public void updateUser(ItiStoreYUser user) {
+        userDAORef.editProfile(user);
     }
 
     public ItiStoreYUser getUserById(Long id) throws SQLException {
@@ -105,8 +90,8 @@ public class DAOService {
         return user;
     }
 
-    public ArrayList<ItiStoreYUser> getUserList() {
-        ArrayList<ItiStoreYUser> users = userDAORef.getUserList();
+    public List<ItiStoreYUser> getUserList() {
+        List<ItiStoreYUser> users = userDAORef.getUserList();
         return users;
     }
 

@@ -51,6 +51,5 @@ Contributor(s):
     <mapping resource="model/dataAccessLayer/entity/ItiStoreYInterest.hbm.xml"/>
     <mapping resource="model/dataAccessLayer/entity/ItiStoreYCart.hbm.xml"/>
     <mapping resource="model/dataAccessLayer/entity/ItiStoreYProduct.hbm.xml"/>
-    <mapping resource="model/dataAccessLayer/entity/ItiStoreYWishlist.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

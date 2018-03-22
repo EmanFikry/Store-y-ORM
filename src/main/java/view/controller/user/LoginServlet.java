@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("loginemail");
         String password = request.getParameter("loginpas");
 
-        //check if user exists in db or not
+        check if user exists in db or not
         DAOService daoService = new DAOService();
         User user = daoService.checkLogin(email, password);
         

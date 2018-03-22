@@ -6,7 +6,7 @@
 package model.dataAccessLayer.DAO;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 import model.dataAccessLayer.entity.ItiStoreYUser;
 
 /**
@@ -15,13 +15,13 @@ import model.dataAccessLayer.entity.ItiStoreYUser;
  */
 public interface UserDAOInt {
 
-    public boolean addUser(ItiStoreYUser user);
+    public void addUser(ItiStoreYUser user);
     
-    public boolean addAllUserInterest(ItiStoreYUser user);
+    public void addAllUserInterest(ItiStoreYUser user);
     
     public boolean hasInterests(ItiStoreYUser user);
 
-    public boolean editProfile(ItiStoreYUser user);
+    public void editProfile(ItiStoreYUser user);
 
     public boolean isEmailExist(String email);
     
@@ -31,7 +31,7 @@ public interface UserDAOInt {
 
     public ItiStoreYUser checkLogin(String email, String password);
 
-    public ArrayList<ItiStoreYUser> getUserList();
+    public List<ItiStoreYUser> getUserList();
 
     public boolean deleteUserInterests(ItiStoreYUser user);
 }

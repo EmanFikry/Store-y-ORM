@@ -6,13 +6,19 @@
 package model.dataAccessLayer.DAO.impl;
 
 import model.dataAccessLayer.DAO.UserDAOInt;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import model.dataAccessLayer.entity.Database;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.dataAccessLayer.entity.ItiStoreYInterest;
 import model.dataAccessLayer.entity.ItiStoreYUser;
-
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -20,106 +26,78 @@ import model.dataAccessLayer.entity.ItiStoreYUser;
  */
 public class UserDAOImpl implements UserDAOInt {
 
-    ItiStoreYUser user = new ItiStoreYUser();
-Long x;
+    SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+    Session session = sessionFactory.openSession();
+
     /**
      * ******************* add new User *****************
      */
+    //tested
     @Override
-    public boolean addUser(ItiStoreYUser user) {
-        boolean isStored = false;
-        PreparedStatement ps = Database.getInstance().getPreparedStatement("INSERT INTO ITI_STORE_Y_USER (NAME,PASSWORD,EMAIL,ADDRESS,JOB,BIRTHDATE,CREDITLIMIT) VALUES (?,?,?,?,?,?,?)");
-        try {
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getAddress());
-            ps.setString(5, user.getJob());
-            ps.setDate(6, new java.sql.Date(user.getBirthdate().getTime()));
-            ps.setFloat(7, user.getCreditLimit());
-
-            int rowsEffected = ps.executeUpdate();
-            if (rowsEffected == 1) {
-                isStored = true;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Database.getInstance().release();
-        }
-
-        return isStored;
+    public void addUser(ItiStoreYUser user) {
+        session.beginTransaction();
+        session.save(user);
+        session.getTransaction().commit();
     }
 
     /**
      * ******************* add all User interest *****************
      */
+    //tested
     @Override
-    public boolean addAllUserInterest(ItiStoreYUser user) {
-        boolean isStored = true;
-        for (String i : user.getUserInterest()) {
-            isStored = addUserInterest(user, i);
+    public void addAllUserInterest(ItiStoreYUser user) {
+        Set<ItiStoreYInterest> interests = user.getItiStoreYInterests();
+
+        Iterator<ItiStoreYInterest> it = interests.iterator();
+        while (it.hasNext()) {
+            addUserInterest(user, it.next().getName());
         }
-        return isStored;
     }
 
     /**
      * ******************* add single interest *****************
      */
-    private boolean addUserInterest(ItiStoreYUser user, String interest) {
-        boolean isStored = false;
-        PreparedStatement ps = Database.getInstance().getPreparedStatement("INSERT INTO ITI_STORE_Y_INTEREST (USERID,NAME) VALUES (?,?)");
-        try {
-            ps.setLong(1, user.getRecID());
-            ps.setString(2, interest);
-            int rowsEffected = ps.executeUpdate();
-            if (rowsEffected == 1) {
-                isStored = true;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        }
-        return isStored;
+    //tested
+    private void addUserInterest(ItiStoreYUser user, String interest) {
+        ItiStoreYInterest interest2 = new ItiStoreYInterest();
+        interest2.setItiStoreYUser(user);
+        interest2.setName(interest);
+        session.beginTransaction();
+        session.save(interest2);
+        session.getTransaction().commit();
     }
 
     /**
      * ******************* delete user interests *****************
      */
+    //tested
     @Override
     public boolean deleteUserInterests(ItiStoreYUser user) {
         boolean isDeleted = false;
-        PreparedStatement ps = Database.getInstance().getPreparedStatement("DELETE FROM ITI_STORE_Y_INTEREST WHERE USERID=? ");
-        try {
-            ps.setLong(1, user.getRecID());
-            if (ps.executeUpdate() > 0) {
-                isDeleted = true;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Database.getInstance().release();
-        }
+        Query query
+                = session.createQuery("DELETE FROM ItiStoreYInterest WHERE USERID=:userId");
+        query.setParameter("userId", user.getRecid());
 
+        if (query.executeUpdate() > 0) {
+            isDeleted = true;
+        }
         return isDeleted;
     }
 
     /**
      * ******************* check if user has interests *****************
      */
+    //not tested because not needed
     @Override
     public boolean hasInterests(ItiStoreYUser user) {
         boolean hasInterest = false;
-        PreparedStatement ps = Database.getInstance().getPreparedStatement("select recid FROM ITI_STORE_Y_INTEREST where userid=?");
-        try {
-            ps.setLong(1, user.getRecID());
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                hasInterest = true;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Database.getInstance().release();
+        Query query
+                = session.createQuery("select recid FROM ITI_STORE_Y_INTEREST where userid=:userId");
+        query.setParameter("userId", user.getRecid());
+
+        List result = query.list();
+        if (result.size() > 0) {
+            hasInterest = true;
         }
         return hasInterest;
     }
@@ -127,49 +105,28 @@ Long x;
     /**
      * ******************* update User *****************
      */
+    //tested
     @Override
-    public boolean editProfile(ItiStoreYUser user) {
-        boolean isUpdated = false;
-        PreparedStatement ps = Database.getInstance().getPreparedStatement("update ITI_STORE_Y_USER  set NAME=?, PASSWORD=?,EMAIL=?,ADDRESS=?,JOB=?,BIRTHDATE=?, CREDITLIMIT=? where Recid=?");
-
-        try {
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getAddress());
-            ps.setString(5, user.getJob());
-            ps.setDate(6, new java.sql.Date(user.getBirthdate().getTime()));
-            ps.setFloat(7, user.getCreditLimit());
-            ps.setLong(8, user.getRecID());
-
-            if (ps.executeUpdate() > 0) {
-                isUpdated = true;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Database.getInstance().release();
-        }
-        return isUpdated;
+    public void editProfile(ItiStoreYUser user) {
+        session.beginTransaction();
+        session.update(user);
+        session.getTransaction().commit();
     }
 
     /**
      * **************** User Exist *****************
      */
+    //tested
     @Override
     public boolean isEmailExist(String email) {
         boolean isExist = false;
-        PreparedStatement ps = Database.getInstance().getPreparedStatement("SELECT recid FROM ITI_STORE_Y_USER WHERE email=?");
-        try {
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                isExist = true;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Database.getInstance().release();
+        Query query
+                = session.createQuery("SELECT recid FROM ItiStoreYUser WHERE email=:userEmail");
+        query.setParameter("userEmail", email);
+
+        List result = query.list();
+        if (result.size() > 0) {
+            isExist = true;
         }
         return isExist;
     }
@@ -177,49 +134,27 @@ Long x;
     /**
      * ***************** get user by id ***************
      */
+    //tested
     @Override
     public ItiStoreYUser getUserById(Long id) throws SQLException {
-        User user = new User();
-        PreparedStatement ps = Database.getInstance().getPreparedStatement("SELECT * FROM ITI_STORE_Y_USER WHERE recid=?");
-        try {
-            ps.setLong(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                user.setRecID(rs.getLong("recId"));
-                user.setName(rs.getString("Name"));
-                user.setPassword(rs.getString("password"));
-                user.setEmail(rs.getString("email"));
-                user.setAddress(rs.getString("address"));
-                user.setJob(rs.getString("JOB"));
-                user.setBirthdate(rs.getDate("BIRTHDATE"));
-                user.setCreditLimit(rs.getFloat("creditlimit"));
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Database.getInstance().release();
-        }
+        ItiStoreYUser user = (ItiStoreYUser) session.load(ItiStoreYUser.class, id);
         return user;
     }
 
     /**
      * ***************** get user by email ***************
      */
+    //tested
     @Override
     public Long getUserIdByEmail(String email) {
         Long userID = -1L;
-        PreparedStatement ps = Database.getInstance().getPreparedStatement("SELECT recid FROM ITI_STORE_Y_USER WHERE email=?");
-        try {
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                userID = rs.getLong("recid");
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Database.getInstance().release();
+        Query query
+                = session.createQuery("SELECT u.recid FROM ItiStoreYUser u WHERE u.email=:userEmail");
+        query.setParameter("userEmail", email);
+
+        List<Long> result = query.list();
+        if (!result.isEmpty()) {
+            userID = result.get(0);
         }
         return userID;
     }
@@ -227,22 +162,24 @@ Long x;
     /**
      * **************** Login method ******************
      */
+    //tested
     @Override
     public ItiStoreYUser checkLogin(String email, String password) {
-        User existUser = null;
+        ItiStoreYUser existUser = null;
         if (isEmailExist(email)) {
-            PreparedStatement ps = Database.getInstance().getPreparedStatement("SELECT * FROM ITI_STORE_Y_USER WHERE email=? AND password=?");
+            Query query
+                    = session.createQuery("FROM ItiStoreYUser WHERE email=:userEmail AND password=:userPassword");
+            query.setParameter("userEmail", email);
+            query.setParameter("userPassword", password);
+
+            List<ItiStoreYUser> result = query.list();
             try {
-                ps.setString(1, email);
-                ps.setString(2, password);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    existUser = getUserById(rs.getLong("recID"));
+                if (!result.isEmpty()) {
+                    existUser = getUserById(result.get(0).getRecid());
                 }
             } catch (SQLException ex) {
-                ex.printStackTrace(System.out);
-            } finally {
-                Database.getInstance().release();
+                Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Exception in checkLogin");
             }
         }
         return existUser;
@@ -251,29 +188,12 @@ Long x;
     /**
      * **************** list all users ******************
      */
+    //tested
     @Override
-    public ArrayList<ItiStoreYUser> getUserList() {
-        ArrayList<User> list = new ArrayList<User>();
-        PreparedStatement ps = Database.getInstance().getPreparedStatement("SELECT * FROM ITI_STORE_Y_USER");
-        try {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                User user = new User();
-                user.setRecID(rs.getLong("recid"));
-                user.setName(rs.getString("Name"));
-                user.setPassword(rs.getString("Password"));
-                user.setEmail(rs.getString("email"));
-                user.setAddress(rs.getString("Address"));
-                user.setJob(rs.getString("job"));
-                user.setBirthdate(rs.getDate("BIRTHDATE"));
-                user.setCreditLimit(rs.getFloat("CreditLimit"));
-                list.add(user);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Database.getInstance().release();
-        }
-        return list;
+    public List<ItiStoreYUser> getUserList() {
+        Query query
+                = session.createQuery("FROM ItiStoreYUser");
+        List<ItiStoreYUser> result = query.list();
+        return result;
     }
 }

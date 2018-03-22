@@ -1,7 +1,6 @@
 package model.dataAccessLayer.entity;
 // Generated Mar 18, 2018 10:53:52 AM by Hibernate Tools 4.3.1
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,10 +17,9 @@ public class ItiStoreYUser implements java.io.Serializable {
     private String address;
     private String job;
     private Date birthdate;
-    private BigDecimal creditlimit;
-    private Set itiStoreYInterests = new HashSet(0);
+    private float creditlimit;
+    private Set itiStoreYInterests = new HashSet();
     private Set itiStoreYCarts = new HashSet(0);
-    private Set itiStoreYWishlists = new HashSet(0);
 
     public ItiStoreYUser() {
     }
@@ -30,7 +28,7 @@ public class ItiStoreYUser implements java.io.Serializable {
         this.recid = recid;
     }
 
-    public ItiStoreYUser(Long recid, String name, String password, String email, String address, String job, Date birthdate, BigDecimal creditlimit, Set itiStoreYInterests, Set itiStoreYCarts, Set itiStoreYWishlists) {
+    public ItiStoreYUser(Long recid, String name, String password, String email, String address, String job, Date birthdate, float creditlimit, Set itiStoreYInterests, Set itiStoreYCarts) {
         this.recid = recid;
         this.name = name;
         this.password = password;
@@ -41,7 +39,6 @@ public class ItiStoreYUser implements java.io.Serializable {
         this.creditlimit = creditlimit;
         this.itiStoreYInterests = itiStoreYInterests;
         this.itiStoreYCarts = itiStoreYCarts;
-        this.itiStoreYWishlists = itiStoreYWishlists;
     }
 
     public Long getRecid() {
@@ -100,11 +97,11 @@ public class ItiStoreYUser implements java.io.Serializable {
         this.birthdate = birthdate;
     }
 
-    public BigDecimal getCreditlimit() {
+    public float getCreditlimit() {
         return this.creditlimit;
     }
 
-    public void setCreditlimit(BigDecimal creditlimit) {
+    public void setCreditlimit(float creditlimit) {
         this.creditlimit = creditlimit;
     }
 
@@ -123,13 +120,4 @@ public class ItiStoreYUser implements java.io.Serializable {
     public void setItiStoreYCarts(Set itiStoreYCarts) {
         this.itiStoreYCarts = itiStoreYCarts;
     }
-
-    public Set getItiStoreYWishlists() {
-        return this.itiStoreYWishlists;
-    }
-
-    public void setItiStoreYWishlists(Set itiStoreYWishlists) {
-        this.itiStoreYWishlists = itiStoreYWishlists;
-    }
-
 }

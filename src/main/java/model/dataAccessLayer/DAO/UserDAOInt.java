@@ -33,5 +33,5 @@ public interface UserDAOInt {
 
     public List<ItiStoreYUser> getUserList();
 
-    public boolean deleteUserInterests(ItiStoreYUser user);
+    public void deleteUserInterests(ItiStoreYUser user);
 }

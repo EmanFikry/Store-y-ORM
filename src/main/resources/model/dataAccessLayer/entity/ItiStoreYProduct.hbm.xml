@@ -6,7 +6,7 @@
     <class name="model.dataAccessLayer.entity.ItiStoreYProduct" table="ITI_STORE_Y_PRODUCT" schema="STORE_Y" optimistic-lock="version">
         <id name="recid" type="java.lang.Long">
             <column name="RECID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="name" type="string">
             <column name="NAME" length="50" />

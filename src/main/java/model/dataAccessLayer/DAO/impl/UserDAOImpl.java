@@ -7,6 +7,7 @@ package model.dataAccessLayer.DAO.impl;
 
 import model.dataAccessLayer.DAO.UserDAOInt;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -25,8 +26,8 @@ import org.hibernate.cfg.Configuration;
  */
 public class UserDAOImpl implements UserDAOInt {
 
-    SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-    Session session = sessionFactory.openSession();
+    static SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+    static Session session = sessionFactory.openSession();
 
     /**
      * ******************* add new User *****************
@@ -37,6 +38,24 @@ public class UserDAOImpl implements UserDAOInt {
         session.beginTransaction();
         session.save(user);
         session.getTransaction().commit();
+    }
+
+    public static void main(String[] args) {
+        UserDAOImpl u = new UserDAOImpl();
+        ItiStoreYUser user = (ItiStoreYUser) session.load(ItiStoreYUser.class, 61L);
+        u.deleteUserInterests(user);
+    }
+
+    public boolean deleteProduct(Long id) {
+        boolean isDeleted = false;
+        Query query = session.createQuery("delete from ItiStoreYProduct where RECID=:recID");
+        query.setParameter("recID", id);
+        int rowsEffected = query.executeUpdate();
+        System.out.println(rowsEffected);
+        if (rowsEffected > 0) {
+            isDeleted = true;
+        }
+        return isDeleted;
     }
 
     /**
@@ -71,16 +90,14 @@ public class UserDAOImpl implements UserDAOInt {
      */
     //tested
     @Override
-    public boolean deleteUserInterests(ItiStoreYUser user) {
-        boolean isDeleted = false;
-        Query query
-                = session.createQuery("DELETE FROM ItiStoreYInterest WHERE USERID=:userId");
-        query.setParameter("userId", user.getRecid());
-
-        if (query.executeUpdate() > 0) {
-            isDeleted = true;
+    public void deleteUserInterests(ItiStoreYUser user) {
+        Set<ItiStoreYInterest> interests = user.getItiStoreYInterests();
+        Iterator<ItiStoreYInterest> it = interests.iterator();
+        while (it.hasNext()) {
+            session.beginTransaction();
+            session.delete(it.next());
+            session.getTransaction().commit();
         }
-        return isDeleted;
     }
 
     /**

@@ -6,8 +6,11 @@
 package controller.DAODelegate;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import model.dataAccessLayer.DAO.*;
+import model.dataAccessLayer.entity.ItiStoreYCart;
+import model.dataAccessLayer.entity.ItiStoreYProduct;
 import model.dataAccessLayer.entity.ItiStoreYUser;
 import model.databasedao.factory.DAOsFactory;
 
@@ -25,6 +28,7 @@ public class DAOService {
     /**
      * ******************** product methods **********************
      */
+    
     public boolean addProduct(ItiStoreYProduct product) {
         boolean isStored = productDAORef.addProduct(product);
         return isStored;
@@ -54,9 +58,11 @@ public class DAOService {
         boolean productExist = productCartDAORef.isProductExist(cartID, productID);
         return productExist;
     }
+
     /**
      * ******************** User methods **********************
      */
+    
     public void addUser(ItiStoreYUser user) {
         userDAORef.addUser(user);
         userDAORef.deleteUserInterests(user);
@@ -98,6 +104,7 @@ public class DAOService {
     /**
      * ******************** Cart methods **********************
      */
+    
     public boolean addCart(ItiStoreYCart cart) {
         boolean isAdded = cartDAORef.addCart(cart);
         return isAdded;

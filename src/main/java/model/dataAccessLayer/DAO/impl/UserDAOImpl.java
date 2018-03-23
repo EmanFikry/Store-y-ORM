@@ -7,7 +7,6 @@ package model.dataAccessLayer.DAO.impl;
 
 import model.dataAccessLayer.DAO.UserDAOInt;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -39,13 +38,7 @@ public class UserDAOImpl implements UserDAOInt {
         session.save(user);
         session.getTransaction().commit();
     }
-
-    public static void main(String[] args) {
-        UserDAOImpl u = new UserDAOImpl();
-        ItiStoreYUser user = (ItiStoreYUser) session.load(ItiStoreYUser.class, 61L);
-        u.deleteUserInterests(user);
-    }
-
+    
     public boolean deleteProduct(Long id) {
         boolean isDeleted = false;
         Query query = session.createQuery("delete from ItiStoreYProduct where RECID=:recID");

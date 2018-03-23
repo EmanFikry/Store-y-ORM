@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.dataAccessLayer.entity.User;
+import model.dataAccessLayer.entity.ItiStoreYUser;
 
 /**
  *
@@ -28,9 +28,8 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("loginemail");
         String password = request.getParameter("loginpas");
 
-        check if user exists in db or not
         DAOService daoService = new DAOService();
-        User user = daoService.checkLogin(email, password);
+        ItiStoreYUser user = daoService.checkLogin(email, password);
         
         HttpSession session = request.getSession(true);
         session.setAttribute("userObject", user);

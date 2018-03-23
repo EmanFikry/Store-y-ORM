@@ -247,27 +247,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <!-- header -->
             <div class="header" id="home1">
                 <div class="container">
-                    
+
                     <div class="w3l_login">
-                       <c:if test="${sessionScope.userObject == null}">
+
                         <a href="#" data-toggle="modal" data-target="#myModal88" style="margin-left:5px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
                         <br>
-                        </c:if>
-                        <c:if test="${sessionScope.userObject != null}">
-                            <form action="SignOutServlet" method="get">
-                                <button class="" type="submit"  value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="log-btn">LogOut</button> 
-                            </form>
-                        </c:if>
+
+                        <form action="SignOutServlet" method="get">
+                            <button class="" type="submit"  value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="log-btn">LogOut</button> 
+                        </form>
+
                     </div>
                     <div class="w3l_logo" style="text-align:center;">
                         <h1 ><a href="index.html">Store-Y<span>Your stores. Your place.</span></a></h1>
                         <br>
-                        <c:if test="${sessionScope.userObject != null}">
-                            <button class="" type="button" name="checkout-btn" value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="check-btn">Check Out</button>
-                            <p>${sessionScope.userObject.name}</p>
 
-                            <a href="editProfile.jsp" class="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="edit-btn">Edit Profile</a>
-                        </c:if>
+                        <button class="" type="button" name="checkout-btn" value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="check-btn">Check Out</button>
+
+
+                        <a href="editProfile.jsp" class="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="edit-btn">Edit Profile</a>
+
                     </div>
 
                 </div>
@@ -294,23 +293,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
                 </div>
             </div>
-            <c:if test="${sessionScope.userObject != null}">
-                <div id="cartx" style="padding:10px; text-align: center;">
-                    <h3 style="margin-bottom:5px;">Your Cart</h3>
-                    <div>
-                        <table id="cart">
-                            <tr>
-                                <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Amount</th>
-                                <th>Add</th>
-                                <th>Remove</th>
-                            </tr>
 
-                        </table>
-                    </div>
+            <div id="cartx" style="padding:10px; text-align: center;">
+                <h3 style="margin-bottom:5px;">Your Cart</h3>
+                <div>
+                    <table id="cart">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Amount</th>
+                            <th>Add</th>
+                            <th>Remove</th>
+                        </tr>
+
+                    </table>
                 </div>
-            </c:if>
+            </div>
             <!-- //new-products -->
 
             <!-- footer -->
@@ -458,7 +456,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                                         }
                                                                         console.log(listItems);
                                                                         createTable(listItems);
-                                                                        sendAjax();
                                                                     }
                                                                     function dec(btn) {
                                                                         var td = btn.parentElement;
@@ -473,27 +470,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                                         }
                                                                         console.log(listItems);
                                                                         createTable(listItems);
-                                                                        sendAjax();
-                                                                    }
-
-                                                                    function sendAjax() {
-
-                                                                        console.log('listItems');
-                                                                        console.log(listItems);
-
-                                                                        $.ajax({
-                                                                            url: "UpdateCartServlet",
-                                                                            type: 'POST',
-                                                                            dataType: 'json',
-                                                                            contentType: 'application/json',
-                                                                            data: JSON.stringify(listItems),
-                                                                            error: function (xhr, status, error) {
-                                                                                console.log(xhr);
-                                                                                console.log(status);
-                                                                                console.log(error);
-                                                                            }
-                                                                        }
-                                                                        );
                                                                     }
 
                                                                     var modal = document.getElementById('myModal');

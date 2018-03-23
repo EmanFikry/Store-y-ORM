@@ -11,13 +11,15 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dataAccessLayer.entity.User;
+import model.dataAccessLayer.entity.ItiStoreYUser;
 
 /**
  *
@@ -55,11 +57,12 @@ public class SignUpServlet extends HttpServlet {
                     + request.getContextPath() + "/home.jsp");
         } else {
             //fill the data in user object
-            User user = new User();
+            ItiStoreYUser user = new ItiStoreYUser();
             user.setAddress(address);
-            user.setCreditLimit(Float.parseFloat(creditLimit));
+            user.setCreditlimit(Float.parseFloat(creditLimit));
             user.setEmail(email);
-            user.setUserInterest(interests);
+            Set interestesSet = new HashSet(interests);
+            user.setItiStoreYInterests(interestesSet);
             user.setJob(job);
             user.setName(name);
             user.setPassword(password);
@@ -75,12 +78,12 @@ public class SignUpServlet extends HttpServlet {
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
             user.setBirthdate(sqlDate);
 
-            boolean isAdded = daoService.addUser(user);
-            if (isAdded) {
-                response.sendRedirect(request.getScheme() + "://"
-                        + request.getServerName() + ":" + request.getServerPort()
-                        + request.getContextPath() + "/home.jsp");
-            }
+            daoService.addUser(user);
+
+            response.sendRedirect(request.getScheme() + "://"
+                    + request.getServerName() + ":" + request.getServerPort()
+                    + request.getContextPath() + "/home.jsp");
+
         }
     }
 

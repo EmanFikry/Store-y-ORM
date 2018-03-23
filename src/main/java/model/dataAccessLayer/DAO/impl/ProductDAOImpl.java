@@ -5,8 +5,14 @@
  */
 package model.dataAccessLayer.DAO.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.dataAccessLayer.entity.ItiStoreYProduct;
 import model.dataAccessLayer.DAO.ProductDAOInt;
 import org.hibernate.Query;

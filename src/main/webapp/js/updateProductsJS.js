@@ -25,8 +25,8 @@ function  updateProducts()
                 productRender = productRender + '<div class="col-md-3 agileinfo_new_products_grid">' +
                         '<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">' +
                         '<div class="hs-wrapper hs-wrapper1">' +
-                        '<img src="' + data[i].imgURL + '"class="img - responsive"/>' +
-                        '<img src="' + data[i].imgURL + '"class="img - responsive"/>' +
+                        '<img src="' + data[i].imgurl + '"class="img - responsive"/>' +
+                        '<img src="' + data[i].imgurl + '"class="img - responsive"/>' +
                         '<div class="w3_hs_bottom w3_hs_bottom_sub">' +
                         '<ul><li>' +
                         '<a href="single.html">' +
@@ -42,7 +42,7 @@ function  updateProducts()
                         '<input type="hidden" id="name" name="w3ls_item" value="' + data[i].name + '">' +
                         '<input type="hidden" id="price" name="amount" value="' + data[i].price + '">' +
                         '<input type="hidden" id="id" name="id" value="' + data[i].recID + '">';
-
+                productRender += '<button onclick="addToCart(this);" class="w3ls-cart">Add to cart</button>';
                 if (check) {
                     productRender += '<button onclick="addToCart(this);" class="w3ls-cart">Add to cart</button>';
                 }

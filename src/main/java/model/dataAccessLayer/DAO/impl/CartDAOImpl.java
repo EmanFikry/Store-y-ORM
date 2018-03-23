@@ -5,9 +5,7 @@
  */
 package model.dataAccessLayer.DAO.impl;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.List;
 import model.dataAccessLayer.entity.ItiStoreYCart;
 import model.dataAccessLayer.DAO.CartDAOInt;
@@ -28,6 +26,8 @@ public class CartDAOImpl implements CartDAOInt {
     /**
      * ******************* add new Cart *****************
      */
+    
+
     @Override
     public boolean addCart(ItiStoreYCart cart) {
         boolean isStored = false;

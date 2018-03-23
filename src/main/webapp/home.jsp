@@ -247,26 +247,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <!-- header -->
             <div class="header" id="home1">
                 <div class="container">
-
+                    
                     <div class="w3l_login">
-
+                       <c:if test="${sessionScope.userObject == null}">
                         <a href="#" data-toggle="modal" data-target="#myModal88" style="margin-left:5px;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
                         <br>
-
-                        <form action="SignOutServlet" method="get">
-                            <button class="" type="submit"  value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="log-btn">LogOut</button> 
-                        </form>
-
+                        </c:if>
+                        <c:if test="${sessionScope.userObject != null}">
+                            <form action="SignOutServlet" method="get">
+                                <button class="" type="submit"  value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="log-btn">LogOut</button> 
+                            </form>
+                        </c:if>
                     </div>
                     <div class="w3l_logo" style="text-align:center;">
                         <h1 ><a href="index.html">Store-Y<span>Your stores. Your place.</span></a></h1>
                         <br>
+                        <c:if test="${sessionScope.userObject != null}">
+                            <button class="" type="button" name="checkout-btn" value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="check-btn">Check Out</button>
+                            <p>${sessionScope.userObject.name}</p>
 
-                        <button class="" type="button" name="checkout-btn" value="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="check-btn">Check Out</button>
-
-
-                        <a href="editProfile.jsp" class="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="edit-btn">Edit Profile</a>
-
+                            <a href="editProfile.jsp" class="" style="display:inline-block;background:#fff;color:#c566d4; border-width:0px;" id="edit-btn">Edit Profile</a>
+                        </c:if>
                     </div>
 
                 </div>
@@ -293,22 +294,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
                 </div>
             </div>
+            <c:if test="${sessionScope.userObject != null}">
+                <div id="cartx" style="padding:10px; text-align: center;">
+                    <h3 style="margin-bottom:5px;">Your Cart</h3>
+                    <div>
+                        <table id="cart">
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Amount</th>
+                                <th>Add</th>
+                                <th>Remove</th>
+                            </tr>
 
-            <div id="cartx" style="padding:10px; text-align: center;">
-                <h3 style="margin-bottom:5px;">Your Cart</h3>
-                <div>
-                    <table id="cart">
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Price</th>
-                            <th>Amount</th>
-                            <th>Add</th>
-                            <th>Remove</th>
-                        </tr>
-
-                    </table>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </c:if>
             <!-- //new-products -->
 
             <!-- footer -->
@@ -533,7 +535,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                                         modal.style.display = "none";
                                                                     });
         </script>
-
         <!-- //cart-js -->
         <c:remove var="invalidName" scope="application" />
         <c:remove var="invalidAddress" scope="application" />
@@ -544,10 +545,5 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         <c:remove var="loginInvalidPassword" scope="application" />
         <c:remove var="loginInvalidEmail" scope="application" />
-
-
-
-
-
     </body>
 </html>

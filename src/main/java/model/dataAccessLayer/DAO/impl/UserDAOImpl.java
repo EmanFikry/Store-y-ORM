@@ -38,18 +38,6 @@ public class UserDAOImpl implements UserDAOInt {
         session.save(user);
         session.getTransaction().commit();
     }
-    
-    public boolean deleteProduct(Long id) {
-        boolean isDeleted = false;
-        Query query = session.createQuery("delete from ItiStoreYProduct where RECID=:recID");
-        query.setParameter("recID", id);
-        int rowsEffected = query.executeUpdate();
-        System.out.println(rowsEffected);
-        if (rowsEffected > 0) {
-            isDeleted = true;
-        }
-        return isDeleted;
-    }
 
     /**
      * ******************* add all User interest *****************
@@ -87,8 +75,9 @@ public class UserDAOImpl implements UserDAOInt {
         Set<ItiStoreYInterest> interests = user.getItiStoreYInterests();
         Iterator<ItiStoreYInterest> it = interests.iterator();
         while (it.hasNext()) {
+            ItiStoreYInterest interest = it.next();
             session.beginTransaction();
-            session.delete(it.next());
+            session.delete(interest);
             session.getTransaction().commit();
         }
     }

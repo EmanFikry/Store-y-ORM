@@ -64,9 +64,6 @@ public class DAOService {
 
     public void addUser(ItiStoreYUser user) {
         userDAORef.addUser(user);
-        userDAORef.deleteUserInterests(user);
-        user.getItiStoreYInterests().clear();
-        userDAORef.addAllUserInterest(user);
     }
 
     public boolean isEmailExist(String email) {
@@ -76,9 +73,7 @@ public class DAOService {
 
     public void editProfile(ItiStoreYUser user) {
         userDAORef.editProfile(user);
-        userDAORef.deleteUserInterests(user);
-        user.getItiStoreYInterests().clear();
-        userDAORef.addAllUserInterest(user);
+        userDAORef.addAllUserInterest(user.getRecid());
     }
 
     public void updateUser(ItiStoreYUser user) {

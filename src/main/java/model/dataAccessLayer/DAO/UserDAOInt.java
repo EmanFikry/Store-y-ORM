@@ -19,7 +19,7 @@ public interface UserDAOInt {
     
     public void addUser(ItiStoreYUser user);
 
-    public void addAllUserInterest(ItiStoreYUser user);
+    public void addAllUserInterest(Long id);
 
     public boolean hasInterests(ItiStoreYUser user);
 
@@ -35,5 +35,5 @@ public interface UserDAOInt {
 
     public List<ItiStoreYUser> getUserList();
 
-    public void deleteUserInterests(ItiStoreYUser user);
+    public void deleteUserInterests(Long id);
 }

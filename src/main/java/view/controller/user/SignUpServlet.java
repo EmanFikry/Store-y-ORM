@@ -91,7 +91,7 @@ public class SignUpServlet extends HttpServlet {
             }
             Set<ItiStoreYUser> interestesSet = new HashSet(interests);
             addedUser.setItiStoreYInterests(interestesSet);
-            daoService.updateUser(addedUser);
+            daoService.editProfile(addedUser);
 
             response.sendRedirect(request.getScheme() + "://"
                     + request.getServerName() + ":" + request.getServerPort()

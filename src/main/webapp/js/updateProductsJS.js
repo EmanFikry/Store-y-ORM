@@ -38,11 +38,11 @@ function  updateProducts()
                         ' <div id="productDiv">' +
                         '<input type="hidden" name="cmd" value="_cart>' +
                         '<input type="hidden" name="add" value="1">' +
-                        '<input type="hidden" id="quantity' + data[i].recID + '" name="quantity" value="' + data[i].amount + '">' +
+                        '<input type="hidden" id="quantity' + data[i].recid + '" name="quantity" value="' + data[i].amount + '">' +
                         '<input type="hidden" id="name" name="w3ls_item" value="' + data[i].name + '">' +
                         '<input type="hidden" id="price" name="amount" value="' + data[i].price + '">' +
-                        '<input type="hidden" id="id" name="id" value="' + data[i].recID + '">';
-                productRender += '<button onclick="addToCart(this);" class="w3ls-cart">Add to cart</button>';
+                        '<input type="hidden" id="id" name="id" value="' + data[i].recid + '">';
+                
                 if (check) {
                     productRender += '<button onclick="addToCart(this);" class="w3ls-cart">Add to cart</button>';
                 }

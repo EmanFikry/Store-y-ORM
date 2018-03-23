@@ -71,7 +71,7 @@ public class BuyServlet extends HttpServlet {
         daoService.updateCart(updatedCart);
         //update user credit limit after buying
         user.setCreditlimit(user.getCreditlimit() - totalSum);
-        daoService.updateUser(user);
+        daoService.editProfile(user);
         session.setAttribute("userObject", user);
         response.sendRedirect(request.getScheme() + "://"
                 + request.getServerName() + ":" + request.getServerPort()

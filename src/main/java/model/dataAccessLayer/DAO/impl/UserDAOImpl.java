@@ -44,26 +44,36 @@ public class UserDAOImpl implements UserDAOInt {
      */
     //tested
     @Override
-    public void addAllUserInterest(ItiStoreYUser user) {
+    public void addAllUserInterest(Long id) {
+        ItiStoreYUser user = (ItiStoreYUser) session.load(ItiStoreYUser.class, id);
+        String hql = "delete from ItiStoreYInterest where itiStoreYUser= :userObj";
+        Query query = session.createQuery(hql);
+        query.setParameter("userObj", user);
+        int result = query.executeUpdate();
+        System.out.println(result);
+
         Set<ItiStoreYInterest> interests = user.getItiStoreYInterests();
 
         Iterator<ItiStoreYInterest> it = interests.iterator();
         while (it.hasNext()) {
-            addUserInterest(user, it.next().getName());
+            addUserInterest(user.getRecid(), it.next().getName());
         }
+        session.evict(user);
     }
 
     /**
      * ******************* add single interest *****************
      */
     //tested
-    private void addUserInterest(ItiStoreYUser user, String interest) {
+    private void addUserInterest(Long id, String interest) {
+        ItiStoreYUser user = (ItiStoreYUser) session.load(ItiStoreYUser.class, id);
         ItiStoreYInterest interest2 = new ItiStoreYInterest();
         interest2.setItiStoreYUser(user);
         interest2.setName(interest);
         session.beginTransaction();
         session.save(interest2);
         session.getTransaction().commit();
+        session.evict(user);
     }
 
     /**
@@ -71,14 +81,15 @@ public class UserDAOImpl implements UserDAOInt {
      */
     //tested
     @Override
-    public void deleteUserInterests(ItiStoreYUser user) {
+    public void deleteUserInterests(Long id) {
+        ItiStoreYUser user = (ItiStoreYUser) session.load(ItiStoreYUser.class, id);
         Set<ItiStoreYInterest> interests = user.getItiStoreYInterests();
         for (ItiStoreYInterest interest : interests) {
             session.beginTransaction();
             session.delete(interest);
             session.getTransaction().commit();
         }
-
+        session.evict(user);
     }
 
     /**

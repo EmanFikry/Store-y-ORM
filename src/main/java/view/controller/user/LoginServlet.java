@@ -20,25 +20,26 @@ import model.dataAccessLayer.entity.ItiStoreYUser;
  * @author Eman-PC
  */
 public class LoginServlet extends HttpServlet {
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String email = request.getParameter("loginemail");
         String password = request.getParameter("loginpas");
 
         DAOService daoService = new DAOService();
         ItiStoreYUser user = daoService.checkLogin(email, password);
-        
-        HttpSession session = request.getSession(true);
-        session.setAttribute("userObject", user);
+        if (user != null) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("userObject", user);
+        }
         response.sendRedirect(request.getScheme() + "://"
                 + request.getServerName() + ":" + request.getServerPort()
                 + request.getContextPath() + "/home.jsp");
-        
+
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

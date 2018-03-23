@@ -73,13 +73,12 @@ public class UserDAOImpl implements UserDAOInt {
     @Override
     public void deleteUserInterests(ItiStoreYUser user) {
         Set<ItiStoreYInterest> interests = user.getItiStoreYInterests();
-        Iterator<ItiStoreYInterest> it = interests.iterator();
-        while (it.hasNext()) {
-            ItiStoreYInterest interest = it.next();
+        for (ItiStoreYInterest interest : interests) {
             session.beginTransaction();
             session.delete(interest);
             session.getTransaction().commit();
         }
+
     }
 
     /**
@@ -193,5 +192,17 @@ public class UserDAOImpl implements UserDAOInt {
                 = session.createQuery("FROM ItiStoreYUser");
         List<ItiStoreYUser> result = query.list();
         return result;
+    }
+
+    @Override
+    public Long getLastClientID() {
+        Long userID = -1L;
+        Query query = session.createQuery("from ItiStoreYUser c where c.recid = ( select max(c1.recid) from  ItiStoreYUser c1 ) ");
+
+        List<ItiStoreYUser> list = query.list();
+        if (!list.isEmpty()) {
+            userID = list.get(0).getRecid();
+        }
+        return userID;
     }
 }

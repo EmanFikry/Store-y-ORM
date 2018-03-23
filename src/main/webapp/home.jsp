@@ -409,7 +409,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                                         }
                                                                         listItems.push({"name": name, "price": price, "amount": 1, "id": id});
                                                                         createTable(listItems);
-                                                                        sendAjax();
                                                                     }
                                                                     function createTable(listItems) {
 

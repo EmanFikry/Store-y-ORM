@@ -62,7 +62,6 @@ public class DisplayProductsServlet extends HttpServlet {
         String arrayToJson = "";
         try {
             arrayToJson = objectMapper.writeValueAsString(newProductsList);
-            System.out.println(arrayToJson);
         } catch (JsonProcessingException ex) {
             Logger.getLogger(ProductDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

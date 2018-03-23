@@ -15,6 +15,8 @@ import model.dataAccessLayer.entity.ItiStoreYUser;
  */
 public interface UserDAOInt {
 
+    public Long getLastClientID();
+    
     public void addUser(ItiStoreYUser user);
 
     public void addAllUserInterest(ItiStoreYUser user);

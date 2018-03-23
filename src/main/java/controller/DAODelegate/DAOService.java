@@ -57,6 +57,11 @@ public class DAOService {
     /**
      * ******************** User methods **********************
      */
+    public Long getLastClientID() {
+        Long userId = userDAORef.getLastClientID();
+        return userId;
+    }
+
     public void addUser(ItiStoreYUser user) {
         userDAORef.addUser(user);
         userDAORef.deleteUserInterests(user);

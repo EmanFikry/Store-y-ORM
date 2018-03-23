@@ -8,6 +8,7 @@ package view.controller.user;
 import controller.DAODelegate.DAOService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.dataAccessLayer.entity.ItiStoreYInterest;
 import model.dataAccessLayer.entity.ItiStoreYUser;
 
 /**
@@ -41,12 +43,6 @@ public class SignUpServlet extends HttpServlet {
         String interest = request.getParameter("uCategory");
 
         String interestsArray[] = interest.split(";");
-        ArrayList<String> interests = new ArrayList<>();
-        for (String temp : interestsArray) {
-            if (!temp.isEmpty()) {
-                interests.add(temp);
-            }
-        }
 
         DAOService daoService = new DAOService();
         boolean isExisted = daoService.isEmailExist(email);
@@ -61,8 +57,6 @@ public class SignUpServlet extends HttpServlet {
             user.setAddress(address);
             user.setCreditlimit(Float.parseFloat(creditLimit));
             user.setEmail(email);
-            Set interestesSet = new HashSet(interests);
-            user.setItiStoreYInterests(interestesSet);
             user.setJob(job);
             user.setName(name);
             user.setPassword(password);
@@ -79,6 +73,25 @@ public class SignUpServlet extends HttpServlet {
             user.setBirthdate(sqlDate);
 
             daoService.addUser(user);
+            ItiStoreYUser addedUser = null;
+            try {
+                addedUser = daoService.getUserById(daoService.getLastClientID());
+            } catch (SQLException ex) {
+                Logger.getLogger(SignUpServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            ArrayList<ItiStoreYInterest> interests = new ArrayList<>();
+            for (String temp : interestsArray) {
+                if (!temp.isEmpty()) {
+                    ItiStoreYInterest newInterest = new ItiStoreYInterest();
+                    newInterest.setItiStoreYUser(addedUser);
+                    newInterest.setName(name);
+                    interests.add(newInterest);
+                }
+            }
+            Set<ItiStoreYUser> interestesSet = new HashSet(interests);
+            addedUser.setItiStoreYInterests(interestesSet);
+            daoService.updateUser(addedUser);
 
             response.sendRedirect(request.getScheme() + "://"
                     + request.getServerName() + ":" + request.getServerPort()

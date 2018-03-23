@@ -10,6 +10,7 @@ import controller.DAODelegate.DAOService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +46,7 @@ public class ViewProduct extends HttpServlet {
         response.sendRedirect("UpdateProduct.jsp");
     }
 
-    private String buildJSONFromVector(ArrayList<ItiStoreYProduct> products) {
+    private String buildJSONFromVector(List<ItiStoreYProduct> products) {
 
         Gson json = new Gson();
         return json.toJson(products);

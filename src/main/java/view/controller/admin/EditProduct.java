@@ -85,9 +85,9 @@ public class EditProduct extends HttpServlet {
         product.setImgurl(imgURL);
         product.setDescription(description);
 
-        if (daoService.updateProduct(product)) {
-            response.sendRedirect("adminHome.jsp");
-        }
+        daoService.updateProduct(product);
+        response.sendRedirect("adminHome.jsp");
+
     }
 
 }

@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.dataAccessLayer.entity.ItiStoreYCart;
+import model.dataAccessLayer.entity.ItiStoreYProduct;
+import model.dataAccessLayer.entity.ItiStoreYUser;
 
 /**
  *
@@ -35,11 +38,11 @@ public class BuyServlet extends HttpServlet {
         float totalSum = 0F;
         //create cart object
         HttpSession session = request.getSession(false);
-        User user = (User) session.getAttribute("userObject");
+        ItiStoreYUser user = (ItiStoreYUser) session.getAttribute("userObject");
 
         //add new cart
-        Cart cart = new Cart();
-        cart.setUserID(user.getRecID());
+        ItiStoreYCart cart = new ItiStoreYCart();
+        cart.setItiStoreYUser(user);
         //cart.setTotalSum(totalSum);
         daoService.addCart(cart);
         Long cartID = daoService.getLastCartID();
@@ -54,7 +57,7 @@ public class BuyServlet extends HttpServlet {
             totalSum = Float.parseFloat(productTotalSum);
 
             //update product amount
-            Product product = daoService.getProductByID(Long.parseLong(productID));
+            ItiStoreYProduct product = daoService.getProductByID(Long.parseLong(productID));
             product.setAmount(product.getAmount() - Integer.parseInt(productQuantity));
             daoService.updateProduct(product);
 
@@ -63,11 +66,11 @@ public class BuyServlet extends HttpServlet {
         }
 
         //update cart total sum
-        cart.setRecID(cartID);
-        cart.setTotalSum(totalSum);
-        daoService.updateCart(cart);
+        ItiStoreYCart updatedCart = daoService.getCartById(cartID);
+        updatedCart.setTotalsum(totalSum);
+        daoService.updateCart(updatedCart);
         //update user credit limit after buying
-        user.setCreditLimit(user.getCreditLimit() - totalSum);
+        user.setCreditlimit(user.getCreditlimit() - totalSum);
         daoService.updateUser(user);
         session.setAttribute("userObject", user);
         response.sendRedirect(request.getScheme() + "://"

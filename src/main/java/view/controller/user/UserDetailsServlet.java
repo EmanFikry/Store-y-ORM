@@ -16,8 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dataAccessLayer.entity.Product;
-import model.dataAccessLayer.entity.User;
+import model.dataAccessLayer.entity.ItiStoreYUser;
 
 /**
  *
@@ -33,15 +32,14 @@ public class UserDetailsServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             String userID = request.getParameter("userid");
             DAOService daoService = new DAOService();
-            User user = daoService.getUserById(Long.parseLong(userID));
+            ItiStoreYUser user = daoService.getUserById(Long.parseLong(userID));
             out.print(buildJSONFromVector(user));
         } catch (SQLException ex) {
             Logger.getLogger(UserDetailsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private String buildJSONFromVector(User user) {
-
+    private String buildJSONFromVector(ItiStoreYUser user) {
         Gson json = new Gson();
         return json.toJson(user);
     }

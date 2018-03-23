@@ -47,6 +47,12 @@ public class CartDAOImpl implements CartDAOInt {
     }
 
     @Override
+    public ItiStoreYCart getCartById(Long id) {
+        ItiStoreYCart cart = (ItiStoreYCart) session.load(ItiStoreYCart.class, id);
+        return cart;
+    }
+
+    @Override
     public Long getLastCartID() {
         Long cartID = -1L;
         Query query = session.createQuery("from ItiStoreYCart c where c.recid = ( select max(c1.recid) from  ItiStoreYCart c1 ) ");

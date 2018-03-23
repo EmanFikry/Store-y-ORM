@@ -10,11 +10,12 @@ import controller.DAODelegate.DAOService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dataAccessLayer.entity.Product;
+import model.dataAccessLayer.entity.ItiStoreYProduct;
 
 /**
  *
@@ -29,16 +30,14 @@ public class DisplayProductsServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         DAOService daoService = new DAOService();
-        ArrayList<Product> products = daoService.getProductList();
+        List<ItiStoreYProduct> products = daoService.getProductList();
         out.print(buildJSONFromVector(products));
-        
 
     }
 
-    private String buildJSONFromVector(ArrayList<Product> products) {
+    private String buildJSONFromVector(List<ItiStoreYProduct> products) {
 
         Gson json = new Gson();
         return json.toJson(products);
     }
-
 }

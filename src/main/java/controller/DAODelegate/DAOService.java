@@ -6,7 +6,6 @@
 package controller.DAODelegate;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import model.dataAccessLayer.DAO.*;
 import model.dataAccessLayer.entity.ItiStoreYCart;
@@ -99,6 +98,11 @@ public class DAOService {
     /**
      * ******************** Cart methods **********************
      */
+    public ItiStoreYCart getCartById(Long id) {
+        ItiStoreYCart cart = cartDAORef.getCartById(id);
+        return cart;
+    }
+
     public boolean addCart(ItiStoreYCart cart) {
         boolean isAdded = cartDAORef.addCart(cart);
         return isAdded;

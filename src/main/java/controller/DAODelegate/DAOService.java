@@ -28,19 +28,16 @@ public class DAOService {
     /**
      * ******************** product methods **********************
      */
-    public boolean addProduct(ItiStoreYProduct product) {
-        boolean isStored = productDAORef.addProduct(product);
-        return isStored;
+    public void addProduct(ItiStoreYProduct product) {
+        productDAORef.addProduct(product);
     }
 
-    public boolean deleteProduct(Long id) {
-        boolean isDeleted = productDAORef.deleteProduct(id);
-        return isDeleted;
+    public void deleteProduct(Long id) {
+        productDAORef.deleteProduct(id);
     }
 
-    public boolean updateProduct(ItiStoreYProduct product) {
-        boolean isUpdated = productDAORef.updateProduct(product);
-        return isUpdated;
+    public void updateProduct(ItiStoreYProduct product) {
+        productDAORef.updateProduct(product);
     }
 
     public ItiStoreYProduct getProductByID(Long id) {
@@ -48,8 +45,8 @@ public class DAOService {
         return product;
     }
 
-    public ArrayList<ItiStoreYProduct> getProductList() {
-        ArrayList<ItiStoreYProduct> products = productDAORef.getProductList();
+    public List<ItiStoreYProduct> getProductList() {
+        List<ItiStoreYProduct> products = productDAORef.getProductList();
         return products;
     }
 
@@ -117,8 +114,7 @@ public class DAOService {
 
     }
 
-    public boolean updateCart(ItiStoreYCart cart) {
-        boolean isUpdated = cartDAORef.updateCart(cart);
-        return isUpdated;
+    public void updateCart(ItiStoreYCart cart) {
+        cartDAORef.updateCart(cart);
     }
 }

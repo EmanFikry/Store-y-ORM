@@ -1,88 +1,61 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package model.dataAccessLayer.DAO.impl;
-//
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import model.dataAccessLayer.entity.ItiStoreYCart;
-//import model.dataAccessLayer.DAO.CartDAOInt;
-//import org.hibernate.Session;
-//import org.hibernate.SessionFactory;
-//import org.hibernate.cfg.Configuration;
-//
-///**
-// *
-// * @author Eman-PC
-// */
-//public class CartDAOImpl implements CartDAOInt {
-//
-//    SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-//    Session session = sessionFactory.openSession();
-//    ItiStoreYCart cart = new ItiStoreYCart();
-//
-//    /**
-//     * ******************* add new Cart *****************
-//     */
-//    @Override
-//    public boolean addCart(ItiStoreYCart cart) {
-//        boolean isStored = false;
-//        PreparedStatement ps = Database.getInstance().getPreparedStatement("INSERT INTO ITI_STORE_Y_CART (USERID,TOTALSUM) VALUES (?,?)");
-//        try {
-//            ps.setLong(1, cart.getUserID());
-//            ps.setDouble(2, cart.getTotalSum());
-//
-//            int rowsEffected = ps.executeUpdate();
-//            if (rowsEffected == 1) {
-//                isStored = true;
-//            }
-//        } catch (SQLException ex) {
-//            ex.printStackTrace(System.out);
-//        } finally {
-//            Database.getInstance().release();
-//        }
-//        return isStored;
-//    }
-//
-//    public boolean updateCart(ItiStoreYCart cart) {
-//        boolean isUpdated = false;
-//        PreparedStatement ps = Database.getInstance().getPreparedStatement("update ITI_STORE_Y_CART set totalsum = ? where recid=? ");
-//        try {
-//            ps.setLong(2, cart.getRecID());
-//            ps.setDouble(1, cart.getTotalSum());
-//
-//            int rowsEffected = ps.executeUpdate();
-//            if (rowsEffected == 1) {
-//                isUpdated = true;
-//            }
-//        } catch (SQLException ex) {
-//            ex.printStackTrace(System.out);
-//        } finally {
-//            Database.getInstance().release();
-//        }
-//        return isUpdated;
-//    }
-//
-//    /**
-//     * ******************* Get last cart id *****************
-//     */
-//    @Override
-//    public Long getLastCartID() {
-//        Long cartID = -1L;
-//        PreparedStatement ps = Database.getInstance().getPreparedStatement("select * from ITI_STORE_Y_CART where recid = ( select max(recid) from  ITI_STORE_Y_CART )");
-//        try {
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next()) {
-//                cartID = rs.getLong("recid");
-//            }
-//        } catch (SQLException ex) {
-//            ex.printStackTrace(System.out);
-//        } finally {
-//            Database.getInstance().release();
-//        }
-//        return cartID;
-//    }
-//}
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package model.dataAccessLayer.DAO.impl;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import model.dataAccessLayer.entity.ItiStoreYCart;
+import model.dataAccessLayer.DAO.CartDAOInt;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+/**
+ *
+ * @author Eman-PC
+ */
+public class CartDAOImpl implements CartDAOInt {
+
+    SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+    Session session = sessionFactory.openSession();
+    ItiStoreYCart cart = new ItiStoreYCart();
+
+    /**
+     * ******************* add new Cart *****************
+     */
+    @Override
+    public boolean addCart(ItiStoreYCart cart) {
+        boolean isStored = false;
+
+        session.beginTransaction();
+        session.save(cart);
+        session.getTransaction().commit();
+        isStored = true;
+        return isStored;
+    }
+
+    @Override
+    public void updateCart(ItiStoreYCart cart) {
+        session.beginTransaction();
+        session.update(cart);
+        session.getTransaction().commit();
+    }
+
+    @Override
+    public Long getLastCartID() {
+        Long cartID = -1L;
+        Query query = session.createQuery("from ItiStoreYCart c where c.recid = ( select max(c1.recid) from  ItiStoreYCart c1 ) ");
+
+        List<ItiStoreYCart> list = query.list();
+        if (!list.isEmpty()) {
+            cartID = list.get(0).getRecid();
+        }
+        return cartID;
+    }
+}

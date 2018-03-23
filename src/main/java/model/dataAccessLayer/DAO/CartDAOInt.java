@@ -17,5 +17,5 @@ public interface CartDAOInt {
 
     public Long getLastCartID();
 
-    public boolean updateCart(ItiStoreYCart cart);
+    public void updateCart(ItiStoreYCart cart);
 }

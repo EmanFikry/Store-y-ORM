@@ -11,7 +11,7 @@
         <many-to-one name="itiStoreYUser" class="model.dataAccessLayer.entity.ItiStoreYUser" fetch="select">
             <column name="USERID" precision="22" scale="0" />
         </many-to-one>
-        <property name="totalsum" type="big_decimal">
+        <property name="totalsum" type="float">
             <column name="TOTALSUM" precision="22" scale="0" />
         </property>
         <set name="itiStoreYProductcarts" table="ITI_STORE_Y_PRODUCTCART" inverse="true" lazy="true" fetch="select">

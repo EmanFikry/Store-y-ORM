@@ -5,7 +5,7 @@
  */
 package model.dataAccessLayer.DAO;
 
-import java.util.ArrayList;
+import java.util.List;
 import model.dataAccessLayer.entity.ItiStoreYProduct;
 
 /**
@@ -14,15 +14,15 @@ import model.dataAccessLayer.entity.ItiStoreYProduct;
  */
 public interface ProductDAOInt {
 
-    public boolean addProduct(ItiStoreYProduct product);
+    public void addProduct(ItiStoreYProduct product);
 
-    public boolean deleteProduct(Long id);
+    public void deleteProduct(Long id);
 
-    public boolean updateProduct(ItiStoreYProduct product);
+    public void updateProduct(ItiStoreYProduct product);
 
     public ItiStoreYProduct getProductByID(Long id);
 
-    public ArrayList<ItiStoreYProduct> getProductList();
+    public List<ItiStoreYProduct> getProductList();
 
     public int productAmount(Long id);
 }

@@ -1,7 +1,6 @@
 package model.dataAccessLayer.entity;
 // Generated Mar 18, 2018 10:53:52 AM by Hibernate Tools 4.3.1
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +13,7 @@ public class ItiStoreYProduct implements java.io.Serializable {
     private String name;
     private float price;
     private String category;
-    private float amount;
+    private int amount;
     private String imgurl;
     private String description;
     private Set itiStoreYProductcarts = new HashSet(0);
@@ -26,7 +25,7 @@ public class ItiStoreYProduct implements java.io.Serializable {
         this.recid = recid;
     }
 
-    public ItiStoreYProduct(Long recid, String name, float price, String category, float amount, String imgurl, String description, Set itiStoreYProductcarts) {
+    public ItiStoreYProduct(Long recid, String name, float price, String category, int amount, String imgurl, String description, Set itiStoreYProductcarts) {
         this.recid = recid;
         this.name = name;
         this.price = price;
@@ -69,11 +68,11 @@ public class ItiStoreYProduct implements java.io.Serializable {
         this.category = category;
     }
 
-    public float getAmount() {
+    public int getAmount() {
         return this.amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

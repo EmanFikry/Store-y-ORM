@@ -22,9 +22,8 @@ import org.hibernate.cfg.Configuration;
  */
 public class ProductCartDAOImpl implements ProductCartDAOInt {
 
-    SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-    Session session = sessionFactory.openSession();
-    ItiStoreYProductcart productCart = new ItiStoreYProductcart();
+    static SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+    static Session session = sessionFactory.openSession();
 
     /**
      * **************** product Exist *****************

@@ -68,14 +68,11 @@ public class AddProduct extends HttpServlet {
                 } else {
                     ServletContext context = request.getServletContext();
                     String realpath = context.getRealPath("images");
-                    System.out.println(realpath + "\\" + item.getName());
                     item.write(new File(realpath + "\\" + item.getName()));
                     product.setImgurl("images" + "\\" + item.getName());
                 }
             }
 
-//		String filePath = request.getRealPath("/");
-            // Image image = new ImageIcon(this.getClass().getResource("/images/")).getImage();
         } catch (FileUploadException ex) {
             Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

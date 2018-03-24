@@ -22,7 +22,6 @@ public class RemoveProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         new DAOService().deleteProduct(Long.parseLong(request.getParameter("id")));
-        request.getSession().removeAttribute("products");
         response.sendRedirect("ViewProduct");
     }
 

@@ -30,7 +30,6 @@ public class ProductDAOImpl implements ProductDAOInt {
         session.beginTransaction();
         session.save(product);
         session.getTransaction().commit();
-        session.evict(product);
     }
 
     /**

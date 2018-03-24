@@ -5,7 +5,9 @@
  */
 package view.controller.user;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import controller.DAODelegate.DAOService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,7 +42,25 @@ public class UserDetailsServlet extends HttpServlet {
     }
 
     private String buildJSONFromVector(ItiStoreYUser user) {
-        Gson json = new Gson();
-        return json.toJson(user);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        ItiStoreYUser newUser = new ItiStoreYUser();
+        newUser.setAddress(user.getAddress());
+        newUser.setBirthdate(user.getBirthdate());
+        newUser.setCreditlimit(user.getCreditlimit());
+        newUser.setEmail(user.getEmail());
+        newUser.setJob(user.getJob());
+        newUser.setName(user.getName());
+        newUser.setPassword(user.getPassword());
+
+        //Set pretty printing of json
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String arrayToJson = "";
+        try {
+            arrayToJson = objectMapper.writeValueAsString(newUser);
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(UserDetailsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayToJson;
     }
 }

@@ -5,12 +5,17 @@
  */
 package view.controller.admin;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import controller.DAODelegate.DAOService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,18 +37,33 @@ public class DisplayUsers extends HttpServlet {
         DAOService daoService = new DAOService();
         users = daoService.getUserList();
 
-        for(int i=0;i<users.size();i++)
-        {
-            System.out.println(users.get(i).getName());
-        }
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         out.print(buildJSONFromVector(users));
     }
 
     private String buildJSONFromVector(List<ItiStoreYUser> users) {
+        ObjectMapper objectMapper = new ObjectMapper();
 
-        Gson json = new Gson();
-        return json.toJson(users);
+        Iterator<ItiStoreYUser> usersIterator = users.iterator();
+        List<ItiStoreYUser> usersList = new ArrayList<>();
+        while (usersIterator.hasNext()) {
+            ItiStoreYUser user = usersIterator.next();
+            ItiStoreYUser newUser = new ItiStoreYUser();
+            newUser.setAddress(user.getAddress());
+            newUser.setEmail(user.getEmail());
+            newUser.setName(user.getName());
+            newUser.setRecid(user.getRecid());
+            usersList.add(newUser);
+        }
+        //Set pretty printing of json
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String arrayToJson = "";
+        try {
+            arrayToJson = objectMapper.writeValueAsString(usersList);
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(DisplayUsers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arrayToJson;
     }
 }

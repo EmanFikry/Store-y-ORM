@@ -85,7 +85,7 @@ users_link.onclick = function () {
                 $("#customers").append('<tr><td>' + data[i].name
                         + '</td><td>' + data[i].email + '</td><td>' + data[i].address +
                         '</td><td>'
-                        + '<input id="V" type="button" value="MORE" onclick="userShowMore(' + data[i].recID + ')"/>' + '</td></tr>');
+                        + '<input id="V" type="button" value="MORE" onclick="userShowMore(' + data[i].recid + ')"/>' + '</td></tr>');
 
             }
         }
@@ -112,23 +112,21 @@ products_link.onclick = function () {
         },
         success: function (data)
         {
-            console.log("hereeeeeeeeeeeee");
-
             document.getElementById("Products").innerHTML = '';
             for (i = 0; i < data.length; i++) {
-                var updateButton = data[i].recID + "U";
-                var deleteButton = data[i].recID + "D";
-                var moreButton = data[i].recID + "V";
+                var updateButton = data[i].recid + "U";
+                var deleteButton = data[i].recid + "D";
+                var moreButton = data[i].recid + "V";
 
                 $("#Products").append(
                         '<tr><td>' + data[i].name + '</td>'
                         + '<td>' + data[i].price + '</td>'
                         + '<td>' + data[i].category + '</td>'
-                        + '<td>' + '<input id="U" type="button" value="UPDATE" onclick="Update(' + data[i].recID + ')"/>'
+                        + '<td>' + '<input id="U" type="button" value="UPDATE" onclick="Update(' + data[i].recid + ')"/>'
                         + '</td>'
-                        + '<td>' + '<input id="D" type="button" value="DELETE" onclick="Delete(' + data[i].recID + ')"/>'
+                        + '<td>' + '<input id="D" type="button" value="DELETE" onclick="Delete(' + data[i].recid + ')"/>'
                         + '</td>'
-                        + '<td>' + '<input id="V" type="button" value="MORE" onclick="ShowMore(' + data[i].recID + ')"/>'
+                        + '<td>' + '<input id="V" type="button" value="MORE" onclick="ShowMore(' + data[i].recid + ')"/>'
                         + '</td></tr>');
                 document.getElementById("U").id = updateButton;
                 document.getElementById("D").id = deleteButton;
@@ -204,7 +202,7 @@ function load_it() {
                 $("#customers").append('<tr><td>' + data[i].name
                         + '</td><td>' + data[i].email + '</td><td>' + data[i].address +
                         '</td><td>'
-                        + '<input id="V" type="button" value="MORE" onclick="userShowMore(' + data[i].recID + ')"/>' + '</td></tr>');
+                        + '<input id="V" type="button" value="MORE" onclick="userShowMore(' + data[i].recid + ')"/>' + '</td></tr>');
 
             }
         }
@@ -259,6 +257,7 @@ function refrehPage() {
 
 function userShowMore(id)
 {
+    alert("user id" + id);
     $.ajax({
         url: "UserDetailsServlet",
         type: 'GET',
@@ -296,7 +295,7 @@ function userShowMore(id)
                     '<br>' +
                     '<label for="price">credit Limit:</label>' +
                     '<br>' +
-                    '<input type="text" readonly value="' + data.creditLimit + '"/>' +
+                    '<input type="text" readonly value="' + data.creditlimit + '"/>' +
                     '<br>' +
                     '</fieldset> <button type="button" onclick="closePopup()">OK</button> </form>'
                     );
@@ -307,6 +306,7 @@ function userShowMore(id)
 }
 function ShowMore(id) {
 
+    alert("prd id is:" + id);
     $.ajax({
         url: "AdminDisplayProductDetailsServlet",
         type: 'GET',
@@ -344,8 +344,6 @@ function ShowMore(id) {
                     '<br>' +
                     '</fieldset> <button type="button" onclick="closePopup2()">OK</button> </form>'
                     );
-
-            // private String imgURL;
         }
     });
 }

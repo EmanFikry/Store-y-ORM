@@ -50,7 +50,6 @@ public class UserDAOImpl implements UserDAOInt {
         Query query = session.createQuery(hql);
         query.setParameter("userObj", user);
         int result = query.executeUpdate();
-        System.out.println(result);
 
         Set<ItiStoreYInterest> interests = user.getItiStoreYInterests();
 

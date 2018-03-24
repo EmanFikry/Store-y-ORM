@@ -103,7 +103,7 @@
         function displayFields()
         {
             document.getElementById('name').value = "${sessionScope.userObject.name}";
-            document.getElementById('credit').value = "${sessionScope.userObject.creditLimit}";
+            document.getElementById('credit').value = "${sessionScope.userObject.creditlimit}";
             document.getElementById('date').value = "${sessionScope.userObject.birthdate}";
             var job = "${sessionScope.userObject.job}";
             console.log(job);

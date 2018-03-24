@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.dataAccessLayer.entity.ItiStoreYInterest;
 import model.dataAccessLayer.entity.ItiStoreYUser;
 
 /**
@@ -32,7 +33,7 @@ public class UpdateUserServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
 
-        DAOService user = new DAOService();
+        DAOService userDAOService = new DAOService();
 
         ItiStoreYUser updatedUser = (ItiStoreYUser) session.getAttribute("userObject");
 
@@ -44,14 +45,7 @@ public class UpdateUserServlet extends HttpServlet {
         String address = request.getParameter("address");
         String job = request.getParameter("job");
         String interest = request.getParameter("interests");
-
         String interestsArray[] = interest.split(";");
-        ArrayList<String> interests = new ArrayList<>();
-        for (String temp : interestsArray) {
-            if (!temp.isEmpty()) {
-                interests.add(temp);
-            }
-        }
         String credit = request.getParameter("credit");
 
         long creditLimit = (long) (Double.parseDouble(credit));
@@ -65,8 +59,6 @@ public class UpdateUserServlet extends HttpServlet {
         }
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-        Set interestesSet = new HashSet(interests);
-        updatedUser.setItiStoreYInterests(interestesSet);
         updatedUser.setAddress(address);
         updatedUser.setBirthdate(sqlDate);
         updatedUser.setCreditlimit(creditLimit);
@@ -75,7 +67,18 @@ public class UpdateUserServlet extends HttpServlet {
         updatedUser.setEmail(email);
         updatedUser.setName(name);
 
-        user.editProfile(updatedUser);
+        ArrayList<ItiStoreYInterest> interests = new ArrayList<>();
+        for (String temp : interestsArray) {
+            if (!temp.isEmpty()) {
+                ItiStoreYInterest newInterest = new ItiStoreYInterest();
+                newInterest.setItiStoreYUser(updatedUser);
+                newInterest.setName(temp);
+                interests.add(newInterest);
+            }
+        }
+        Set<ItiStoreYUser> interestesSet = new HashSet(interests);
+        updatedUser.setItiStoreYInterests(interestesSet);
+        userDAOService.editProfile(updatedUser);
 
         response.sendRedirect(request.getScheme() + "://"
                 + request.getServerName() + ":" + request.getServerPort()

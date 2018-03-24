@@ -178,7 +178,7 @@ add_product_link.onclick = function () {
             '<input type="text" id="productDescription" name="productDescription" maxlength="100" placeholder="Enter description" onblur="checkName()" required>' +
             '<br>' +
             '<label id="descriptionError"></label>' +
-            '<br> <br> <input type="submit" value="Submit" > </fieldset> </form>');
+            '<br> <br> <input type="submit" value="Add" > </fieldset> </form>');
 }
 function load_it() {
     users_link.style.background = "#fff";

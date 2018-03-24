@@ -91,7 +91,7 @@
     <input type="hidden" id="uCategory" name="uCategory" value="done">
     <input type="hidden" id="userJob" name="userJob" value="done">
 
-    <input type="button" id="submit" value="Submit"/><br>
+    <input type="button" id="submit" value="Edit"/><br>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
     <script>

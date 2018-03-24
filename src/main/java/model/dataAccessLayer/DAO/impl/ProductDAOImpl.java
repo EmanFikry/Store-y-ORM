@@ -30,7 +30,7 @@ public class ProductDAOImpl implements ProductDAOInt {
         session.beginTransaction();
         session.save(product);
         session.getTransaction().commit();
-        System.out.println("product added");
+        session.evict(product);
     }
 
     /**
@@ -53,6 +53,7 @@ public class ProductDAOImpl implements ProductDAOInt {
         session.beginTransaction();
         session.update(product);
         session.getTransaction().commit();
+        session.evict(product);
     }
 
     /**

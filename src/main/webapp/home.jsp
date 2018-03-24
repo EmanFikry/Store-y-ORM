@@ -389,7 +389,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                                         var pricefield = divParentOfButton.querySelector("#price").value;
                                                                         var idfield = divParentOfButton.querySelector("#id").value;
                                                                         console.log(namefield);
-                                                                        alert(idfield);
                                                                         addItems(namefield, pricefield, idfield);
                                                                     }
 

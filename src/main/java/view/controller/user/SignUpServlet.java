@@ -85,7 +85,7 @@ public class SignUpServlet extends HttpServlet {
                 if (!temp.isEmpty()) {
                     ItiStoreYInterest newInterest = new ItiStoreYInterest();
                     newInterest.setItiStoreYUser(addedUser);
-                    newInterest.setName(name);
+                    newInterest.setName(temp);
                     interests.add(newInterest);
                 }
             }

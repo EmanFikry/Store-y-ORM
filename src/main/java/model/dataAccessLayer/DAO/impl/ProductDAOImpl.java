@@ -42,6 +42,7 @@ public class ProductDAOImpl implements ProductDAOInt {
         session.beginTransaction();
         session.delete(product);
         session.getTransaction().commit();
+        session.evict(product);
     }
 
     /**
@@ -59,7 +60,7 @@ public class ProductDAOImpl implements ProductDAOInt {
      */
     @Override
     public ItiStoreYProduct getProductByID(Long id) {
-        ItiStoreYProduct product = new ItiStoreYProduct();
+        ItiStoreYProduct product = null;
         Query query = session.createQuery("from ItiStoreYProduct where recid = :recID ");
         query.setParameter("recID", id);
         List<ItiStoreYProduct> list = query.list();

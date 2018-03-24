@@ -257,7 +257,6 @@ function refrehPage() {
 
 function userShowMore(id)
 {
-    alert("user id" + id);
     $.ajax({
         url: "UserDetailsServlet",
         type: 'GET',
@@ -306,7 +305,6 @@ function userShowMore(id)
 }
 function ShowMore(id) {
 
-    alert("prd id is:" + id);
     $.ajax({
         url: "AdminDisplayProductDetailsServlet",
         type: 'GET',
